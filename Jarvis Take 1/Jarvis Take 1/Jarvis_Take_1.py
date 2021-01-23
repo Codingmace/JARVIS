@@ -9,7 +9,6 @@ import smtplib
 import psutil
 import pyjokes
 import pyautogui
-from news import speak_news, getNewsUrl
 from diction import translate
 from loc import weather
 from youtube import youtube
@@ -238,18 +237,6 @@ if __name__ == '__main__':
             translate(takeCommand())
 
 
-
-        elif 'news' in query:   # FUCK THE NEWS  ADD MEMES
-            speak('Ofcourse sir..')
-            speak_news()
-            speak('Do you want to read the full news...')
-            test = takeCommand()
-            if 'yes' in test:
-                speak('Ok Sir, Opening browser...')
-                webbrowser.open(getNewsUrl())
-                speak('You can now read the full news from this website.')
-            else:
-                speak('No Problem Sir')
 
         elif 'voice' in query:
             if 'female' in query:

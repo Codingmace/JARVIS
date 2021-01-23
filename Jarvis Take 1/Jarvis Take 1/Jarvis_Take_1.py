@@ -9,7 +9,6 @@ import smtplib
 import psutil
 import pyjokes
 import pyautogui
-from diction import translate
 from loc import weather
 from youtube import youtube
 import psutil
@@ -231,10 +230,6 @@ if __name__ == '__main__':
 
         elif 'sleep' in query:
             sys.exit()
-
-        elif 'dictionary' in query:
-            speak('What you want to search in your intelligent dictionary?')
-            translate(takeCommand())
 
 
 

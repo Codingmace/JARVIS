@@ -11,6 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>Jarvis Take 1</Name>
     <RootNamespace>Jarvis Take 1</RootNamespace>
+    <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>

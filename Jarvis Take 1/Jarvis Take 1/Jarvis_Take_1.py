@@ -100,8 +100,17 @@ def sendEmail(to, content):
     server.close()
 
 
+def setupEval():
+    f = open("settings.txt")
+    lines = f.readlines()
+
+
+
+
 
 if __name__ == '__main__':
+    setupEval() # Determine all the general info is in settings.txt
+
     if platform == "linux" or platform == "linux2":
         chrome_path = '/usr/bin/google-chrome'
 
@@ -190,21 +199,22 @@ if __name__ == '__main__':
             
         elif 'stands for' in query:
             speak('J.A.R.V.I.S stands for JUST A RATHER VERY INTELLIGENT SYSTEM')
-
-       """ elif 'open code' in query:
+        
+        elif 'open code' in query:   #REMOVE ISSUE
             if platform == "win32":
                 os.startfile(
-                    "C:\\Users\\gs935\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe")
+                    'C:\\Users\\gs935\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe')
             elif platform == "linux" or platform == "linux2" or "darwin":
-                os.system('code .') """ # Write some code for me
+                os.system('code .') # Write some code for me
 
+        
         elif 'shutdown' in query:
             if platform == "win32":
                 os.system('shutdown /p /f')
             elif platform == "linux" or platform == "linux2" or "darwin":
                 os.system('poweroff')
 
-        elif 'github' in query:
+        elif 'github' in query:  #MAYBE TO DOWNLOAD AN UPDATE COMMAND
             webbrowser.get('chrome').open_new_tab(
                 'https://github.com/gauravsingh9356')
 
@@ -229,7 +239,7 @@ if __name__ == '__main__':
 
 
 
-        elif 'news' in query:
+        elif 'news' in query:   # FUCK THE NEWS  ADD MEMES
             speak('Ofcourse sir..')
             speak_news()
             speak('Do you want to read the full news...')

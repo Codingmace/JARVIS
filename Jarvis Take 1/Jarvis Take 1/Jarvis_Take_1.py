@@ -10,7 +10,6 @@ import psutil
 import pyjokes
 import pyautogui
 from loc import weather
-from youtube import youtube
 import psutil
 import pyjokes
 from sys import platform
@@ -134,8 +133,6 @@ if __name__ == '__main__':
             print(results)
             speak(results)
 
-        elif 'youtube downloader' in query:
-            exec(open('youtube_downloader.py').read())
 
         elif 'voice' in query:
             if 'female' in query:
@@ -147,9 +144,6 @@ if __name__ == '__main__':
         if 'jarvis are you there' in query:
             speak("Yes SIR, at your service")
 
-        elif 'open youtube' in query:
-
-            webbrowser.get('chrome').open_new_tab('https://youtube.com')
 
         elif 'cpu' in query:
             cpu()

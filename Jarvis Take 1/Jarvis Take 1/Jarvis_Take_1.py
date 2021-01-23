@@ -11,7 +11,7 @@ import pyjokes
 import pyautogui
 import psutil
 import pyjokes
-from sys import platform
+import platform
 import os
 import getpass
 
@@ -25,33 +25,6 @@ name = "SIR"
 platform = "win32"
 musicPath= "D://music//"
 
-def getPlatform():
-    linuxDistro = ""
-    try:
-        linuxDistro = platform.linux_distribution()
-    except:
-        linuxDistro =  "N/A"
-    
-    print("""Python Version: %s
-    linux_distribution: %s
-    system: %s
-    machine: %s
-    platform: %s
-    uname: %s
-    version: %s
-    mac_ver: %s
-    """ % (
-    sys.version.split('\n'),
-    linux_distribution(),
-    platform.system(),
-    platform.machine(),
-    platform.platform(),
-    platform.uname(),
-    platform.version(),
-    platform.mac_ver(),
-    ))
-
-    print(platform.uname()[0])
 
 
 def speak(audio):

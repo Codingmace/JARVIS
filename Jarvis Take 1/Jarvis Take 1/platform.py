@@ -1,9 +1,8 @@
 
 import platform
 import sys
-
-print(platform.system())
-print(platform.platform())
+#print(platform.system())
+#print(platform.platform())
 
 
 

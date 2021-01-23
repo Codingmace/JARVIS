@@ -23,7 +23,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Jarvis_Take_1.py" />
-    <Compile Include="testCode1.py">
+    <Compile Include="platform.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

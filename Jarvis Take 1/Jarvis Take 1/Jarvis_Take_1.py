@@ -9,7 +9,6 @@ import smtplib
 import psutil
 import pyjokes
 import pyautogui
-from loc import weather
 import psutil
 import pyjokes
 from sys import platform
@@ -25,6 +24,35 @@ engine.setProperty('voice', voices[0].id)
 name = "SIR"
 platform = "win32"
 musicPath= "D://music//"
+
+def getPlatform():
+    linuxDistro = ""
+    try:
+        linuxDistro = platform.linux_distribution()
+    except:
+        linuxDistro =  "N/A"
+    
+    print("""Python Version: %s
+    linux_distribution: %s
+    system: %s
+    machine: %s
+    platform: %s
+    uname: %s
+    version: %s
+    mac_ver: %s
+    """ % (
+    sys.version.split('\n'),
+    linux_distribution(),
+    platform.system(),
+    platform.machine(),
+    platform.platform(),
+    platform.uname(),
+    platform.version(),
+    platform.mac_ver(),
+    ))
+
+    print(platform.uname()[0])
+
 
 def speak(audio):
     engine.say(audio)
@@ -74,16 +102,20 @@ def takeCommand():
     return query
 
 
+def weather():
+    print("Need to do the weather")
+
 def wishMe():
     hour = int(datetime.datetime.now().hour)
+    response = "Good Evening "+ name
     if hour >= 0 and hour < 12:
-        speak("Good Morning", name)
+        response = "Good Morning "+ name
+
     elif hour >= 12 and hour < 18:
-        speak("Good Afternoon",name)
+        response = "Good Afternoon"+name
 
-    else:
-        speak('Good Evening',name)
-
+    speak(response)
+    
     weather()
     speak('I am JARVIS. Please tell me how can I help you SIR?')
 
@@ -105,8 +137,9 @@ def setupEval():
 
 
 
+
 if __name__ == '__main__':
-    setupEval() # Determine all the general info is in settings.txt
+#    setupEval() # Determine all the general info is in settings.txt
 
     if platform == "linux" or platform == "linux2":
         chrome_path = '/usr/bin/google-chrome'
@@ -164,9 +197,6 @@ if __name__ == '__main__':
         elif 'play music' in query:
             os.startfile(musicPath)
 
-        elif 'search youtube' in query:
-            speak('What you want to search on Youtube?')
-            youtube(takeCommand())
             
         elif 'the time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")

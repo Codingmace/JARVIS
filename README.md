@@ -41,7 +41,7 @@ EVERYTHING IS COMMAND BASED
   - [ ] Shutdown and Sleep Command
   - [ ] Define a word
   
-Photo
+- Photo
   - [ ] Enhance Photo
   - [ ] Grab recent top iFunny memes
   - [ ] Download Desktop photos
@@ -49,7 +49,7 @@ Photo
   - [ ] Object Classification
   - [ ] Image OCR
 
-Personal Software
+- Personal Software
   - [ ] Compress Images
   - [ ] Use incremental Backup Software
   - [ ] Compress TimeLapse recording
@@ -57,7 +57,7 @@ Personal Software
   - [ ] Remove duplicate files on computer
   - [ ] Remove empty folders on computer
   
-Extra
+- Extra
   - [ ] Vulnerability Scan Report on Android App
   - [ ] Output passive crawl of a website
   - [ ] Rename

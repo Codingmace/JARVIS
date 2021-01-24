@@ -17,10 +17,6 @@ engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[1].id)
 
-## Things to put in the settings
-name = "SIR" # Need to override later to whatever
-platform = sys.platform
-musicPath= "D://music//"
 
 def speak(audio):
     engine.say(audio)
@@ -73,6 +69,7 @@ def takeCommand():
 def weather():
     print("Need to do the weather")
 
+
 def wishMe():
     hour = int(datetime.datetime.now().hour)
     response = "Good Evening "+ name
@@ -87,6 +84,7 @@ def wishMe():
     weather()
     speak('I am JARVIS. Please tell me how can I help you SIR?')
 
+
 # Definately doesn't work
 def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
@@ -96,11 +94,33 @@ def sendEmail(to, content):
     server.sendmail('email', to, content)
     server.close()
 
+def dirExist(folderPath):
+    folderCheck = os.path.isdir(folderPath)
+    if not folderCheck: # Make folder if it doesn't exist
+        os.makedirs(folderPath)
 
-def setupEval():
-    f = open("settings.txt")
+
+# Evaluting that the settings file has everything
+def setupEval(machineName): # MachineName will be when have more than 1 machine and changing the data foler to it
+    dirExist("data")
+    f = open("data/settings.txt")
     lines = f.readlines()
+    if(len(lines) < 5): # Restart Setup
+        name = "Master" # User's name
+        musicPath = "./music" # Later verify how much we start with
+        dirExist(musicPath)
+        voiceId = 1 # Setting to female
+        voice = "female" if voiceId == 1 else "male"
 
+        f.write("Name: " + name)
+        f.write("Platform: " + sys.platform) # OS On
+        f.write("MusicPath: " + musicPath) # Path for music
+        f.write("Voice: " + voice)
+
+        # CONTINUE WITH A FRESH STARTUP
+
+    else:
+        print("Well seems you already have data. Good for you. Maybe later you could add some manipulation but we are keeping it simple right now")
 
 
 
@@ -108,7 +128,7 @@ def setupEval():
 
 if __name__ == '__main__':
 #    setupEval() # Determine all the general info is in settings.txt
-
+    
     if platform == "linux" or platform == "linux2":
         chrome_path = '/usr/bin/google-chrome'
 
@@ -232,13 +252,3 @@ if __name__ == '__main__':
                 engine.setProperty('voice', voices[1].id)
             speak("Hello Sir, I have switched my voice. How is it?")
 
-        elif 'email to gaurav' in query:
-            try:
-                speak('What should I say?')
-                content = takeCommand()
-                to = 'email'
-                sendEmail(to, content)
-                speak('Email has been sent!')
-
-            except Exception as e:
-                speak('Sorry sir, Not able to send email at the moment')

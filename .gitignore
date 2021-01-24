@@ -126,5 +126,6 @@ dmypy.json
 
 
 # Visual studio
-.suo
-.pyproj
+*.suo
+*.pyproj
+*

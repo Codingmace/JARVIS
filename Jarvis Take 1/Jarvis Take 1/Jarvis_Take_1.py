@@ -24,6 +24,7 @@ def speak(audio):
 
 # Add setting and maybe a tag
 def screenshot():
+    speak("Taking screenshot")
     img = pyautogui.screenshot()
     img.save('screenshot/screenshot.png')
 
@@ -127,8 +128,38 @@ def setupEval(machineName): # MachineName will be when have more than 1 machine 
 
 
 if __name__ == '__main__':
-#    setupEval() # Determine all the general info is in settings.txt
+    print("Loading Config")
+    machineName = "JARVIS"
+    setupEval(machineName) # Determine all the general info is in settings.txt
+    platform = sys.platform
+    name = "Master"
+    print("Loaded config")
     
+    while True:
+        query = takeCommand().lower()
+        if 'sleep' in query:
+            print("Going to sleep")
+            sys.exit()
+
+        elif 'shutdown' in query:
+            print("Shutting down")
+            if platform == "win32":
+                os.system("shutdown /p /f")
+            if platform == "linux" or "darwin" or "linux2":
+                os.system("poweroff")
+
+        elif 'your name' in query:
+            print("My name is " + machineName)
+            if 'stand for' in query:
+                print("which stands for JUST A ")
+
+        elif 'screenshot' in query:
+            screenshot()
+
+
+
+
+
     if platform == "linux" or platform == "linux2":
         chrome_path = '/usr/bin/google-chrome'
 
@@ -172,9 +203,6 @@ if __name__ == '__main__':
         elif 'joke' in query:
             joke()
 
-        elif 'screenshot' in query:
-            speak("taking screenshot")
-            screenshot()
 
         elif 'open google' in query:
             webbrowser.get('chrome').open_new_tab('https://google.com')
@@ -210,6 +238,7 @@ if __name__ == '__main__':
         elif 'stands for' in query:
             speak('J.A.R.V.I.S stands for JUST A RATHER VERY INTELLIGENT SYSTEM')
         
+
         elif 'open code' in query:   #REMOVE ISSUE
             if platform == "win32":
                 os.startfile(
@@ -218,12 +247,6 @@ if __name__ == '__main__':
                 os.system('code .') # Write some code for me
 
         
-        elif 'shutdown' in query:
-            if platform == "win32":
-                os.system('shutdown /p /f')
-            elif platform == "linux" or platform == "linux2" or "darwin":
-                os.system('poweroff')
-
         elif 'github' in query:  #MAYBE TO DOWNLOAD AN UPDATE COMMAND
             webbrowser.get('chrome').open_new_tab(
                 'https://github.com/gauravsingh9356')
@@ -232,16 +255,13 @@ if __name__ == '__main__':
             speak("what should i remember",name)
             rememberMessage = takeCommand()
             speak("Ok. I will remember",rememberMessage)
-            remember = open('data.txt', 'w')
+            remember = open('data.txt', 'a')
             remember.write(rememberMessage)
             remember.close()
 
         elif 'do you remember anything' in query:# print out the recently added comamnds
             remember = open('data.txt', 'r')
-            speak("you said me to remember that" + remember.read())
-
-        elif 'sleep' in query:
-            sys.exit()
+            speak("You said me to remember that" + remember.read())
 
 
 

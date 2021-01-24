@@ -156,7 +156,9 @@ if __name__ == '__main__':
         elif 'screenshot' in query:
             screenshot()
 
-
+        elif 'music' in query:
+            # PLay spotify?
+            print("Make a music function")
 
 
 
@@ -232,11 +234,6 @@ if __name__ == '__main__':
             webbrowser.get('chrome').open_new_tab(url)
             speak('Here is the location ' + location)
 
-        elif 'your name' in query:
-            speak('My name is JARVIS')
-            
-        elif 'stands for' in query:
-            speak('J.A.R.V.I.S stands for JUST A RATHER VERY INTELLIGENT SYSTEM')
         
 
         elif 'open code' in query:   #REMOVE ISSUE
@@ -263,12 +260,4 @@ if __name__ == '__main__':
             remember = open('data.txt', 'r')
             speak("You said me to remember that" + remember.read())
 
-
-
-        elif 'voice' in query:
-            if 'female' in query:
-                engine.setProperty('voice', voices[0].id)
-            else:
-                engine.setProperty('voice', voices[1].id)
-            speak("Hello Sir, I have switched my voice. How is it?")
 

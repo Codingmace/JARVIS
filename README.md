@@ -6,7 +6,7 @@ EVERYTHING IS COMMAND BASED
 ## FRAMEWORK
 
 - Facial Recognition
-  - [x] Cat Face
+  - [ ] Cat Face
   - [ ] Human Face
 
 - Phone Calls

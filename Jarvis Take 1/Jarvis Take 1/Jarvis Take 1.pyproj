@@ -12,7 +12,7 @@
     <Name>Jarvis Take 1</Name>
     <RootNamespace>Jarvis Take 1</RootNamespace>
     <TestFramework>Pytest</TestFramework>
-    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|Default|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,11 +24,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Jarvis_Take_1.py" />
-    <Compile Include="platform.py">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Interpreter Include="Default\">
+      <Id>Default</Id>
+      <Version>3.8</Version>
+      <Description>Default (Python 3.8 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
     <Interpreter Include="env\">
       <Id>env</Id>
       <Version>3.7</Version>

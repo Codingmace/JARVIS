@@ -1,6 +1,6 @@
 import pyttsx3
 import wikipedia
-import speech_recognition as sr
+import speech_recognition as sr  #IMplement later Automatic-speech recognition
 import webbrowser
 import datetime
 import os
@@ -8,24 +8,19 @@ import sys
 import smtplib
 import psutil
 import pyjokes
+import pyaudio
 import pyautogui
-import psutil
-import pyjokes
 import platform
-import os
 import getpass
 
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[0].id)
-# print(voices[0].id)
+engine.setProperty('voice', voices[1].id)
 
 ## Things to put in the settings
-name = "SIR"
-platform = "win32"
+name = "SIR" # Need to override later to whatever
+platform = sys.platform
 musicPath= "D://music//"
-
-
 
 def speak(audio):
     engine.say(audio)

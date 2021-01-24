@@ -86,15 +86,6 @@ def wishMe():
     speak('I am JARVIS. Please tell me how can I help you SIR?')
 
 
-# Definately doesn't work
-def sendEmail(to, content):
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.ehlo()
-    server.starttls()
-    server.login('email', 'password')
-    server.sendmail('email', to, content)
-    server.close()
-
 def dirExist(folderPath):
     folderCheck = os.path.isdir(folderPath)
     if not folderCheck: # Make folder if it doesn't exist
@@ -133,8 +124,17 @@ if __name__ == '__main__':
     setupEval(machineName) # Determine all the general info is in settings.txt
     platform = sys.platform
     name = "Master"
+    voiceId = 1 # Female
     print("Loaded config")
     
+    """
+    Default Chrome Locations
+    Linux : /usr/bin/google-chrome
+    Mac : open -a /Applications/Google\ Chrome.app
+    Windows : C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+        webbrowser.register(
+        'chrome', None, webbrowser.BackgroundBrowser(chrome_path))
+    """
     while True:
         query = takeCommand().lower()
         if 'sleep' in query:
@@ -151,7 +151,7 @@ if __name__ == '__main__':
         elif 'your name' in query:
             print("My name is " + machineName)
             if 'stand for' in query:
-                print("which stands for JUST A ")
+                print("which stands for JUST A VERY INTELLIGENT SYSTEM")
 
         elif 'screenshot' in query:
             screenshot()
@@ -160,22 +160,21 @@ if __name__ == '__main__':
             # PLay spotify?
             print("Make a music function")
 
+        elif 'are you there' in query:
+            speak(str("Yes " + name + ", " +machineName+ " at your service"))
 
+        elif 'what time is it' in query:
+            strTime = datetime.datetime.now().strftime("%H:%M:%S")
+            speak(f'{name}, the time is {strTime}')
 
-    if platform == "linux" or platform == "linux2":
-        chrome_path = '/usr/bin/google-chrome'
+        elif 'change voice' in query:
+            if voiceId == 1:
+                voiceId = 0
+            elif voiceId == 0:
+                voiceId = 1
+            speak(str("Voice changed to " +("female" if voiceId == 0 else "male")))
+            
 
-    elif platform == "darwin":
-        chrome_path = 'open -a /Applications/Google\ Chrome.app'
-
-    elif platform == "win32":
-        chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
-    else:
-        print('Unsupported OS') # Search for it
-        exit(1)
-
-    webbrowser.register(
-        'chrome', None, webbrowser.BackgroundBrowser(chrome_path))
     wishMe()
     while True:
         query = takeCommand().lower()
@@ -195,9 +194,6 @@ if __name__ == '__main__':
                 engine.setProperty('voice', voices[0].id)
             speak("Hello",name, ", I have switched my voice. How is it?")
 
-        if 'jarvis are you there' in query:
-            speak("Yes SIR, at your service")
-
 
         elif 'cpu' in query:
             cpu()
@@ -214,11 +210,6 @@ if __name__ == '__main__':
 
         elif 'play music' in query:
             os.startfile(musicPath)
-
-            
-        elif 'the time' in query:
-            strTime = datetime.datetime.now().strftime("%H:%M:%S")
-            speak(f'{name}, the time is {strTime}')
 
         elif 'search' in query:
             speak('What do you want to search for?')
@@ -243,10 +234,7 @@ if __name__ == '__main__':
             elif platform == "linux" or platform == "linux2" or "darwin":
                 os.system('code .') # Write some code for me
 
-        
-        elif 'github' in query:  #MAYBE TO DOWNLOAD AN UPDATE COMMAND
-            webbrowser.get('chrome').open_new_tab(
-                'https://github.com/gauravsingh9356')
+  
 
         elif 'remember that' in query: ## Add to take in the entry name
             speak("what should i remember",name)

@@ -130,18 +130,15 @@ if __name__ == '__main__':
     platform = sys.platform
     name = "Master"
     voiceId = 1 # Female
-    print("Loaded config")
+    musicPath = "./music" # Later verify how much we start with
     softwareList = getSoftwares(platform)
     browser= 'chrome'
+    chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+    webbrowser.register(browser, None, webbrowser.BackgroundBrowser(chrome_path))
+
+    print("Loaded config")
     greetings()
-    """
-    Default Chrome Locations
-    Linux : /usr/bin/google-chrome
-    Mac : open -a /Applications/Google\ Chrome.app
-    Windows : C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
-        webbrowser.register(
-        'chrome', None, webbrowser.BackgroundBrowser(chrome_path))
-    """
+
     while True:
         query = takeCommand().lower()
         if 'sleep' in query:
@@ -190,55 +187,52 @@ if __name__ == '__main__':
             print(results)
             speak(results)
             
-
-
-
-            
-        else: # check if it is a command to run on terminal
-            print("Check here if it is a command or not")
-
-
-
-
-
-        elif 'cpu' in query:
-            cpu()
-
-
         elif 'open google' in query:
-            webbrowser.get('chrome').open_new_tab('https://google.com')
+            webbrowser.get(browser).open_new_tab("https://google.com")
 
         elif 'open stackoverflow' in query:
-            webbrowser.get('chrome').open_new_tab('https://stackoverflow.com')
+            webbrowser.get(browser).open_new_tab("https://stackoverflow.com")
 
-        elif 'play music' in query:
-            os.startfile(musicPath)
+        elif 'open' in query:
+            query.replace("open ", "")
+            print("Check if the query is a software")
+            print("Check to see if it is a file")
+            print("Check if the query is a website")
+            print("Throw an error if not above")
 
-        elif 'search' in query:
-            speak('What do you want to search for?')
-            search = takeCommand()
-            url = 'https://google.com/search?q=' + search
-            webbrowser.get('chrome').open_new_tab(url)
-            speak('Here is What I found for' + search)
+        elif 'play' in query:
+            if 'music' in query:
+                os.startfile(musicPath)
+            else:
+                query.replace("play ", "")
+                print("Find the song")
+                print("Play the song or throw an error")
+            
+        elif 'remember' in query: ## Add to take in the entry name
+            print("Many things that can go here but going to start simple")
+            query.replace("remember", "")
+            print("Split up the command. The key word and action")
+            print("For now is will split them")
+            rememberMessage = query.replace("remember", "").split(" is ")
+            rememberCmd = open('extraCommands.txt', 'a')
+            rememberCmd.write(rememberMessage[0])
+            rememberCmd.close()
+            rememberAction = open('extraActions.txt', 'a')
+            rememberAction.write(rememberMessage[1])
+            rememberAction.close()
 
-        elif 'location' in query:
-            speak('What is the location?')
-            location = takeCommand()
-            url = 'https://google.nl/maps/place/' + location + '/&amp;'
-            webbrowser.get('chrome').open_new_tab(url)
-            speak('Here is the location ' + location)
+        elif 'list extra' in query:# print out the recently added comamnds
+            if 'command' in query:
+                remember = open("extraCommands.txt", "r")
+                lines = remember.readlines()
+                speak(str("I have " + str(len(lines)) + " learned commands"))
+            if 'action' in query:
+                remember = open("extraActions.txt", "r")
+                lines = remember.readlines()
+                speak(str("I have " + str(len(lines)) + " learned commands"))
 
 
-        elif 'remember that' in query: ## Add to take in the entry name
-            speak("what should i remember",name)
-            rememberMessage = takeCommand()
-            speak("Ok. I will remember",rememberMessage)
-            remember = open('data.txt', 'a')
-            remember.write(rememberMessage)
-            remember.close()
-
-        elif 'do you remember anything' in query:# print out the recently added comamnds
-            remember = open('data.txt', 'r')
-            speak("You said me to remember that" + remember.read())
+        else: # check if it is a command to run on terminal
+            print("Check here if it is a command or not")
 
 

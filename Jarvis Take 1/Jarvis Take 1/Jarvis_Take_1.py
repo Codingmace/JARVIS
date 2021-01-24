@@ -37,12 +37,6 @@ def cpu():
     speak("battery is at")
     speak(battery.percent)
 
-# Just because
-def joke():
-    for i in range(5):
-        speak(pyjokes.get_jokes()[i])
-
-
 
 def takeCommand():
     
@@ -114,6 +108,19 @@ def setupEval(machineName): # MachineName will be when have more than 1 machine 
     else:
         print("Well seems you already have data. Good for you. Maybe later you could add some manipulation but we are keeping it simple right now")
 
+def getSoftwares(platform):
+    softwareList = []
+    basePath = ""
+    if platform == 'linux' or platform == 'linux2':
+        basePath = '/usr/bin/'
+    elif platform == "darwin":
+        basePath = '/Applications/'
+    elif platform == "win32":
+        basePath = "C:\\Program Files (x86)\\"
+       # print(basePath)
+    else:
+        speak("Ummm. I don't know where it is. Could you specify where it is ")
+        basePath = input("Enter in the path")
 
 
 
@@ -126,7 +133,7 @@ if __name__ == '__main__':
     name = "Master"
     voiceId = 1 # Female
     print("Loaded config")
-    
+    softwareList = getSoftwares(platform)
     """
     Default Chrome Locations
     Linux : /usr/bin/google-chrome
@@ -175,31 +182,24 @@ if __name__ == '__main__':
             speak(str("Voice changed to " +("female" if voiceId == 0 else "male")))
             
 
-    wishMe()
-    while True:
-        query = takeCommand().lower()
-        if 'wikipedia' in query:
+        elif 'wikipedia' in query:
             speak('Searching Wikipedia....')
             query = query.replace('wikipedia', '')
             results = wikipedia.summary(query, sentences=2)
             speak('According to Wikipedia')
             print(results)
             speak(results)
+            
+            
+        else: # check if it is a command to run on terminal
+            print("Check here if it is a command or not")
 
 
-        elif 'voice' in query:
-            if 'female' in query:
-                engine.setProperty('voice', voices[1].id)
-            else:
-                engine.setProperty('voice', voices[0].id)
-            speak("Hello",name, ", I have switched my voice. How is it?")
+
 
 
         elif 'cpu' in query:
             cpu()
-
-        elif 'joke' in query:
-            joke()
 
 
         elif 'open google' in query:
@@ -225,16 +225,6 @@ if __name__ == '__main__':
             webbrowser.get('chrome').open_new_tab(url)
             speak('Here is the location ' + location)
 
-        
-
-        elif 'open code' in query:   #REMOVE ISSUE
-            if platform == "win32":
-                os.startfile(
-                    'C:\\Users\\gs935\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe')
-            elif platform == "linux" or platform == "linux2" or "darwin":
-                os.system('code .') # Write some code for me
-
-  
 
         elif 'remember that' in query: ## Add to take in the entry name
             speak("what should i remember",name)

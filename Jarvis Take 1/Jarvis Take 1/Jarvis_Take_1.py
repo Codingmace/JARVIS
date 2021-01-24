@@ -65,7 +65,7 @@ def weather():
     print("Need to do the weather")
 
 
-def wishMe():
+def greetings():
     hour = int(datetime.datetime.now().hour)
     response = "Good Evening "+ name
     if hour >= 0 and hour < 12:
@@ -75,8 +75,6 @@ def wishMe():
         response = "Good Afternoon"+name
 
     speak(response)
-    
-    weather()
     speak('I am JARVIS. Please tell me how can I help you SIR?')
 
 
@@ -104,9 +102,9 @@ def setupEval(machineName): # MachineName will be when have more than 1 machine 
         f.write("Voice: " + voice)
 
         # CONTINUE WITH A FRESH STARTUP
-
     else:
         print("Well seems you already have data. Good for you. Maybe later you could add some manipulation but we are keeping it simple right now")
+
 
 def getSoftwares(platform):
     softwareList = []
@@ -134,6 +132,8 @@ if __name__ == '__main__':
     voiceId = 1 # Female
     print("Loaded config")
     softwareList = getSoftwares(platform)
+    browser= 'chrome'
+    greetings()
     """
     Default Chrome Locations
     Linux : /usr/bin/google-chrome
@@ -190,6 +190,9 @@ if __name__ == '__main__':
             print(results)
             speak(results)
             
+
+
+
             
         else: # check if it is a command to run on terminal
             print("Check here if it is a command or not")

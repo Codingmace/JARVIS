@@ -32,13 +32,13 @@ EVERYTHING IS COMMAND BASED
   - [ ] Can be taught new commands
   - [ ] Tell weather at location
   - [ ] Tell predicted weather for location
-  - [ ] Time
-  - [ ] Screenshot
+  - [X] Time
+  - [X] Screenshot
   - [ ] Play music
   - [ ] Launch softwares on machine
   - [ ] Activate PiHole (What I use as a DNS AdBlocker)
   - [ ] Current System Stats
-  - [ ] Shutdown and Sleep Command
+  - [X] Shutdown and Sleep Command
   - [ ] Define a word
   
 - Photo

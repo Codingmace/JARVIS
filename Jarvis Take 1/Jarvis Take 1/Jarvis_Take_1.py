@@ -7,7 +7,6 @@ import os
 import sys
 import smtplib
 import psutil
-import pyjokes
 import pyaudio
 import pyautogui
 import platform
@@ -26,7 +25,7 @@ def speak(audio):
 def screenshot():
     speak("Taking screenshot")
     img = pyautogui.screenshot()
-    img.save('screenshot/screenshot.png')
+    img.save('screenshots/screenshot.png')
 
 # Do all diagnostics here
 def cpu():
@@ -87,8 +86,9 @@ def dirExist(folderPath):
 # Evaluting that the settings file has everything
 def setupEval(machineName): # MachineName will be when have more than 1 machine and changing the data foler to it
     dirExist("data")
-    f = open("data/settings.txt")
-    lines = f.readlines()
+    f1 = open("data/oldSettings.txt")
+    f = open("data/settings.txt", "w")
+    lines = f1.readlines()
     if(len(lines) < 5): # Restart Setup
         name = "Master" # User's name
         musicPath = "./music" # Later verify how much we start with
@@ -96,7 +96,7 @@ def setupEval(machineName): # MachineName will be when have more than 1 machine 
         voiceId = 1 # Setting to female
         voice = "female" if voiceId == 1 else "male"
 
-        f.write("Name: " + name)
+        f.write(("Name: " + name))
         f.write("Platform: " + sys.platform) # OS On
         f.write("MusicPath: " + musicPath) # Path for music
         f.write("Voice: " + voice)

@@ -12,7 +12,7 @@
     <Name>Jarvis Take 1</Name>
     <RootNamespace>Jarvis Take 1</RootNamespace>
     <TestFramework>Pytest</TestFramework>
-    <InterpreterId>Global|PythonCore|3.8</InterpreterId>
+    <InterpreterId>MSBuild|Default|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,6 +47,7 @@
     <Content Include="data\commands.txt" />
     <Content Include="data\settings.txt" />
     <Content Include="data\keys.txt" />
+    <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|PythonCore|3.8" />

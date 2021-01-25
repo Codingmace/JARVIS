@@ -7,7 +7,7 @@ import os
 import sys
 import smtplib
 import psutil
-import pyaudio
+import PyAudio
 import pyautogui
 import platform
 import getpass

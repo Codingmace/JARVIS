@@ -1,6 +1,6 @@
 import pyttsx3
 import wikipedia
-import speech_recognition as sr  #IMplement later Automatic-speech recognition
+import speech_recognition as sr  #Implement later Automatic-speech recognition
 import webbrowser
 import datetime
 import os
@@ -21,11 +21,13 @@ def speak(audio):
     engine.say(audio)
     engine.runAndWait()
 
-# Add setting and maybe a tag
+
 def screenshot():
     speak("Taking screenshot")
     img = pyautogui.screenshot()
-    img.save('screenshots/screenshot.png')
+    if not os.path.exists('screenshot'):
+        os.makedirs('screenshot')
+    img.save('screenshots/screenshot ' + datetime.datetime.now().replace(microsecond=0)+ '.png')
 
 # Do all diagnostics here
 def cpu():

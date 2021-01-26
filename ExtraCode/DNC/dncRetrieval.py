@@ -26,16 +26,33 @@ with open('subjectMap.txt','r') as subject_file:
 for line in a:
     split = line.split(" - ")
     subject.append(split[0])
-    corr.append(split[1])
+    corr.append(split[1].strip('\n'))
 #print(subject)
+
+
+errors = open("log.txt","a") # Adjust to be correct folder and not override eachother
 
 # Read in from the API
 # for offset in range(0 ,3186831, 50):
-for offset in range(1900 ,6000, 50):
+for offset in range(2500 ,4000, 50):
     response = requests.get(baseUrl+apiKey + "&" + extendUrl + str(offset))
-    data = response.json()
-    output = open(str("Data\output" + str((int)(offset / 50))+".json"), "w")
 
+    if response.status_code is not 200:
+        # Renew the API key and get Another request
+        response = requests.get(baseUrl+apiKey + "&" + extendUrl + str(offset))
+        try:
+            apiKey = apiDoc.readline()
+        except:
+            print("We are out of keys. Ended on offset of " + offset)
+            errors.write("Out of Keys, "+offset)
+            errors.flush()
+            errors.close()
+            exit
+            
+    data = response.json()
+    print(response.status_code)
+    output = open(str("Data\output" + str((int)(offset / 50))+".json"), "w")
+    
 #    print(data)
 # Parse Json
     del data['meta']
@@ -78,6 +95,7 @@ for offset in range(1900 ,6000, 50):
     json.dump(data, output)
     output.flush()
     output.close()
-
+errors.flush()
+errors.close()
 
 

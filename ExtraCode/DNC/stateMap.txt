@@ -48,3 +48,5 @@ Washington - WA
 West Virginia - WV
 Wisconsin - WI
 Wyoming - WY
+District of Columbia - DoC
+Puerto Rico - PR

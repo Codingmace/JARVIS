@@ -31,12 +31,12 @@ for line in a:
 
 # Read in from the API
 # for offset in range(0 ,3186831, 50):
-for offset in range(0 ,300, 50):
+for offset in range(1900 ,6000, 50):
     response = requests.get(baseUrl+apiKey + "&" + extendUrl + str(offset))
     data = response.json()
     output = open(str("Data\output" + str((int)(offset / 50))+".json"), "w")
 
-    print(data)
+#    print(data)
 # Parse Json
     del data['meta']
     del data['links']

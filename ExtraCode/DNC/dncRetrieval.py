@@ -9,8 +9,8 @@ apiDoc = open("APIKey.txt", "r")
 apiKey = apiDoc.readline()
 
 # Map States
-states = []
-abbr = []
+states = ['']
+abbr = ['']
 with open('stateMap.txt','r') as map_file:
     a = map_file.readlines()
 for line in a:
@@ -23,32 +23,34 @@ for line in a:
 for offset in range(0 ,300, 50):
     response = requests.get(baseUrl+apiKey + "&" + extendUrl + str(offset))
     data = response.json()
-    output = open(str("Data\output" + str(offset / 50)+".json"), "w")
+    output = open(str("Data\output" + str((int)(offset / 50))+".json"), "w")
 # Parse Json
     del data['meta']
     del data['links']
 
-for element in data['data']:
-    del element['type']
-    del element['relationships']
-    del element['meta']
-    del element['links']
+    for element in data['data']:
+        del element['type']
+        del element['relationships']
+        del element['meta']
+        del element['links']
 
-    element['number'] = element['attributes']['company-phone-number']
-    element['date'] = element['attributes']['violation-date']
-    element['subject'] = element['attributes']['subject'].replace("  ", " ")
-    element['recorded-or-robo']= element['attributes']['recorded-message-or-robocall']
-    element['city'] = element['attributes']['consumer-city']
-    curState = element['attributes']['consumer-state']
-    curAbbr = abbr[states.index(curState)]
-    
-    element['state'] = curAbbr
-    element['area-code'] = element['attributes']['consumer-area-code']
+        element['number'] = element['attributes']['company-phone-number']
+        element['date'] = element['attributes']['violation-date']
+        element['subject'] = element['attributes']['subject'].replace("  ", " ")
+        element['recorded-or-robo']= element['attributes']['recorded-message-or-robocall']
+        element['city'] = element['attributes']['consumer-city']
+        curState = element['attributes']['consumer-state']
+        curAbbr = abbr[states.index(curState)]
+        
+        element['state'] = curAbbr
+        element['area-code'] = element['attributes']['consumer-area-code']
 
-    del element['attributes']
-    
-# Write it all to a file
+        del element['attributes']
+        
+    # Write it all to a file
     json.dump(data, output)
     output.flush()
     output.close()
+
+
 

@@ -25,8 +25,7 @@ def speak(audio):
 def screenshot():
     speak("Taking screenshot")
     img = pyautogui.screenshot()
-    if not os.path.exists('screenshot'):
-        os.makedirs('screenshot')
+    dirExist('screenshot')
     img.save('screenshots/screenshot ' + datetime.datetime.now().replace(microsecond=0)+ '.png')
 
 # Do all diagnostics here

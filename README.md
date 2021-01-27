@@ -6,58 +6,59 @@ EVERYTHING IS COMMAND BASED
 ## FRAMEWORK
 
 - Facial Recognition
-  - [ ] Cat Face
+  - [ ] Cat Face - Written needs implementation
   - [ ] Human Face
 
 - Phone Calls
-  - [ ] Reverse IP Lookup
+  - [ ] Reverse IP Lookup - Needs to be Implemented
   - [ ] Find name of Caller
   - [ ] Find Origin of caller
-  - [ ] Search to see if blocked (DNC DATABASE API)
+  - [ ] Search to see if blocked (DNC DATABASE API) - Working on
   
 - Networking
-  - [ ] Locate Public IP Address
-  - [ ] Ping Sweep
-  - [ ] Port Scanner
+  - [ ] Locate Public IP Address - Needs to be implemented
+  - [ ] Ping Sweep - Needs to be implemented
+  - [ ] Port Scanner - Needs to be implemented
   
 - Web
-  - [ ] Search Google
-  - [ ] Open few preset websites
+  - [ ] Search Google - Needs to be implmemented
   - [ ] Open a url website
-  - [ ] Crawl for more information on unknown topics
-  - [ ] Download Youtube Videos, Maybe
+  - [ ] Crawl for more information on unknown topics - Needs to be implemented
+  - [ ] Download Youtube Videos - Needs to be implemented
   - [ ] Remove yourself from the internet
   
 - Queries
   - [ ] Can be taught new commands
-  - [ ] Tell weather at location
-  - [ ] Tell predicted weather for location
+  - [ ] Tell weather at location - Needs to be implemented
+  - [ ] Tell predicted weather for location - Needs to be implemented
   - [X] Time
   - [X] Screenshot
-  - [ ] Play music
+  - [ ] Play music - Needs to be tested
   - [ ] Launch softwares on machine
   - [ ] Activate PiHole (What I use as a DNS AdBlocker)
   - [ ] Current System Stats
   - [X] Shutdown and Sleep Command
-  - [ ] Define a word
+  - [ ] Define a word - Needs to be implemented
   
 - Photo
   - [ ] Enhance Photo
   - [ ] Grab recent top iFunny memes
-  - [ ] Download Desktop photos
+  - [ ] Download Desktop photos - Needs to be implemented
   - [ ] Download Random Facts
   - [ ] Object Classification
-  - [ ] Image OCR
+  - [ ] Image OCR - Needs to be implemented
 
 - Personal Software
-  - [ ] Compress Images
-  - [ ] Use incremental Backup Software
-  - [ ] Compress TimeLapse recording
-  - [ ] Scan Videos for key components
-  - [ ] Remove duplicate files on computer
+  - [ ] Compress Images - Needs to be implemented
+  - [ ] Use incremental Backup Software - Needs to be implemented
+  - [ ] Compress TimeLapse recording - Needs to be implemented
+  - [ ] Scan Videos for key components - Needs to be Implemented
+  - [ ] Remove duplicate files on computer - Needs to be implemented
   - [ ] Remove empty folders on computer
   
 - Extra
   - [ ] Vulnerability Scan Report on Android App
-  - [ ] Output passive crawl of a website
+  - [ ] StaCoAn Software Launch
+  - [ ] MobSF software launch
+  - [ ] Output passive crawl of a website - Needs to be implemented
   - [ ] Rename

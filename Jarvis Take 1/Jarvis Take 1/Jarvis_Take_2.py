@@ -98,10 +98,10 @@ def setupEval(machineName): # MachineName will be when have more than 1 machine 
         voiceId = 1 # Setting to female
         voice = "female" if voiceId == 1 else "male"
 
-        f.write(("Name: " + name))
-        f.write("Platform: " + sys.platform) # OS On
-        f.write("MusicPath: " + musicPath) # Path for music
-        f.write("Voice: " + voice)
+        f.write(("Name: " + name)+"\n")
+        f.write("Platform: " + sys.platform + "\n") # OS On
+        f.write("MusicPath: " + musicPath+"\n") # Path for music
+        f.write("Voice: " + voice + "\n")
 
         # CONTINUE WITH A FRESH STARTUP
     else:

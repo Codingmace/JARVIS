@@ -1,1 +1,6 @@
 The time needs to be in regular time and not military
+Setting the commands to be linked to a file
+
+
+DNC
+- I can use phone map but would like to use local database but would require merging the files

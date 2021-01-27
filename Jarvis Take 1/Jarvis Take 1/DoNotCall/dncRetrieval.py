@@ -8,6 +8,7 @@ baseUrl = "https://api.ftc.gov/v0/dnc-complaints?api_key="
 extendUrl = "offset="
 apiDoc = open("APIKey.txt", "r")
 apiKey = apiDoc.readline()
+#apiKey = apiDoc.readline()
 
 # NEED TO REMOVE BECAUSE YOU CANNOT HAVE MORE THAN 1 VALID KEY AT A TIME
 
@@ -32,16 +33,14 @@ for line in a:
     split = line.split(" - ")
     subject.append(split[0])
     corr.append(split[1].strip('\n'))
-
+            
 phoneMap = open("PhoneMap.txt", "w")
 errors = open("log.txt","a") # Adjust to be correct folder and not override eachother
 
 # Read in from the API
-# for offset in range(0 ,3186831, 50):
-# for offset in range(0,3186831, 50):
-for offset in range(1850,3186831, 50):
-#for offset in range(2500 ,4000, 50):
-    time.sleep(10)
+# for offset in range(7500,3186831, 50):
+for offset in range(9350,3186831, 50):
+    time.sleep(60)
     response = requests.get(baseUrl+apiKey + "&" + extendUrl + str(offset))
     
     if not (response.status_code == 200):

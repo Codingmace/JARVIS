@@ -10,6 +10,8 @@ apiDoc = open("APIKey.txt", "r")
 apiKey = apiDoc.readline()
 #apiKey = apiDoc.readline()
 
+### FOR UPDATING
+
 # NEED TO REMOVE BECAUSE YOU CANNOT HAVE MORE THAN 1 VALID KEY AT A TIME
 
 # Map States

@@ -1,0 +1,4 @@
+Name: Master
+Platform: win32
+MusicPath: ./music
+Voice: female

@@ -1,1 +1,0 @@
-Name: MasterPlatform: win32MusicPath: ./musicVoice: female

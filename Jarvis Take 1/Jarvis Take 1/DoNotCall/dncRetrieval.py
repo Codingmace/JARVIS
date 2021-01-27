@@ -47,7 +47,7 @@ for offset in range(2500 ,4000, 50):
             apiKey = apiKeys[apiKeyCon]
         except:
             print("We are out of keys. Ended on offset of " + str(offset))
-            errors.write("Out of Keys, "+ str(offset))
+            errors.write("Out of Keys, "+ str(offset) + "\n")
             errors.flush()
             errors.close()
             phoneMap.flush()

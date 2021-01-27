@@ -36,15 +36,15 @@ for line in a:
     subject.append(split[0])
     corr.append(split[1].strip('\n'))
             
-phoneMap = open("PhoneMap.txt", "w")
+phoneMap = open("PhoneMap.txt", "a")
 errors = open("log.txt","a") # Adjust to be correct folder and not override eachother
 
 # Read in from the API
 # for offset in range(7500,3186831, 50):
 # for offset in range(9350,3186831, 50):
 # for offset in range(9550,3186831, 50):
-for offset in range(11350,3186831, 50):
-    time.sleep(60)
+# for offset in range(11350,3186831, 50):
+for offset in range(13900,3186831, 50):
     response = requests.get(baseUrl+apiKey + "&" + extendUrl + str(offset))
     
     if not (response.status_code == 200):
@@ -105,6 +105,7 @@ for offset in range(11350,3186831, 50):
     errors.flush()
     output.flush()
     output.close()
+    time.sleep(60)
     
 errors.close()
 phoneMap.close()

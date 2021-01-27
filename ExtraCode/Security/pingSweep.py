@@ -28,7 +28,7 @@ if __name__ == '__main__':
         p.start()
 
     for i in range(1,255):
-        jobs.put('172.20.10.{0}'.format(i))
+        jobs.put('192.168.2.{0}'.format(i))
 #        jobs.put('192.168.1.{0}'.format(i))
 
     for p in pool:

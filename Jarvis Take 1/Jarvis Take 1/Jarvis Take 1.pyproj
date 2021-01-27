@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>26e920d9-0f87-4a54-824d-9e2b79dfcd2f</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Jarvis_Take_1.py</StartupFile>
+    <StartupFile>Jarvis_Take_2.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -12,8 +12,9 @@
     <Name>Jarvis Take 1</Name>
     <RootNamespace>Jarvis Take 1</RootNamespace>
     <TestFramework>Pytest</TestFramework>
-    <InterpreterId>MSBuild|Default|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|JarvisWheel|$(MSBuildProjectFullPath)</InterpreterId>
     <SuppressPackageInstallationPrompt>True</SuppressPackageInstallationPrompt>
+    <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,34 +25,38 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Jarvis_Take_1.py" />
+    <Compile Include="DoNotCall\dncRetrieval.py" />
     <Compile Include="Jarvis_Take_2.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="Default\">
-      <Id>Default</Id>
-      <Version>3.8</Version>
-      <Description>Default (Python 3.8 (64-bit))</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>X64</Architecture>
-    </Interpreter>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="data\" />
+    <Folder Include="DoNotCall\" />
     <Folder Include="screenshots\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="data\commands.txt" />
     <Content Include="data\settings.txt" />
     <Content Include="data\keys.txt" />
+    <Content Include="DoNotCall\APIKey.txt" />
+    <Content Include="DoNotCall\stateMap.txt" />
+    <Content Include="DoNotCall\subjectMap.txt" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
-    <InterpreterReference Include="Global|PythonCore|3.8" />
+    <InterpreterReference Include="Global|PythonCore|3.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="..\..\..\..\Venv Jarvis\JarvisWheel\">
+      <Id>JarvisWheel</Id>
+      <Version>3.7</Version>
+      <Description>JarvisWheel (Python 3.7 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

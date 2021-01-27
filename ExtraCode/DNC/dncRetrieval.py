@@ -6,7 +6,9 @@ testUrl = 'https://api.ftc.gov/v0/dnc-complaints?api_key=DEMO_KEY&created_date_f
 baseUrl = "https://api.ftc.gov/v0/dnc-complaints?api_key="
 extendUrl = "offset="
 apiDoc = open("APIKey.txt", "r")
-apiKey = apiDoc.readline()
+apiKeyCon = 0
+apiKeys = apiDoc.readlines()
+apiKey = apiKeys[apiKeyCon]
 
 # Map States
 states = ['']
@@ -29,7 +31,7 @@ for line in a:
     corr.append(split[1].strip('\n'))
 #print(subject)
 
-
+phoneMap = open("PhoneMap.txt")
 errors = open("log.txt","a") # Adjust to be correct folder and not override eachother
 
 # Read in from the API
@@ -37,17 +39,20 @@ errors = open("log.txt","a") # Adjust to be correct folder and not override each
 for offset in range(2500 ,4000, 50):
     response = requests.get(baseUrl+apiKey + "&" + extendUrl + str(offset))
 
-    if response.status_code is not 200:
+    if not (response.status_code == 200):
         # Renew the API key and get Another request
         response = requests.get(baseUrl+apiKey + "&" + extendUrl + str(offset))
         try:
-            apiKey = apiDoc.readline()
+            apiKeyCon += 1
+            apiKey = apiKeys[apiKeyCon]
         except:
-            print("We are out of keys. Ended on offset of " + offset)
-            errors.write("Out of Keys, "+offset)
+            print("We are out of keys. Ended on offset of " + str(offset))
+            errors.write("Out of Keys, "+ str(offset))
             errors.flush()
             errors.close()
-            exit
+            phoneMap.flush()
+            phoneMap.close()
+            exit()
             
     data = response.json()
     print(response.status_code)
@@ -57,7 +62,7 @@ for offset in range(2500 ,4000, 50):
 # Parse Json
     del data['meta']
     del data['links']
-
+    
     for element in data['data']:
         del element['type']
         del element['relationships']
@@ -88,14 +93,18 @@ for offset in range(2500 ,4000, 50):
         
         element['state'] = curAbbr
         element['area-code'] = element['attributes']['consumer-area-code']
-
+        
         del element['attributes']
+
+        phoneMap.write(element['id'] + " " + element['number'])
         
     # Write it all to a file
     json.dump(data, output)
+    phoneMap.flush()
+    errors.flush()
     output.flush()
     output.close()
-errors.flush()
+    
 errors.close()
-
+phoneMap.close()
 

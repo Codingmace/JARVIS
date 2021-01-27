@@ -1,14 +1,17 @@
 import requests
 import json
+import time
 # https://www.ftc.gov/developer
 
 testUrl = 'https://api.ftc.gov/v0/dnc-complaints?api_key=DEMO_KEY&created_date_from="2020-02-27 04:10:00"&created_date_to="2020-02-27 04:30:00"'
 baseUrl = "https://api.ftc.gov/v0/dnc-complaints?api_key="
 extendUrl = "offset="
 apiDoc = open("APIKey.txt", "r")
-apiKeyCon = 0
+apiKeyCon = 8
 apiKeys = apiDoc.readlines()
 apiKey = apiKeys[apiKeyCon]
+
+# NEED TO REMOVE BECAUSE YOU CANNOT HAVE MORE THAN 1 VALID KEY AT A TIME
 
 # Map States
 states = ['']
@@ -31,14 +34,17 @@ for line in a:
     corr.append(split[1].strip('\n'))
 #print(subject)
 
-phoneMap = open("PhoneMap.txt")
+phoneMap = open("PhoneMap.txt", "w")
 errors = open("log.txt","a") # Adjust to be correct folder and not override eachother
 
 # Read in from the API
 # for offset in range(0 ,3186831, 50):
-for offset in range(2500 ,4000, 50):
+# for offset in range(0,3186831, 50):
+for offset in range(1850,3186831, 50):
+#for offset in range(2500 ,4000, 50):
+    time.sleep(10)
     response = requests.get(baseUrl+apiKey + "&" + extendUrl + str(offset))
-
+    
     if not (response.status_code == 200):
         # Renew the API key and get Another request
         response = requests.get(baseUrl+apiKey + "&" + extendUrl + str(offset))
@@ -57,7 +63,7 @@ for offset in range(2500 ,4000, 50):
     data = response.json()
     print(response.status_code)
     output = open(str("Data\output" + str((int)(offset / 50))+".json"), "w")
-    
+    print(data)
 #    print(data)
 # Parse Json
     del data['meta']
@@ -95,8 +101,9 @@ for offset in range(2500 ,4000, 50):
         element['area-code'] = element['attributes']['consumer-area-code']
         
         del element['attributes']
-
-        phoneMap.write(element['id'] + " " + element['number'])
+        temp = element['id'] + " " + element['number'] + "\n"
+        phoneMap.write(temp)
+#        phoneMap.write(str(element['id'] + " " + element['number']))
         
     # Write it all to a file
     json.dump(data, output)

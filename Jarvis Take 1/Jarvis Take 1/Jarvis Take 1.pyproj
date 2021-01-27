@@ -33,6 +33,7 @@
   <ItemGroup>
     <Folder Include="data\" />
     <Folder Include="DoNotCall\" />
+    <Folder Include="DoNotCall\Data\" />
     <Folder Include="screenshots\" />
   </ItemGroup>
   <ItemGroup>

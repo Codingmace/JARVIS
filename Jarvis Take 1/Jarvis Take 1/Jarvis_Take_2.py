@@ -7,7 +7,7 @@ import os
 import sys
 import smtplib
 import psutil
-import pyaudio
+#import pyaudio
 import pyautogui
 import platform
 import getpass
@@ -62,6 +62,7 @@ def takeCommand():
 
 
 def weather():
+        
     print("Need to do the weather")
 
 
@@ -235,5 +236,4 @@ if __name__ == '__main__':
 
         else: # check if it is a command to run on terminal
             print("Check here if it is a command or not")
-
 

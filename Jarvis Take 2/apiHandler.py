@@ -78,16 +78,5 @@ from OCRLY import OImage2Text
 from youtubeDownload import downloadVideo
 
 
-def main(query, selection, data):
-    print("Here is where we deal with the query onto the API.")
-    
-
-
-
-
-
-
-
-
 
 

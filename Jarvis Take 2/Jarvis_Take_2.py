@@ -21,13 +21,7 @@ def speak(audio):
 
 
 # Do all diagnostics here
-def cpu():
-    usage = str(psutil.cpu_percent())
-    speak("CPU is at"+usage)
 
-    battery = psutil.sensors_battery()
-    speak("battery is at")
-    speak(battery.percent)
 
 
 def takeCommand():
@@ -51,11 +45,6 @@ def takeCommand():
         print('Say that again please...')
         return 'None'
     return query
-
-
-def weather():
-        
-    print("Need to do the weather")
 
 
 def greetings():
@@ -132,15 +121,17 @@ if __name__ == '__main__':
     militaryTime = True
     voiceId = 1 # Female
     musicPath = "./music" # Later verify how much we start with
-    softwareList = getSoftwares(platform)
+#    softwareList = getSoftwares(platform) ## Will implement later
     browser= 'chrome'
     chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
     webbrowser.register(browser, None, webbrowser.BackgroundBrowser(chrome_path))
 
-
     ## LOAD IN THE BASIC CONFIGURATIONS
     basicFile = open("data/basicCommands.txt", "r")
     basicCommands = basicFile.readlines()
+    ## LOAD IN THE API CONFIGURATIONS
+    ApiFile = open("data/ApiCommands.txt", "r")
+    ApiCommands = basicFile.readlines()
     
     print("Loaded config")
     greetings()
@@ -150,20 +141,24 @@ if __name__ == '__main__':
     for line in basicCommands:
         print(line)
 
-
+    print("This is a list of the API Commands")
+    for line in ApiCommands:
+        print(line)
+        
     # import pyaudio # Throwing error on the Laptop
+
     from basicHelper import * 
     while True:
        # query = takeCommand().lower()
         query = 'a'
-        
+
+
+        """ BASIC HELPER SECTION """
         if 'sleep' in query:
-#            from basicHelper import sleep
             speak("Going to sleep " +name)
             sleep()
 
         elif 'shutdown' in query:
-#            from basicHelper import shutdown
             speak("Shutting down")
             shutdown(platform)
 
@@ -173,7 +168,6 @@ if __name__ == '__main__':
                 speak("which stands for " + machineMean)
 
         elif 'screenshot' in query:
-#            from basicHelper import screenshot
             screenshot("screenshot")
 
         elif 'are you there' in query:
@@ -187,7 +181,6 @@ if __name__ == '__main__':
             voiceId = changeVoice(voiceId)
             speak(str("Voice changed to " +("female" if voiceId == 0 else "male")))
             
-
         elif 'wikipedia' in query:
             speak('Searching Wikipedia....')
             results = searchWiki(query)
@@ -195,54 +188,28 @@ if __name__ == '__main__':
             print(results)
             speak(results)
 
-            
-        elif 'open google' in query:
-            webbrowser.get(browser).open_new_tab("https://google.com")
+        elif 'diagnostics' in query:
+            speak('Running Diagnostics')
+            speak(diagnostics())
 
-##        elif 'open stackoverflow' in query:
-##            webbrowser.get(browser).open_new_tab("https://stackoverflow.com")
+        """ API HELPER SECTION """
+        elif 'define' in query:
+            word = query.replace('define', '')
+            speak("The definition of " + word)
+            speak (wordDefinition(word))
 
-        elif 'music' in query:
-            # Play spotify?
-            print("Make a music function")
-            
-        elif 'open' in query:
-            query.replace("open ", "")
-            print("Check if the query is a software")
-            print("Check to see if it is a file")
-            print("Check if the query is a website")
-            print("Throw an error if not above")
+        elif 'google' in query:
+            newQuery = query.replace("google", "")
+            if 'search' in newQuery: # Google Search
+                
+            elif 'image' in newQuery:
 
-        elif 'play' in query:
-            if 'music' in query:
-                os.startfile(musicPath)
-            else:
-                query.replace("play ", "")
-                print("Find the song")
-                print("Play the song or throw an error")
-            
-        elif 'remember' in query: ## Add to take in the entry name
-            print("Many things that can go here but going to start simple")
-            query.replace("remember", "")
-            print("Split up the command. The key word and action")
-            print("For now is will split them")
-            rememberMessage = query.replace("remember", "").split(" is ")
-            rememberCmd = open('extraCommands.txt', 'a')
-            rememberCmd.write(rememberMessage[0])
-            rememberCmd.close()
-            rememberAction = open('extraActions.txt', 'a')
-            rememberAction.write(rememberMessage[1])
-            rememberAction.close()
+            if 'crawl'
 
-        elif 'list extra' in query:# print out the recently added comamnds
-            if 'command' in query:
-                remember = open("extraCommands.txt", "r")
-                lines = remember.readlines()
-                speak(str("I have " + str(len(lines)) + " learned commands"))
-            if 'action' in query:
-                remember = open("extraActions.txt", "r")
-                lines = remember.readlines()
-                speak(str("I have " + str(len(lines)) + " learned commands"))
+
+
+
+
 
 
         else: # check if it is a command to run on terminal

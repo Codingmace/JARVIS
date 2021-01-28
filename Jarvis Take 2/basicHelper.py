@@ -51,3 +51,11 @@ def searchWiki(query):
     results = wikipedia.summary(query, sentences=2)
     return results
 
+## Need to do more to this
+def diagnostics():
+    usage = str(psutil.cpu_percent())
+    battery = psutil.sensors_battery()
+    
+    return str("CPU is at " + usage + " and batter is at " + battery.percent)
+
+

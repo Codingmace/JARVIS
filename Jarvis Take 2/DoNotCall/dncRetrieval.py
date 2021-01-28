@@ -9,7 +9,7 @@ extendUrl = "offset="
 apiDoc = open("APIKey.txt", "r")
 apiKey = apiDoc.readline()
 apiKey = apiDoc.readline()
-#apiKey = "1MIqfBRshPMveerYAHsjso0BMUuRFP2GwpfXLpfW"
+apiKey = "1MIqfBRshPMveerYAHsjso0BMUuRFP2GwpfXLpfW"
 
 ### FOR UPDATING
 
@@ -60,7 +60,7 @@ errors = open("log.txt","a") # Adjust to be correct folder and not override each
 # for offset in range(34400,3186831, 50):
 # for offset in range(36900,3186831, 50):
 # for offset in range(37800,3186831, 50):
-for offset in range(40350,3186831, 50):
+for offset in range(42900,3186831, 50):
     response = requests.get(baseUrl+apiKey + "&" + extendUrl + str(offset))
     
     if not (response.status_code == 200):
@@ -121,7 +121,7 @@ for offset in range(40350,3186831, 50):
     errors.flush()
     output.flush()
     output.close()
-    time.sleep(45)
+    time.sleep(30)
     
 errors.close()
 phoneMap.close()

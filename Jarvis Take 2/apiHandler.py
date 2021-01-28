@@ -10,6 +10,7 @@ def wordDefinition(word):
 
 
 # Google Search : Look up things on google
+
 from googleSearch import search, images, crawl, news
 
 def encode(term):

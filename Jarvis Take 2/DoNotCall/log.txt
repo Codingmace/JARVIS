@@ -29,3 +29,8 @@ Out of request, 40350
 Out of request, 40350
 Out of request, 42850
 Out of request, 42900
+Out of request, 45400
+Out of request, 47000
+Out of request, 47450
+Out of request, 47500
+Out of request, 47750

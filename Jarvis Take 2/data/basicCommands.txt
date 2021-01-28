@@ -1,0 +1,6 @@
+sleep
+shutdown
+screenshot
+time
+change voice
+search wikipedia

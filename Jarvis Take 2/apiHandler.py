@@ -3,7 +3,6 @@
 
 global rapidApiKey = "8614ca8be7msh26e5b0d5c58e075p134f84jsn178e24818b36"
 
-
 # Urban Dictionary : To define words
 def wordDefinition(word):
     from urbanDictionary import defineWord

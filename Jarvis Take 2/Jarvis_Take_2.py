@@ -1,5 +1,4 @@
 import pyttsx3
-import wikipedia
 import speech_recognition as sr  #Implement later Automatic-speech recognition
 import webbrowser
 import datetime
@@ -8,7 +7,6 @@ import sys
 import smtplib
 import psutil
 #import pyaudio
-import pyautogui
 import platform
 import getpass
 
@@ -21,12 +19,6 @@ def speak(audio):
     engine.say(audio)
     engine.runAndWait()
 
-
-def screenshot():
-    speak("Taking screenshot")
-    img = pyautogui.screenshot()
-    dirExist('screenshot')
-    img.save('screenshots/screenshot ' + datetime.datetime.now().replace(microsecond=0)+ '.png')
 
 # Do all diagnostics here
 def cpu():
@@ -117,20 +109,27 @@ def getSoftwares(platform):
         basePath = '/Applications/'
     elif platform == "win32":
         basePath = "C:\\Program Files (x86)\\"
+        basePath2 = "C:\\Program Files\\"
        # print(basePath)
     else:
         speak("Ummm. I don't know where it is. Could you specify where it is ")
         basePath = input("Enter in the path")
 
 
-
+def startUpInitial():
+    print("Here is the process that is needed at start up")
+    # Load configurations
+    # Make sure the folders and files are their
 
 if __name__ == '__main__':
     print("Loading Config")
-    machineName = "JARVIS"
-    setupEval(machineName) # Determine all the general info is in settings.txt
+    machineName = "TOBIAS"
+    machineMean = "Totally Obscure Intelligent Assistant System"
+# Will add this when have preset settings    
+#    setupEval(machineName) # Determine all the general info is in settings.txt
     platform = sys.platform
     name = "Master"
+    militaryTime = True
     voiceId = 1 # Female
     musicPath = "./music" # Later verify how much we start with
     softwareList = getSoftwares(platform)
@@ -138,64 +137,75 @@ if __name__ == '__main__':
     chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
     webbrowser.register(browser, None, webbrowser.BackgroundBrowser(chrome_path))
 
+
+    ## LOAD IN THE BASIC CONFIGURATIONS
+    basicFile = open("data/basicCommands.txt", "r")
+    basicCommands = basicFile.readlines()
+    
     print("Loaded config")
     greetings()
-    import pyaudio
 
+
+    print("This is a list of the Basic Commands")
+    for line in basicCommands:
+        print(line)
+
+
+    # import pyaudio # Throwing error on the Laptop
+    from basicHelper import * 
     while True:
-        query = takeCommand().lower()
+       # query = takeCommand().lower()
+        query = 'a'
+        
         if 'sleep' in query:
-            print("Going to sleep")
-            sys.exit()
+#            from basicHelper import sleep
+            speak("Going to sleep " +name)
+            sleep()
 
         elif 'shutdown' in query:
-            print("Shutting down")
-            if platform == "win32":
-                os.system("shutdown /p /f")
-            if platform == "linux" or "darwin" or "linux2":
-                os.system("poweroff")
+#            from basicHelper import shutdown
+            speak("Shutting down")
+            shutdown(platform)
 
         elif 'your name' in query:
-            print("My name is " + machineName)
+            speak("My name is "+ machineName)
             if 'stand for' in query:
-                print("which stands for JUST A VERY INTELLIGENT SYSTEM")
+                speak("which stands for " + machineMean)
 
         elif 'screenshot' in query:
-            screenshot()
-
-        elif 'music' in query:
-            # PLay spotify?
-            print("Make a music function")
+#            from basicHelper import screenshot
+            screenshot("screenshot")
 
         elif 'are you there' in query:
-            speak(str("Yes " + name + ", " +machineName+ " at your service"))
+            speak(str("Yes " + name + ", " + machineName+ " at your service"))
 
         elif 'what time is it' in query:
-            strTime = datetime.datetime.now().strftime("%H:%M:%S")
-            speak(f'{name}, the time is {strTime}')
+            speak("The time is ")
+            speak(getTime(militaryTime))
 
         elif 'change voice' in query:
-            if voiceId == 1:
-                voiceId = 0
-            elif voiceId == 0:
-                voiceId = 1
+            voiceId = changeVoice(voiceId)
             speak(str("Voice changed to " +("female" if voiceId == 0 else "male")))
             
 
         elif 'wikipedia' in query:
             speak('Searching Wikipedia....')
-            query = query.replace('wikipedia', '')
-            results = wikipedia.summary(query, sentences=2)
+            results = searchWiki(query)
             speak('According to Wikipedia')
             print(results)
             speak(results)
+
             
         elif 'open google' in query:
             webbrowser.get(browser).open_new_tab("https://google.com")
 
-        elif 'open stackoverflow' in query:
-            webbrowser.get(browser).open_new_tab("https://stackoverflow.com")
+##        elif 'open stackoverflow' in query:
+##            webbrowser.get(browser).open_new_tab("https://stackoverflow.com")
 
+        elif 'music' in query:
+            # Play spotify?
+            print("Make a music function")
+            
         elif 'open' in query:
             query.replace("open ", "")
             print("Check if the query is a software")

@@ -12,3 +12,14 @@ Out of request, 9350
 Out of request, 9350
 Out of request, 13850
 Out of request, 13900
+Out of request, 16200
+Out of request, 19050
+Out of request, 21550
+Out of request, 21800
+Out of request, 21850
+Out of request, 24350
+Out of request, 24400
+Out of request, 26900
+Out of request, 31800
+Out of request, 34350
+Out of request, 36900

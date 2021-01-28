@@ -1,8 +1,14 @@
 ## This is to help with importing the API only when needed
 ## Will read in all the keys here though
 
+global rapidApiKey = "8614ca8be7msh26e5b0d5c58e075p134f84jsn178e24818b36"
+
+
 # Urban Dictionary : To define words
-from urbanDictionary import defineWord
+def wordDefinition(word):
+    from urbanDictionary import defineWord
+    return defineWord(word,rapidApiKey)
+
 
 # Google Search : Look up things on google
 from googleSearch import search, images, crawl, news
@@ -71,5 +77,18 @@ from OCRLY import OImage2Text
 
 # Youtube Download : Download Youtube Video by VideoID
 from youtubeDownload import downloadVideo
+
+
+def main(query, selection, data):
+    print("Here is where we deal with the query onto the API.")
+    
+
+
+
+
+
+
+
+
 
 

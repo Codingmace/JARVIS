@@ -51,3 +51,6 @@ Wyoming - WY
 District of Columbia - DoC
 Puerto Rico - PR
 Quebec, Canada - Can
+Virgin Islands - VI
+British Columbia, Canada - BC
+Alberta, Canada - AC

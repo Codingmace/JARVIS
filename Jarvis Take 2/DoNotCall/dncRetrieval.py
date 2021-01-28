@@ -7,8 +7,9 @@ import time
 baseUrl = "https://api.ftc.gov/v0/dnc-complaints?api_key="
 extendUrl = "offset="
 apiDoc = open("APIKey.txt", "r")
-apiKey = apiDoc.readline()
-apiKey = apiDoc.readline()
+# apiKey = apiDoc.readline()
+# apiKey = apiDoc.readline()
+apiKey = "1MIqfBRshPMveerYAHsjso0BMUuRFP2GwpfXLpfW"
 
 ### FOR UPDATING
 
@@ -44,7 +45,20 @@ errors = open("log.txt","a") # Adjust to be correct folder and not override each
 # for offset in range(9350,3186831, 50):
 # for offset in range(9550,3186831, 50):
 # for offset in range(11350,3186831, 50):
-for offset in range(13900,3186831, 50):
+# for offset in range(13900,3186831, 50):
+# for offset in range(14200,3186831, 50):
+# for offset in range(14800,3186831, 50):
+# for offset in range(16250,3186831, 50):
+# for offset in range(16550,3186831, 50):
+# for offset in range(19050,3186831, 50):
+# for offset in range(21600,3186831, 50):
+# for offset in range(21850,3186831, 50):
+# for offset in range(24400,3186831, 50):
+# for offset in range(26950,3186831, 50):
+# for offset in range(29300,3186831, 50):
+# for offset in range(31850,3186831, 50):
+# for offset in range(34400,3186831, 50):
+for offset in range(36900,3186831, 50):
     response = requests.get(baseUrl+apiKey + "&" + extendUrl + str(offset))
     
     if not (response.status_code == 200):
@@ -55,7 +69,7 @@ for offset in range(13900,3186831, 50):
         phoneMap.flush()
         phoneMap.close()
         exit()
-            
+        
     data = response.json()
     print(response.status_code)
     output = open(str("Data\output" + str((int)(offset / 50))+".json"), "w")
@@ -105,7 +119,7 @@ for offset in range(13900,3186831, 50):
     errors.flush()
     output.flush()
     output.close()
-    time.sleep(60)
+    time.sleep(45)
     
 errors.close()
 phoneMap.close()

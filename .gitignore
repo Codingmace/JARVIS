@@ -131,3 +131,4 @@ dmypy.json
 # Jarvis Take 2/API/*.*
 ExtraCode/Phone Number/allNumbers.txt
 *.json
+*.html

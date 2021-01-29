@@ -46,61 +46,87 @@ def randomCatFact(query):
     return catFact(rapidApiKey)
 
 
+
+
+
+
 # Open Weather : Reports back the weather
 """ NEEDS: have to sort out how I am going to do location """
 # from openWeather import *
 
 # Weather.com : Reports back weather
 """ Just Need Geocode """
-from API.weatherCom import *
+def weather(query, location):
+    from API.weatherCom import *
 
 
 
 
 
-# Test : To grab text, identify parts of speech, identify name of entities
-from API.testTextHelp import fetchText, pos, namedEntity
 
-# Email Validate : Check if email is vali or not
-from API.emailValidate import validEmail
+# Email Validate : Check if email is valid or not
+def validateEmailAddress(query):
+    from API.emailValidate import validEmail
+    
 
-# Summarize API : Summarize the text of a URL link
-from API.summarizeApi import summarize
 
 # Verifone : Verifies a phone is valid (Default Country is US)
 from API.veriphone import verifyPhone
 
 # Pose Estimate : Takes a photo or video and estimates the posture
-from API.poseEstimate import video, image
-
+def estimatePose(query):
+    from API.poseEstimate import video, image
+    
 # Transcribe : Turns audio into text
-from API.transcribe import transcribeUrl, getTask, serviceStatus, getTasks, transcribe
-
-# Trulia :
-from API.trulia import searching, propertyDetail
+def transcribeAudio(query):
+    from API.transcribe import transcribeUrl, getTask, serviceStatus, getTasks, transcribe
 
 def encode(term): # URL Encoding
     return term.replace(" ", "%20")
 
+# Trulia :
+def propertySearch(query):
+    from API.trulia import searching, propertyDetail
+    
+
 # COST MONEY
 # Category Prediction : Prints out catagories the text matches
-from API.categoryPrediction import categoryPrediction
+def predictCategory(query):
+    from API.categoryPrediction import categoryPrediction
 
 # Text Analyzer : Analyzes the contents of a URL
-from API.textAnalyzer import contentExtract, namedExtract, partOfSpeech
+def analyzeUrlText(query):
+    from API.textAnalyzer import contentExtract, namedExtract, partOfSpeech
+
+# Test : To grab text, identify parts of speech, identify name of entities
+def analyzeText(query):
+    from API.testTextHelp import fetchText, pos, namedEntity
+
+# Summarize API : Summarize the text of a URL link
+def summarizeUrlText(query):
+    from API.summarizeApi import summarize
+
 
 # URL Intel :
 from API.urlIntel import urlIntel
 
 # Plate Recognition :
-from API.plateRecognition import recognizeByUrl , recognizeByImage
+def plateRecognition(query):
+    from API.plateRecognition import recognizeByUrl , recognizeByImage
+
 ### USES TRUE URL ENCODING
 
 # OCRLY : URL Image to text
-from API.OCRLY import OImage2Text
+def urlImage2Text(query):
+    from API.OCRLY import OImage2Text
 
 # Youtube Download : Download Youtube Video by VideoID
-from API.youtubeDownload import downloadVideo
+def downloadYoutube(query):
+    from API.youtubeDownload import downloadVideo
+
+
 
 # Threat Detect :
-from API.threatDetector import detectThreat
+def detectUrlThreats(query):
+    from API.threatDetector import detectThreat
+    

@@ -50,10 +50,11 @@ def createUrl():
             except:
                 nonWork.write(str(i)+""+str(mid)+""+"\n")
                 print(str(i)+""+str(mid)+"")
-                time.delay(60)
+                time.sleep(60)
+#        exit()
     goodNumb.close()
     badNumb.close()
     nonWork.close()
-#        exit()
+
 
 createUrl()

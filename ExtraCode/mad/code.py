@@ -4,28 +4,20 @@ import re
 import time
 
 def createUrl():
-#    https://www.usphonebook.com/000-000-0001
     baseUrl = "https://npnr.org/"
     con = 0
-    validArea = open("areaCodes.txt", "r")
+    validArea = open("areaCodes1.txt", "r")
     areaCodes = validArea.readlines()
     validArea.close()
     goodNumb = open("goodNumbers.txt", "a")
     badNumb = open("badNumbers.txt","a")
-
+    nonWork = open("Nonworking.txt", "a")
     for code in areaCodes:
-#    for code in range(817, 818):
         i = int(code)
-#        fir = f"{i:03}"
         for j in range(0, 999):
             mid = f"{j:03}"
-            for k in range(0, 9999):
-                end = f"{k:04}"
-                # print(baseUrl + fir + "-" + mid + "-" + end + "")
-                extendUrl = str(i) + "/" + str(mid) + "/" + str(end) + "/"+ str(i) + "" + str(mid) + "" + str(end) +""
-                print(baseUrl + extendUrl  + ".html")
-#                req = urllib.request.Request(url, method='GET')
-                headers = {
+            extendUrl = str(i) + "/" + str(mid)
+            headers = {
 'authority': 'npnr.org',
 'method': 'GET',
 'path': extendUrl,
@@ -42,23 +34,26 @@ def createUrl():
 'sec-fetch-user': '?1',
 'upgrade-insecure-requests': '1',
 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36',
-    }
-                r = requests.get((baseUrl + extendUrl + ".html"), allow_redirects=True, headers=headers)
-#                print(len(r.content))
-                open("Data/"+ str(i) + "" + str(mid) + "" + str(end) + '.html', 'wb').write(r.content)
-                if(len(r.content)< 27000):
-                    badNumb.write(str(i) + "" + str(mid) + "" + str(end) + "\n")
+    	}
+            try:
+                r = requests.get((baseUrl + extendUrl), allow_redirects=True, headers=headers)
+                if ("does not have a location" in str(r.content)):
+                    badNumb.write(str(i) + "" + str(mid) + "\n")
                 else:
-                    goodNumb.write(str(i) + "" + str(mid) + "" + str(end) + "\n")
+#                        open("Data/"+ str(i) + "" + str(mid) + "" + '.html', 'wb').write(r.content)
+                    goodNumb.write(str(i) + "" + str(mid) + "" + "\n")
                 con += 1
-                time.sleep(1)
                 if(con % 20 == 0):
                     goodNumb.flush()
                     badNumb.flush()
-
+                    nonWork.flush()
+            except:
+                nonWork.write(str(i)+""+str(mid)+""+"\n")
+                print(str(i)+""+str(mid)+"")
+                time.delay(60)
     goodNumb.close()
     badNumb.close()
+    nonWork.close()
+#        exit()
 
 createUrl()
-
-

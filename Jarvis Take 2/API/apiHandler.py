@@ -28,9 +28,22 @@ def google(query):
 
 
 # Revese Image : Google Reverse Image Search
-def reverseImage(query):
+def reverseImageSearch(query):
     from API.reverseImage import reverseImage
+    print("Check that the file exists")
     print("Remove and add in the file name")
+    imageUrl = query # Modify for the actual file URL
+    reverseImage(imageUrl,rapidApiKey)
+
+# Open Proxy : Reports all open proxies at that moment
+def proxyCheck():
+    from API.openProxies import openProxy
+    return openProxy(rapidApiKey)
+
+# Cat Facts : Returns random cat facts
+def randomCatFact(query):
+    from API.catFacts import catFact
+    return catFact(rapidApiKey)
 
 
 # Open Weather : Reports back the weather
@@ -41,11 +54,9 @@ def reverseImage(query):
 """ Just Need Geocode """
 from API.weatherCom import *
 
-# Open Proxy : Reports all open proxies at that moment
-from API.openProxies import openProxy
 
-# Cat Facts : Returns random cat facts
-from API.catFacts import catFact
+
+
 
 # Test : To grab text, identify parts of speech, identify name of entities
 from API.testTextHelp import fetchText, pos, namedEntity

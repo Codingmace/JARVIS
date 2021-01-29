@@ -22,7 +22,6 @@ def speak(audio):
 # Do all diagnostics here
 
 
-
 def takeCommand():
 
     r = sr.Recognizer()
@@ -207,9 +206,9 @@ if __name__ == '__main__':
             result = google(newQuery)
 
         elif 'reverse image search' in query:
-            
+            print("LOoking up the image. check if it is URL or local file")
         
-            
+                
 
 
 

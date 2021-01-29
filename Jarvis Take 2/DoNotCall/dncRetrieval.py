@@ -8,7 +8,7 @@ baseUrl = "https://api.ftc.gov/v0/dnc-complaints?api_key="
 extendUrl = "offset="
 apiDoc = open("APIKey.txt", "r")
 apiKey = apiDoc.readline()
-#apiKey = "1MIqfBRshPMveerYAHsjso0BMUuRFP2GwpfXLpfW"
+apiKey = "1MIqfBRshPMveerYAHsjso0BMUuRFP2GwpfXLpfW"
 
 ### FOR UPDATING
 
@@ -19,7 +19,7 @@ states = ['']
 abbr = ['']
 with open('stateMap.txt','r') as map_file:
     a = map_file.readlines()
-    
+
 for line in a:
     split = line.split(" - ")
     states.append(split[0])
@@ -30,12 +30,12 @@ subject = ['']
 corr = [''] # Correlation
 with open('subjectMap.txt','r') as subject_file:
     a = subject_file.readlines()
-    
+
 for line in a:
     split = line.split(" - ")
     subject.append(split[0])
     corr.append(split[1].strip('\n'))
-            
+
 phoneMap = open("PhoneMap.txt", "a")
 errors = open("log.txt","a") # Adjust to be correct folder and not override eachother
 
@@ -63,9 +63,10 @@ errors = open("log.txt","a") # Adjust to be correct folder and not override each
 # for offset in range(45450,3186831, 50):
 # for offset in range(47050,3186831, 50):
 # for offset in range(47500,3186831, 50):
-for offset in range(47800,3186831, 50):
+# for offset in range(47800,3186831, 50):
+for offset in range(50350,3186831, 50):
     response = requests.get(baseUrl+apiKey + "&" + extendUrl + str(offset))
-    
+
     if not (response.status_code == 200):
         print("We are out of responses. Ended on offset of " + str(offset))
         errors.write("Out of request, "+ str(offset) + "\n")
@@ -74,16 +75,16 @@ for offset in range(47800,3186831, 50):
         phoneMap.flush()
         phoneMap.close()
         exit()
-        
+
     data = response.json()
     print(response.status_code)
     output = open(str("Data\output" + str((int)(offset / 50))+".json"), "w")
     # print(data)
-    
+
 # Parse Json
     del data['meta']
     del data['links']
-    
+
     for element in data['data']:
         del element['type']
         del element['relationships']
@@ -102,22 +103,22 @@ for offset in range(47800,3186831, 50):
         else: # If it is not mapped yet
             print(tempSubject)
 
-        
+
         element['subject'] = tempSubject
-        
+
         element['recorded-or-robo']= element['attributes']['recorded-message-or-robocall']
         element['city'] = element['attributes']['consumer-city']
         curState = element['attributes']['consumer-state']
         curAbbr = abbr[states.index(curState)]
-        
+
         element['state'] = curAbbr
         element['area-code'] = element['attributes']['consumer-area-code']
-        
+
         del element['attributes']
         temp = element['id'] + " " + element['number'] + "\n"
         phoneMap.write(temp)
 
-        
+
     # Write it all to a file
     json.dump(data, output)
     phoneMap.flush()
@@ -125,7 +126,6 @@ for offset in range(47800,3186831, 50):
     output.flush()
     output.close()
     time.sleep(30)
-    
+
 errors.close()
 phoneMap.close()
-

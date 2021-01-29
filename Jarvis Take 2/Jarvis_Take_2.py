@@ -203,10 +203,10 @@ if __name__ == '__main__':
             if 'search' in newQuery: # Google Search
                 
             elif 'image' in newQuery:
-
+                
             if 'crawl'
-
-
+                
+            
 
 
 

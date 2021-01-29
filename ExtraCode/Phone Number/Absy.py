@@ -19,7 +19,6 @@ def createUrl():
             mid = f"{j:03}"
             for k in range(6427, 6500):
                 end = f"{k:04}"
-
                 numb = str(i) + str(mid) + str(end)
                 
                 r = requests.get(baseUrl + numb)
@@ -34,8 +33,6 @@ def createUrl():
                     goodNumb.flush()
 
     goodNumb.close()
-
-    
 
 createUrl()
 

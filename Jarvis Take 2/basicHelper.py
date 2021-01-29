@@ -59,3 +59,4 @@ def diagnostics():
     return str("CPU is at " + usage + " and batter is at " + battery.percent)
 
 
+

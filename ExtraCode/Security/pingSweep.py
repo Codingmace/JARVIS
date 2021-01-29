@@ -9,8 +9,7 @@ def pinger( job_q, results_q ):
         if ip is None: break
 
         try:
-            subprocess.check_call(['ping','-c1',ip],
-                                  stdout=DEVNULL)
+            subprocess.check_call(['ping','-c1',ip], stdout=DEVNULL)
             results_q.put(ip)
         except:
             pass
@@ -28,7 +27,7 @@ if __name__ == '__main__':
         p.start()
 
     for i in range(1,255):
-        jobs.put('192.168.2.{0}'.format(i))
+        jobs.put('192.168.2.{}'.format(i))
 #        jobs.put('192.168.1.{0}'.format(i))
 
     for p in pool:

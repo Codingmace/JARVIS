@@ -8,7 +8,7 @@ baseUrl = "https://api.ftc.gov/v0/dnc-complaints?api_key="
 extendUrl = "offset="
 apiDoc = open("APIKey.txt", "r")
 apiKey = apiDoc.readline()
-# apiKey = "1MIqfBRshPMveerYAHsjso0BMUuRFP2GwpfXLpfW"
+#apiKey = "1MIqfBRshPMveerYAHsjso0BMUuRFP2GwpfXLpfW"
 
 ### FOR UPDATING
 
@@ -68,7 +68,9 @@ errors = open("log.txt","a") # Adjust to be correct folder and not override each
 # for offset in range(52800,3186831, 50):
 # for offset in range(55350,3186831, 50):
 # for offset in range(56500,3186831, 50):
-for offset in range(57850,3186831, 50):
+# for offset in range(57850,3186831, 50):
+# for offset in range(59600,3186831, 50):
+for offset in range(59800,3186831, 50):
     response = requests.get(baseUrl+apiKey + "&" + extendUrl + str(offset))
 
     if not (response.status_code == 200):

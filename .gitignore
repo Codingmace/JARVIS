@@ -128,7 +128,6 @@ dmypy.json
 # Visual studio
 *.suo
 *.pyproj
-Jarvis Take 1/.vs/Jarvis Take 1/v16/.suo
-Jarvis Take 2/API/*.*
+# Jarvis Take 2/API/*.*
 ExtraCode/Phone Number/allNumbers.txt
 *.json

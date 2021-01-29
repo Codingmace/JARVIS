@@ -15,12 +15,13 @@ def shutdown(platform):
 
 
 def screenshot(folderPath):
-    from pyautogui import screenshot
-    speak("Taking screenshot")
+    import pyautogui
     img = pyautogui.screenshot()
     dirExist(folderPath)
-    img.save(folderPath + '/screenshot ' + datetime.datetime.now().replace(microsecond=0)+ '.png')
-    
+    dateTime = (datetime.datetime.now().replace(microsecond=0).strftime('%H-%M-%S'))
+    img.save(folderPath + '/screenshot ' + (dateTime)+ '.png')
+    return "Taking Screenshot"
+
 def dirExist(folderPath):
     folderCheck = os.path.isdir(folderPath)
     if not folderCheck: # Make folder if it doesn't exist
@@ -53,10 +54,11 @@ def searchWiki(query):
 
 ## Need to do more to this
 def diagnostics():
+    import psutil
     usage = str(psutil.cpu_percent())
     battery = psutil.sensors_battery()
     
-    return str("CPU is at " + usage + " and batter is at " + battery.percent)
+    return str("CPU is at " + usage + " and batter is at " + str(battery.percent))
 
 
 

@@ -5,7 +5,6 @@ import datetime
 import os
 import sys
 import smtplib
-import psutil
 #import pyaudio
 import platform
 import getpass
@@ -57,7 +56,7 @@ def greetings():
         response = "Good Afternoon"+name
 
     speak(response)
-    speak('I am JARVIS. Please tell me how can I help you SIR?')
+    speak('I am Tobias. Please tell me how can I help you Master?')
 
 
 def dirExist(folderPath):
@@ -134,7 +133,7 @@ if __name__ == '__main__':
     ApiCommands = basicFile.readlines()
     
     print("Loaded config")
-    greetings()
+#    greetings()
 
 
     print("This is a list of the Basic Commands")
@@ -146,12 +145,16 @@ if __name__ == '__main__':
         print(line)
         
     # import pyaudio # Throwing error on the Laptop
-
-    from basicHelper import * 
-    while True:
+    cont = True
+    from basicHelper import *
+#    from API import apiHandler
+    from API.apiHandler import *
+#    from API import *
+   # from API.apiHandler import *
+    while cont:
        # query = takeCommand().lower()
-        query = 'a'
-
+        query = 'google searc  lamborghini'
+        cont = not cont
 
         """ BASIC HELPER SECTION """
         if 'sleep' in query:
@@ -168,8 +171,9 @@ if __name__ == '__main__':
                 speak("which stands for " + machineMean)
 
         elif 'screenshot' in query:
-            screenshot("screenshot")
-
+            status = screenshot("screenshot")
+            speak(status)
+            
         elif 'are you there' in query:
             speak(str("Yes " + name + ", " + machineName+ " at your service"))
 
@@ -191,8 +195,8 @@ if __name__ == '__main__':
         elif 'diagnostics' in query:
             speak('Running Diagnostics')
             speak(diagnostics())
-
-        """ API HELPER SECTION """
+            
+#        """ API HELPER SECTION """
         elif 'define' in query:
             word = query.replace('define', '')
             speak("The definition of " + word)
@@ -200,12 +204,11 @@ if __name__ == '__main__':
 
         elif 'google' in query:
             newQuery = query.replace("google", "")
-            if 'search' in newQuery: # Google Search
-                
-            elif 'image' in newQuery:
-                
-            if 'crawl'
-                
+            result = google(newQuery)
+
+        elif 'reverse image search' in query:
+            
+        
             
 
 

@@ -1,8 +1,8 @@
 import socket
 import time
 import threading
-
 from queue import Queue
+
 socket.setdefaulttimeout(0.25)
 print_lock = threading.Lock()
 

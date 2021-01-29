@@ -8,7 +8,6 @@ baseUrl = "https://api.ftc.gov/v0/dnc-complaints?api_key="
 extendUrl = "offset="
 apiDoc = open("APIKey.txt", "r")
 apiKey = apiDoc.readline()
-apiKey = apiDoc.readline()
 #apiKey = "1MIqfBRshPMveerYAHsjso0BMUuRFP2GwpfXLpfW"
 
 ### FOR UPDATING
@@ -79,7 +78,7 @@ for offset in range(47800,3186831, 50):
     data = response.json()
     print(response.status_code)
     output = open(str("Data\output" + str((int)(offset / 50))+".json"), "w")
-    print(data)
+    # print(data)
     
 # Parse Json
     del data['meta']

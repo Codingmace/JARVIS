@@ -11,5 +11,4 @@ def defineWord(word, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-
-    print(response.text)
+    return response.text

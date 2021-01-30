@@ -10,11 +10,7 @@ def detectThreat(ipAddress, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers)
-
-    ## Add the JSON Parsing Here
-
-    print(response.text)
-
+    return response.text
 
 
 

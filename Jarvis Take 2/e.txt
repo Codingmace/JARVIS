@@ -69,3 +69,5 @@ ReverseImage by Local instead of URL?
                 speak(str("I have " + str(len(lines)) + " learned commands"))
 
 
+
+ping sweep did not work

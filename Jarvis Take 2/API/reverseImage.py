@@ -11,5 +11,4 @@ def reverseImage(url, rapidApiKey):
         }
 
     response = requests.request("GET", baseUrl, headers=headers, params=querystring)
-
-    print(response.text)
+    return response.text

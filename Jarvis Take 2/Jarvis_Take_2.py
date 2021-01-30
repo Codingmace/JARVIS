@@ -211,7 +211,7 @@ if __name__ == '__main__':
         elif 'more commands' in query:
             print("Made some more commands here")
 
-
+        
 
 
         else: # check if it is a command to run on terminal

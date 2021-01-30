@@ -8,7 +8,7 @@ def search(term, number, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers)
-    print(response.text)
+    return response.text
 
 
 def images(term, rapidApiKey):
@@ -19,7 +19,7 @@ def images(term, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers)
-    print(response.text)
+    return response.text
     
 
 def crawl(term, number, rapidApiKey):
@@ -30,7 +30,7 @@ def crawl(term, number, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers)
-    print(response.text)
+    return response.text
 
 
 def news(term, rapidApiKey):
@@ -41,7 +41,7 @@ def news(term, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers)
-    print(response.text)
+    return response.text
     
 
 
@@ -58,7 +58,6 @@ def SERP(payload, rapidApiKey):
         }
 
     response = requests.request("POST", url, data=payload, headers=headers)
-
     print(response.text)
 
 

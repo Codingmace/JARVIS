@@ -1,45 +1,42 @@
 import requests
 
-def fetchText(url):
+def fetchText(url,rapidApiKey):
     baseUrl = "https://test1972.p.rapidapi.com/analyze-text/text"
 
     querystring = {"url":url}
 
     headers = {
-        'x-rapidapi-key': "8614ca8be7msh26e5b0d5c58e075p134f84jsn178e24818b36",
+        'x-rapidapi-key': rapidApiKey,
         'x-rapidapi-host': "test1972.p.rapidapi.com"
         }
 
     response = requests.request("GET", baseUrl, headers=headers, params=querystring)
+    return response.text
 
-    print(response.text)
-
-def pos(url):
+def pos(url, rapidApiKey):
     baseUrl = "https://test1972.p.rapidapi.com/analyze-text/pos"
 
     querystring = {"url":url}
 
     headers = {
-        'x-rapidapi-key': "8614ca8be7msh26e5b0d5c58e075p134f84jsn178e24818b36",
+        'x-rapidapi-key': rapidApiKey,
         'x-rapidapi-host': "test1972.p.rapidapi.com"
         }
 
     response = requests.request("GET", baseUrl, headers=headers, params=querystring)
+    return response.text
 
-    print(response.text)
 
-
-def namedEntity(url):
+def namedEntity(url, rapidApiKey):
     baseUrl = "https://test1972.p.rapidapi.com/analyze-text/ner"
 
     querystring = {"url":url}
 
     headers = {
-        'x-rapidapi-key': "8614ca8be7msh26e5b0d5c58e075p134f84jsn178e24818b36",
+        'x-rapidapi-key': rapidApiKey,
         'x-rapidapi-host': "test1972.p.rapidapi.com"
         }
 
     response = requests.request("GET", baseUrl, headers=headers, params=querystring)
-
-    print(response.text)
+    return response.text
 

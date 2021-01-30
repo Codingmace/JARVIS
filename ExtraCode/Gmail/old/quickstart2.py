@@ -5,45 +5,9 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 import json
-from tld import get_tld
-
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
-
-
-def cleanUrl(url):
-#    from tld import get_tld
-    newUrl = url.strip()
-    
-    if not("mailto" in url): # It is email back
-#        res = get_tld(url, as_object=True) #Get the root as an object
-#        return (res.tld)
-        #print("Send them back an email about unsubscribing. Could do this one later")
-        return newUrl
-    else: # It is an actual URL that needs to be cleaned up
-        url = newUrl
-        newUrl = url.replace("<","").replace(">","")
-        return newUrl
-
-def cleanDomain(url):
-    newUrl = url.strip().replace("<","").replace("<","")
-    startInd = 0
-    if ("mailto" in newUrl):
-        startInd = newUrl.index(":") # MAYBE +1
-        if ("?" in newUrl): # Has a subject line too
-            endInd = newUrl.index("?") 
-            return newUrl[startInd:endInd]
-        return newUrl[startInd:] # Maybe
-    elif ("https" in newUrl):
-        newUrl = newUrl.replace("https://","")
-        startInd = newUrl.index("/")
-        return "https://" + (newUrl[0:startInd])
-    elif ("http" in newUrl):
-        newUrl = newUrl.replace("http://","")
-        startInd = newUrl.index("/")
-        return "http://" + (newUrl[0:startInd])
-        
 
 def main():
     """Shows basic usage of the Gmail API.
@@ -73,7 +37,6 @@ def main():
     # Call the Gmail API
     megaThreadList = []
     ar = []
-    unsub = []
     moreThreads = True
     threadsList = service.users().threads().list(userId='me',includeSpamTrash=False,prettyPrint=True).execute()
     nextPageToken = threadsList['nextPageToken']
@@ -89,17 +52,11 @@ def main():
             print(nextPageToken)
         else:
             moreThreads = False
-#        moreThreads = False
 
     for ids in megaThreadList:
         metaMessage = service.users().threads().get(userId='me',id=ids,format="metadata").execute()
-        fullMessage = service.users().threads().get(userId='me',id=ids,format="full").execute()
-#        print(metaMessage)
-#        s = input()
         payloads = (metaMessage['messages'][0]['payload'])
         head = payloads['headers']
-        # Name = List-Unsubscribe
-        curEmail = ""
         for pay in head:
             if(pay['name'] == 'From'):
                 temp = pay['value']
@@ -108,39 +65,40 @@ def main():
                     ind = temp.index("<")
 #                ind = temp.index("<")
                 if (ind < 0):
-                    #print(temp)
-                    curEmail = temp
+                    print(temp)
                 else:
-                    curEmail = temp[ind+1:-1]
-                    ar.append(curEmail)
+                    ar.append(temp[ind+1:-1])
 #                    print(temp[temp.index("<"):-1])
-            if(pay['name'] == 'List-Unsubscribe'):
-                temp = pay['value']
-                ind = temp.index("<")
-                curLink = temp[ind+1:-1]
-                unsub.append(curLink)
-              #  if("," in temp):
-              #      print("True")
-
-    subscribeList = []
-    for a in unsub:
-        if "," in a:
-            split = a.split(",")
-            #print(cleanUrl(split[0]))
-            #print(cleanUrl(split[1]))
-            cleanDom = cleanDomain(split[1])
-            if not (cleanDom in subscribeList):
-                subscribeList.append(cleanDom)
-        else:
-            #print(cleanUrl(a))
-            cleanDom = cleanDomain(a)
-            if not (cleanDom in subscribeList):
-                subscribeList.append(cleanDom)
-
-            
-    for b in subscribeList:
-        print(b)
-
+                break
     
+    
+    minMessage = service.users().threads().get(userId='me',id="1766fb36b3d82723",format="metadata").execute()
+    x = json.dumps(minMessage)
+#    print(x)
+    print(minMessage['messages'][0]['payload'])
+    payloads = (minMessage['messages'][0]['payload'])
+    head = payloads['headers']
+    for pay in head:
+        if(pay['name'] == 'From'):
+            print("I FOUND IT")
+            ar.append(pay['value'])
+            break
+    
+    # id= 1766fb36b3d82723
+    
+#    f = open("i.json","w")
+#    json.dump(minMessage, f)
+    
+    results = service.users().labels().list(userId='me').execute()
+    labels = results.get('labels', [])
+#    print(results)
+
+    if not labels:
+        print('No labels found.')
+    else:
+        print('Labels:')
+        for label in labels:
+            print(label['name'])
+
 if __name__ == '__main__':
     main()

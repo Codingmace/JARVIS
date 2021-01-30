@@ -43,7 +43,8 @@ def proxyCheck():
 # Cat Facts : Returns random cat facts
 def randomCatFact(query):
     from API.catFacts import catFact
-    return catFact(rapidApiKey)
+    print("gets the random cat fact and will choose one")
+    # catFact(rapidApiKey)
 
 
 
@@ -57,8 +58,9 @@ def randomCatFact(query):
 # Weather.com : Reports back weather
 """ Just Need Geocode """
 def weather(query, location):
-    from API.weatherCom import *
-
+    # Cannot do * Have to add all of them
+    from API.weatherCom import covid19
+    print("Add the geocode to most of these because I don't know this far")
 
 
 
@@ -94,6 +96,7 @@ def propertySearch(query):
 # Category Prediction : Prints out catagories the text matches
 def predictCategory(query):
     from API.categoryPrediction import categoryPrediction
+    print("Could take this from the text")
 
 # Text Analyzer : Analyzes the contents of a URL
 def analyzeUrlText(query):
@@ -120,6 +123,7 @@ def urlImage2Text(query):
 # Youtube Download : Download Youtube Video by VideoID
 def downloadYoutube(query):
     from API.youtubeDownload import downloadVideo
+    print("Send it and it will return a warning or a download link to go to")
 
 
 # Threat Detect :

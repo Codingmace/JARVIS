@@ -9,5 +9,5 @@ def catFact(rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers)
-    
+    print("Take in the response and return only one random fact. Store all of them to a file")
     return response.text

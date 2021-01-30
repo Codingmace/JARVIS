@@ -4,7 +4,6 @@ import threading
 from queue import Queue
 
 
-
 def portscan(port):
    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
    try:
@@ -21,12 +20,10 @@ def threader():
       portscan(worker)
       q.task_done()
 
-
 def main(target):
    socket.setdefaulttimeout(0.25)
    print_lock = threading.Lock()
-
-#   target = input('Enter the host to be scanned: ')
+   target = "192.168.2.10"
    t_IP = socket.gethostbyname(target)
    print ('Starting scan on host: ', t_IP)
    q = Queue()

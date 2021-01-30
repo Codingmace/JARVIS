@@ -71,7 +71,8 @@ def validateEmailAddress(query):
 
 
 # Verifone : Verifies a phone is valid (Default Country is US)
-from API.veriphone import verifyPhone
+def verifyPhoneNumber(query):
+    from API.veriphone import verifyPhone
 
 # Pose Estimate : Takes a photo or video and estimates the posture
 def estimatePose(query):
@@ -106,10 +107,6 @@ def analyzeText(query):
 def summarizeUrlText(query):
     from API.summarizeApi import summarize
 
-
-# URL Intel :
-from API.urlIntel import urlIntel
-
 # Plate Recognition :
 def plateRecognition(query):
     from API.plateRecognition import recognizeByUrl , recognizeByImage
@@ -125,8 +122,11 @@ def downloadYoutube(query):
     from API.youtubeDownload import downloadVideo
 
 
-
 # Threat Detect :
 def detectUrlThreats(query):
     from API.threatDetector import detectThreat
-    
+
+# URL Intel :
+def IntelligentUrl(query):
+    from API.urlIntel import urlIntel
+

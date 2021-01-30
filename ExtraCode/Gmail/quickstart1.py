@@ -35,59 +35,13 @@ def main():
     service = build('gmail', 'v1', credentials=creds)
 
     # Call the Gmail API
-    megaThreadList = []
-    ar = []
-    moreThreads = True
     threadsList = service.users().threads().list(userId='me',includeSpamTrash=False,prettyPrint=True).execute()
-    nextPageToken = threadsList['nextPageToken']
-    for thread1 in threadsList['threads']:
-        megaThreadList.append(thread1['id'])
-        
-    while moreThreads:
-        threadsList = service.users().threads().list(userId='me',includeSpamTrash=False,prettyPrint=True,pageToken=nextPageToken).execute()
-        for thread1 in threadsList['threads']:
-            megaThreadList.append(thread1['id'])
-        if 'nextPageToken' in threadsList:
-            nextPageToken = threadsList['nextPageToken']
-            print(nextPageToken)
-        else:
-            moreThreads = False
-
-    for ids in megaThreadList:
-        metaMessage = service.users().threads().get(userId='me',id=ids,format="metadata").execute()
-        payloads = (metaMessage['messages'][0]['payload'])
-        head = payloads['headers']
-        for pay in head:
-            if(pay['name'] == 'From'):
-                temp = pay['value']
-                ind = -1
-                if "<" in temp:
-                    ind = temp.index("<")
-#                ind = temp.index("<")
-                if (ind < 0):
-                    print(temp)
-                else:
-                    ar.append(temp[ind+1:-1])
-#                    print(temp[temp.index("<"):-1])
-                break
-    
-    
     minMessage = service.users().threads().get(userId='me',id="1766fb36b3d82723",format="metadata").execute()
-    x = json.dumps(minMessage)
-#    print(x)
-    print(minMessage['messages'][0]['payload'])
-    payloads = (minMessage['messages'][0]['payload'])
-    head = payloads['headers']
-    for pay in head:
-        if(pay['name'] == 'From'):
-            print("I FOUND IT")
-            ar.append(pay['value'])
-            break
-    
+    print(minMessage)
     # id= 1766fb36b3d82723
-    
-#    f = open("i.json","w")
-#    json.dump(minMessage, f)
+
+    f = open("i.json","w")
+    json.dump(minMessage, f)
     
     results = service.users().labels().list(userId='me').execute()
     labels = results.get('labels', [])

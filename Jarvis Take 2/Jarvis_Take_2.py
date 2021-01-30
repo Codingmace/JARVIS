@@ -208,7 +208,8 @@ if __name__ == '__main__':
         elif 'reverse image search' in query:
             print("Looking up the image. check if it is URL or local file")
                     
-        elif ' 
+        elif 'more commands' in query:
+            print("Made some more commands here")
 
 
 

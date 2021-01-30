@@ -54,3 +54,4 @@ Quebec, Canada - Can
 Virgin Islands - VI
 British Columbia, Canada - BC
 Alberta, Canada - AC
+Manitoba, Canada - MB

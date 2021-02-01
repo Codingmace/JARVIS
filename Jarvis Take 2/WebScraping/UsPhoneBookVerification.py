@@ -2,7 +2,7 @@ import os, sys
 import requests
 import re
 
-def createUrl():
+def USPhonebook():
     baseUrl = "https://www.usphonebook.com/"
     extendUrl = "100-200-2000"
 
@@ -34,6 +34,6 @@ def createUrl():
     else:
         print("That number is good")
 
-createUrl()
+USPhonebook()
 
 

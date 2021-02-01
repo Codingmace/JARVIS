@@ -161,10 +161,8 @@ def printGrid(grid):
 def getFiles(fp): # Files Path
 	x = []
 	y = os.listdir(fp)
-#	print(op.abspath(fp))
 	while len(y) > 0:
 		cur = y[0]
-#		print(op.abspath(cur))
 		if op.isdir(cur):
 			tmp = os.listdir(cur)
 			for t in tmp:
@@ -174,7 +172,6 @@ def getFiles(fp): # Files Path
 		else: # For errors
 			x.append(cur)
 		y.remove(cur)
-#	print(x)
 	return x
 
 """ Returns the file name without the date or extension """
@@ -188,11 +185,6 @@ def findNames(fl): # Finds the compatable file names
 		tempFile = parseName(f)
 		if tempFile not in result:
 			result.append(tempFile)
-#		if tempFile in result:
-#			print(tempFile + " is already valid archive")
-#		else:
-#			print(tempFile + " is a new archive adding to list")
-#			result.append(tempFile)
 	return result
 
 """ Compresses the file main file """
@@ -264,7 +256,6 @@ def compress():
 			os.makedirs(dirName) # For multiple
 
 		zipfile.ZipFile(workspace + "\\" + sets[i]).extractall(dirName)
-#		print("Extraction of " + sets[i] + " complete")
 		print(str((i/(len(sets)))*100)+ "  %")
 	
 	grid = []
@@ -274,7 +265,6 @@ def compress():
 	print("Creating Nodes and adding to an array of LinkedList")
 	for i in range(0, len(sets) , 1):
 		os.chdir("..\\" + str(i))
-		# print("Changing workspace to " + os.getcwd())
 		baseFiles = getFiles(".") # What comparing everything to
 #		print("Creating Nodes and adding to an array of LinkedList")
 		for b in baseFiles: 

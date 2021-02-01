@@ -2,7 +2,7 @@ import os, sys
 import requests
 import re
 
-def createUrl():
+def whitePages():
     baseUrl = "https://www.whitepages.com/phone/1-"
     extendUrl = "200-200-2000
 
@@ -15,6 +15,6 @@ def createUrl():
         print("That is a good number")
 
 
-createUrl()
+whitePages()
 
 

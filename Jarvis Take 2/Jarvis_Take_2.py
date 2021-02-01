@@ -194,6 +194,7 @@ if __name__ == '__main__':
         elif 'diagnostics' in query:
             speak('Running Diagnostics')
             speak(diagnostics())
+
             
 #        """ API HELPER SECTION """
         elif 'define' in query:
@@ -208,6 +209,50 @@ if __name__ == '__main__':
         elif 'reverse image search' in query:
             print("Looking up the image. check if it is URL or local file")
                     
+        elif 'proxy' in query:
+            print("Check for some open proxies")
+
+        elif 'cat fact' in query:
+            print("Print out a single random cat fact. Maybe store the other ones for later.")
+
+        elif 'weather' in query:
+            query = query.replace("weather")
+
+        elif 'verify' in query or "valid" in query:
+            print("Check if the phone number or email is valid")
+
+        elif 'analyze' in query:
+            query = query.replace("analyze","")
+            if 'text' in query:
+                print("analyze the text in some way.")
+                print("This can be by test, text anaylzer or if needed category prediction")
+            elif 'video' in query:
+                print("Doing the estimate pose
+        elif 'transcribe' in query:
+            if 'audio to text' in query:
+                print("Do the scripting for Transcribe")
+
+        elif 'scan' in query:
+            if 'url' in query:
+                print("scan urls or something")
+                print("Do the detect or URL intel")
+
+        elif 'image' in query and 'text' in query:
+            print("Image to text OCRLY")
+
+        elif 'youtube' in query:
+            if 'search' in query:
+                print("Search and pull up the youtube video")
+            elif 'download' in query:
+                print("Download the youtube video. this may require searching for it")
+
+        elif 'locate' in query:
+            print("go through the ip address of mine or of someone else")
+
+        elif 'property search' in query:
+            print("Call Trulia on searching a property. Could be an issue.")
+            
+
         elif 'more commands' in query:
             print("Made some more commands here")
 

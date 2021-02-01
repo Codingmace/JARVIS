@@ -3,6 +3,9 @@
 import sys
 
 rapidApiKey = "8614ca8be7msh26e5b0d5c58e075p134f84jsn178e24818b36"
+# Add variable for location
+
+
 #sys.path.append("API/")
 
 # Urban Dictionary : To define words
@@ -130,7 +133,20 @@ def downloadYoutube(query):
 def detectUrlThreats(query):
     from API.threatDetector import detectThreat
 
-# URL Intel :
+# URL Intel : Extracts Links from a URL
 def IntelligentUrl(query):
     from API.urlIntel import urlIntel
 
+
+# IP2Location : Well Turns an IP Address into a Location
+def ip2Location(query):
+    from API.ip2Location import ip2location
+
+# Find any Ip address world wide : IPv6 and IPv4
+def ipLocWW(query):
+    from API.ipWorldWide import ipWorldWide
+
+
+# IP Geolocation Web Service : IP Geolocate
+def ipGeoLocate(query):
+    from API.ipGeoLocation import ipLocation

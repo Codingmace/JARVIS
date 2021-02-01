@@ -1,7 +1,7 @@
 import requests
 
 def openProxy(rapidApiKey):
-    url = "https://open-proxies.p.rapidapi.com/proxies"
+    url = "https://open-proxies.p.rapidapi.com/daily"
 
     headers = {
         'x-rapidapi-key': rapidApiKey,

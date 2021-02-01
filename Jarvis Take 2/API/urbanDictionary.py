@@ -3,7 +3,7 @@ import requests
 def defineWord(word, rapidApiKey):
     url = "https://mashape-community-urban-dictionary.p.rapidapi.com/define"
 
-    querystring = {"term":word}
+    querystring = {"term" : word}
 
     headers = {
         'x-rapidapi-key': rapidApiKey,
@@ -11,4 +11,5 @@ def defineWord(word, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-    return response.text
+
+    return response

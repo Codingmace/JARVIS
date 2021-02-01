@@ -21,9 +21,8 @@ def speak(audio):
 
 # Do all diagnostics here
 
-
+"""
 def takeCommand():
-
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print('Listening...')
@@ -43,7 +42,10 @@ def takeCommand():
         print('Say that again please...')
         return 'None'
     return query
+"""
 
+def takeCommand(query):
+    return query
 
 def greetings():
     hour = int(datetime.datetime.now().hour)
@@ -152,7 +154,9 @@ if __name__ == '__main__':
    # from API.apiHandler import *
     while cont:
        # query = takeCommand().lower()
-        query = 'google searc  lamborghini'
+#        query = input("Enter a command").lower()
+        query = "cat fact"
+#        query = 'google searc  lamborghini'
         cont = not cont
 
         """ BASIC HELPER SECTION """
@@ -197,28 +201,45 @@ if __name__ == '__main__':
 
             
 #        """ API HELPER SECTION """
-        elif 'define' in query:
+        elif 'define' in query: # Done
             word = query.replace('define', '')
-            speak("The definition of " + word)
-            speak (wordDefinition(word))
+            print(wordDefinition(word))
+            print("Hope that definition works for you") # Could add returning an example
+            
+#            speak("The definition of " + word)
+#            speak (wordDefinition(word))
 
         elif 'google' in query:
             newQuery = query.replace("google", "")
-            result = google(newQuery)
+            if "search" in query or "image" in query or "crawl" in query or "news" in query:
+                result = google(newQuery)
+                
+                
 
         elif 'reverse image search' in query:
-            print("Looking up the image. check if it is URL or local file")
+            newQuery = query.replace("reverse image search", "")
+            reverseImageSearch(newQuery)
+            
                     
         elif 'proxy' in query:
-            print("Check for some open proxies")
+            proxies = proxyCheck()
+            tempFile = open("1-31-2020.txt", "w")
+            tempFile.write(proxies)
+            tempFile.flush()
+            tempFile.close()
+            print(proxies[0]) # Check this works. Wasn't able to test today
+            print("Printing out top 2 and saving all of them to a file")
 
         elif 'cat fact' in query:
-            print("Print out a single random cat fact. Maybe store the other ones for later.")
+            print(randomCatFact()) # Add to this getting more than 1 back
 
         elif 'weather' in query:
             query = query.replace("weather")
+            print("Locate the device first or location of the weather")
 
         elif 'verify' in query or "valid" in query:
+            newQuery = query.replace("verify","").replace("valid","")
+            
             print("Check if the phone number or email is valid")
 
         elif 'analyze' in query:
@@ -227,7 +248,9 @@ if __name__ == '__main__':
                 print("analyze the text in some way.")
                 print("This can be by test, text anaylzer or if needed category prediction")
             elif 'video' in query:
-                print("Doing the estimate pose
+                print("Doing the estimate pose")
+                
+                
         elif 'transcribe' in query:
             if 'audio to text' in query:
                 print("Do the scripting for Transcribe")

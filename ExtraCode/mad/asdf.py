@@ -14,5 +14,5 @@ def files(filename):
 	f1.flush()
 	f1.close()
 
-files("goodNumbers.txt")
+files("badNumbers.txt")
 

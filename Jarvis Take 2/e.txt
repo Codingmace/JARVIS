@@ -71,3 +71,11 @@ ReverseImage by Local instead of URL?
 
 
 ping sweep did not work
+
+
+Expression recognition
+Hand gesture recognition
+Chat bot capabilitiy
+
+Hard coded
+save notes from user

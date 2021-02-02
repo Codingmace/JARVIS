@@ -3,7 +3,7 @@ from keyboard import Keyboard
 """ Control the WINDOWS Volume. Can trigger sound and mute functions.
     Should be fully functional affter calling any function (IE resets) """
 
-class Key:
+class Key():
 
     def __init__():
         currentVolume = 0

@@ -11,10 +11,8 @@ rapidApiKey = "8614ca8be7msh26e5b0d5c58e075p134f84jsn178e24818b36"
 
 def responses(response, neededData):
     dataResponse = response.json()
-
 #    neededData = ['region_name','city_name','latitude','longitude','zip_code']
     importantData = []
-
     for data in neededData:
         importantData.append(dataResponse[data])
 
@@ -76,12 +74,12 @@ def reverseImageSearch(query):
     print("Check that the file exists")
     print("Remove and add in the file name")
     imageUrl = query # Modify for the actual file URL
-    reverseImage(imageUrl,rapidApiKey)
+    reverseImage(imageUrl)
 
 # Open Proxy : Reports all open proxies at that moment
 def proxyCheck():
     from API.openProxies import openProxy
-    return openProxy()
+    return openProxy().text
 
 
 # Cat Facts : Returns random cat facts
@@ -148,7 +146,7 @@ def estimatePose(query):
 # Transcribe : Turns audio into text
 def transcribeAudio(query):
     from API.transcribe import transcribeUrl, getTask, serviceStatus, getTasks, transcribe
-    
+    print("")
 
 def encode(term): # URL Encoding
     return term.replace(" ", "%20")
@@ -156,7 +154,7 @@ def encode(term): # URL Encoding
 # Trulia :
 def propertySearch(query):
     from API.trulia import searching, propertyDetail
-    
+    print("Have no fucking clue how I am going to get this information")    
     
 
 # COST MONEY
@@ -196,6 +194,7 @@ def urlImage2Text(query):
 # Youtube Download : Download Youtube Video by VideoID
 def downloadYoutube(query):
     from API.youtubeDownload import downloadVideo
+    
     print("Send it and it will return a warning or a download link to go to")
     
 

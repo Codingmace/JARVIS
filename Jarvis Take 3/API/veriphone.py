@@ -1,6 +1,7 @@
 import requests
+from variable import rapidApiKey
 
-def verifyPhone(number, rapidApiKey):
+def verifyPhone(number):
     url = "https://veriphone.p.rapidapi.com/verify"
 
     querystring = {"phone":number,"default_country":"US"}
@@ -11,5 +12,4 @@ def verifyPhone(number, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-
-    print(response.text)
+    return response

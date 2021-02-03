@@ -1,6 +1,7 @@
 import requests
+from variable import rapidApiKey
 
-def ipLocation(ipAdress, rapidApiKey):
+def ipLocation(ipAdress):
     url = "https://ip-location5.p.rapidapi.com/get_geo_info"
 
     payload = "ip="+ipAddress

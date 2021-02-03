@@ -1,6 +1,7 @@
 import requests
+from variable import rapidApiKey
 
-def summarize(url, rapidApiKey):
+def summarize(url):
     baseUrl = "https://summarization3.p.rapidapi.com/summary/v1/"
 
     querystring = {"url":url}
@@ -11,4 +12,4 @@ def summarize(url, rapidApiKey):
         }
 
     response = requests.request("GET", baseUrl, headers=headers, params=querystring)
-    return response.text
+    return response

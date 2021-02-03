@@ -54,15 +54,30 @@
       "rapidApi": true,
       "functions": [
         {
-          "name": "",
-          "url": "",
+          "name": "search",
+          "url": "https://google-search3.p.rapidapi.com/api/v1/search/q=term&num=11",
           "variables": [
             {
-              "name": "",
-              "required":
+              "name": "term",
+              "required": true
+            },
+            {
+              "name": "number",
+              "required": false
             }
           ],
-          "return": [ "email", "valid" ]
+          "return": [ "answers", "results" ]
+        },
+        {
+          "name": "images",
+          "url": "https://google-search3.p.rapidapi.com/api/v1/images/q=term",
+          "variables": [
+            {
+              "name": "term",
+              "required": true
+            }
+          ],
+          "return": [ "", "" ]
         }
       ]
     },
@@ -76,10 +91,10 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
-          "return": [ "email", "valid" ]
+          "return": [ "", "" ]
         }
       ]
     },
@@ -93,10 +108,10 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
-          "return": [ "email", "valid" ]
+          "return": [ "", "" ]
         }
       ]
     },
@@ -110,10 +125,10 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
-          "return": [ "email", "valid" ]
+          "return": [ "", "" ]
         }
       ]
     },
@@ -127,7 +142,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]
@@ -142,7 +157,7 @@
           "name": "openProxy",
           "url": "https://open-proxies.p.rapidapi.com/daily",
           "variables": [ {} ],
-          "return": [ "proxy"]
+          "return": [ "proxy" ]
         }
       ]
     },
@@ -156,7 +171,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]
@@ -173,7 +188,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]
@@ -190,7 +205,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]
@@ -207,7 +222,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]
@@ -224,7 +239,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]
@@ -241,7 +256,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]
@@ -258,7 +273,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]
@@ -275,7 +290,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]
@@ -292,7 +307,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]
@@ -309,7 +324,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]
@@ -326,7 +341,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]
@@ -343,7 +358,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]
@@ -360,7 +375,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]
@@ -377,7 +392,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]
@@ -394,7 +409,7 @@
           "variables": [
             {
               "name": "",
-              "required":
+              "required": ""
             }
           ],
           "return": [ "email", "valid" ]

@@ -1,7 +1,7 @@
 import requests
+from variable import rapidApiKey
 
-
-def searching(city, state, pageNum,rapidApiKey):
+def searching(city, state, pageNum):
     url = "https://trulia1.p.rapidapi.com/search"
     city = "new%20york" # URL Encoding
     payload = "city="+ city+"&state_code=" + state + "&page=" + str(pageNum)
@@ -12,10 +12,10 @@ def searching(city, state, pageNum,rapidApiKey):
         }
 
     response = requests.request("POST", url, data=payload, headers=headers)
-    return response.text
+    return response
 
 
-def propertyDetail(rapidApiKey):
+def propertyDetail():
     url = "https://trulia1.p.rapidapi.com/property"
 
     payload = "property_url=https%3A%2F%2Fwww.trulia.com%2Fp%2Fny%2Fnew-york%2F150-central-park-s-new-york-ny-10019--689699"
@@ -26,4 +26,4 @@ def propertyDetail(rapidApiKey):
         }
 
     response = requests.request("POST", url, data=payload, headers=headers)
-    return response.text
+    return response

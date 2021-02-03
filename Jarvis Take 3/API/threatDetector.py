@@ -1,6 +1,7 @@
 import requests
+from variable import rapidApiKey
 
-def detectThreat(ipAddress, rapidApiKey):
+def detectThreat(ipAddress):
 #    ipAddress = "45.16.197.205"
     url = "https://ip-geolocation-and-threat-detection.p.rapidapi.com/" + ipAddress
 
@@ -10,7 +11,7 @@ def detectThreat(ipAddress, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers)
-    return response.text
+    return response
 
 
 

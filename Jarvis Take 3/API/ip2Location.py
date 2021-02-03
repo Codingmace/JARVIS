@@ -1,10 +1,11 @@
 import requests
+from variable import rapidApiKey
 
-def ip2location(ipAddress,apiKey, rapidApiKey):
+def ip2location(ipAddress,apiKey):
     url = "https://ip2location-ip2location-v1.p.rapidapi.com/"
 
     apiKey = "demo"
-    querystring = {"ip":ipAddress,"key":apiKey,"package":"WS9"}
+    querystring = {"ip": ipAddress,"key": apiKey,"package": "WS9"}
 
     headers = {
         'x-rapidapi-key': rapidApiKey,
@@ -23,6 +24,7 @@ def ip2location(ipAddress,apiKey, rapidApiKey):
     print(neededData)
     print(importantData)
     return response
+
     """
     {
     "country_code":"US"

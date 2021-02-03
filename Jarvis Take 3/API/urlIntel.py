@@ -1,6 +1,7 @@
 import requests
+from variable import rapidApiKey
 
-def urlIntel(targetUrl, rapidApiKey):
+def urlIntel(targetUrl):
     url = "https://url-intelligence.p.rapidapi.com/rip"
 
     querystring = {"target":targetUrl}
@@ -11,4 +12,4 @@ def urlIntel(targetUrl, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-    return response.text
+    return response

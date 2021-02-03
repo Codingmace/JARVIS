@@ -1,6 +1,7 @@
 import requests
+from variable import rapidApiKey
 
-def image(base64ImageData, rapidApiKey):
+def image(base64ImageData):
 
     url = "https://bform-pose-estimation.p.rapidapi.com/image"
 
@@ -12,9 +13,9 @@ def image(base64ImageData, rapidApiKey):
         }
 
     response = requests.request("POST", url, data=payload, headers=headers)
-    return response.text
+    return response
 
-def video(rapidApiKey):
+def video(base64VideoData):
 
     url = "https://bform-pose-estimation.p.rapidapi.com/video"
 
@@ -26,4 +27,4 @@ def video(rapidApiKey):
         }
 
     response = requests.request("POST", url, data=payload, headers=headers)
-    return response.text
+    return response

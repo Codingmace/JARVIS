@@ -114,7 +114,7 @@ if __name__ == '__main__':
     print("Loading Config")
     machineName = "TOBIAS"
     machineMean = "Totally Obscure Intelligent Assistant System"
-# Will add this when have preset settings    
+# Will add this when have preset settings
 #    setupEval(machineName) # Determine all the general info is in settings.txt
     platform = sys.platform
     name = "Master"
@@ -125,14 +125,14 @@ if __name__ == '__main__':
     browser= 'chrome'
     chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
     webbrowser.register(browser, None, webbrowser.BackgroundBrowser(chrome_path))
-
+    
     ## LOAD IN THE BASIC CONFIGURATIONS
     basicFile = open("data/basicCommands.txt", "r")
     basicCommands = basicFile.readlines()
     ## LOAD IN THE API CONFIGURATIONS
     ApiFile = open("data/ApiCommands.txt", "r")
     ApiCommands = basicFile.readlines()
-    
+
     print("Loaded config")
 #    greetings()
 
@@ -144,13 +144,14 @@ if __name__ == '__main__':
     print("This is a list of the API Commands")
     for line in ApiCommands:
         print(line)
-        
+
     # import pyaudio # Throwing error on the Laptop
     cont = True
     from basicHelper import *
     from API.apiHandler import *
     while cont:
-        query = "cat fact"
+#        query = "cat fact"
+        query = "weather"
         cont = not cont
 
         """ BASIC HELPER SECTION """
@@ -170,7 +171,7 @@ if __name__ == '__main__':
         elif 'screenshot' in query:
             status = screenshot("screenshot")
             speak(status)
-            
+
         elif 'are you there' in query:
             speak(str("Yes " + name + ", " + machineName+ " at your service"))
 
@@ -181,7 +182,7 @@ if __name__ == '__main__':
         elif 'change voice' in query:
             voiceId = changeVoice(voiceId)
             speak(str("Voice changed to " +("female" if voiceId == 0 else "male")))
-            
+
         elif 'wikipedia' in query:
             speak('Searching Wikipedia....')
             results = searchWiki(query)
@@ -193,7 +194,7 @@ if __name__ == '__main__':
             speak('Running Diagnostics')
             speak(diagnostics())
 
-            
+
 #        """ API HELPER SECTION """
         elif 'define' in query: # Done
             word = query.replace('define', '')
@@ -209,12 +210,12 @@ if __name__ == '__main__':
         elif 'reverse image search' in query:
             newQuery = query.replace("reverse image search", "")
             reverseImageSearch(newQuery)
-            
-                    
+
+
         elif 'proxy' in query:
             proxies = proxyCheck()
             tempFile = open("1-31-2020.txt", "w")
-            tempFile.write(proxies) 
+            tempFile.write(proxies)
             tempFile.flush()
             tempFile.close()
             print(proxies[0]) # Check this works. Wasn't able to test today
@@ -231,7 +232,7 @@ if __name__ == '__main__':
 
         elif 'verify' in query or "valid" in query:
             newQuery = query.replace("verify","").replace("valid","")
-            
+
             print("Check if the phone number or email is valid")
 
         elif 'analyze' in query:
@@ -241,14 +242,16 @@ if __name__ == '__main__':
                 print("This can be by test, text anaylzer or if needed category prediction")
             elif 'video' in query:
                 print("Doing the estimate pose")
-                
-                
+
+
         elif 'transcribe' in query:
             if 'audio to text' in query:
+                query = query.replace("trascribe audio to text", "")
                 print("Do the scripting for Transcribe")
 
         elif 'scan' in query:
             if 'url' in query:
+                
                 print("scan urls or something")
                 print("Do the detect or URL intel")
 
@@ -266,14 +269,13 @@ if __name__ == '__main__':
 
         elif 'property search' in query:
             print("Call Trulia on searching a property. Could be an issue.")
-            
+
 
         elif 'more commands' in query:
             print("Made some more commands here")
 
-        
+
 
 
         else: # check if it is a command to run on terminal
             print("Check here if it is a command or not")
-

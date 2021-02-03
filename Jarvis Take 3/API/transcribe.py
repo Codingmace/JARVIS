@@ -1,7 +1,7 @@
 import requests
+from variable import rapidApiKey
 
-
-def transcribeUrl(audioUrl, rapidApiKey):
+def transcribeUrl(audioUrl):
     url = "https://transcribe.p.rapidapi.com/api/v1/transcribe_url/"
 
     payload = "{\r\n    \"url\": " + audioUrl + "\r\n}"
@@ -12,10 +12,10 @@ def transcribeUrl(audioUrl, rapidApiKey):
         }
 
     response = requests.request("POST", url, data=payload, headers=headers)
-    return response.text
+    return response
 
 
-def getTask(taskID, rapidApiKey):
+def getTask(taskID):
     url = "https://transcribe.p.rapidapi.com/api/v1/tasks/" +taskID
 
     headers = {
@@ -24,9 +24,9 @@ def getTask(taskID, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers)
-    return response.text
+    return response
 
-def serviceStatus(rapidApiKey):
+def serviceStatus():
     url = "https://transcribe.p.rapidapi.com/api/v1/"
 
     headers = {
@@ -35,9 +35,9 @@ def serviceStatus(rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers)
-    return response.text
+    return response
 
-def getTasks(rapidApiKey):
+def getTasks():
     url = "https://transcribe.p.rapidapi.com/api/v1/tasks/"
 
     headers = {
@@ -46,10 +46,10 @@ def getTasks(rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers)
-    return response.text
+    return response
  
 ## Import Binary? audio local file?
-def transcribe(rapidApiKey):
+def transcribe(fileData):
     url = "https://transcribe.p.rapidapi.com/api/v1/transcribe/"
 
     payload = "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"file\"\r\n\r\n\r\n-----011000010111000001101001--\r\n\r\n"
@@ -60,6 +60,6 @@ def transcribe(rapidApiKey):
         }
 
     response = requests.request("POST", url, data=payload, headers=headers)
-    return response.text
+    return response
 
         

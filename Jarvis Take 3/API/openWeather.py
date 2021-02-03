@@ -1,6 +1,7 @@
 import requests
+from variables import rapidApiKey
 
-def currentWeather(rapidApiKey):
+def currentWeather():
     url = "https://community-open-weather-map.p.rapidapi.com/weather"
 
     querystring = {"q":"London,uk","lat":"0","lon":"0","callback":"test","id":"2172797","lang":"en","units":"\"metric\" or \"imperial\"","mode":"JSON"}
@@ -11,9 +12,9 @@ def currentWeather(rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-    return response.text
+    return response
 
-def forecast(rapidApiKey):
+def forecast():
     url = "https://community-open-weather-map.p.rapidapi.com/forecast/daily"
 
     querystring = {"q":"san francisco,us","lat":"35","lon":"139","cnt":"10","units":"metric or imperial","mode":"JSON","lang":"en"}
@@ -24,10 +25,10 @@ def forecast(rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-    return response.text
+    return response
 
 
-def searchWeatherData(rapidApiKey):
+def searchWeatherData():
     url = "https://community-open-weather-map.p.rapidapi.com/find"
 
     querystring = {"q":"london","cnt":"1","mode":"JSON","lon":"0","type":"link, accurate","lat":"0","units":"imperial, metric"}
@@ -38,7 +39,7 @@ def searchWeatherData(rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-    return response.text
+    return response
 
 def historicalWeather(rapidApiKey):
     url = "https://community-open-weather-map.p.rapidapi.com/onecall/timemachine"
@@ -54,7 +55,7 @@ def historicalWeather(rapidApiKey):
     return response.text
 
 
-def climateForecast30(city, rapidApiKey):
+def climateForecast30(city):
     url = "https://community-open-weather-map.p.rapidapi.com/climate/month"
 
     querystring = {"q": city}
@@ -65,10 +66,10 @@ def climateForecast30(city, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-    return response.text
+    return response
 
 
-def forecast5d3h(rapidApiKey):
+def forecast5d3h():
     url = "https://community-open-weather-map.p.rapidapi.com/forecast"
 
     querystring = {"q":"san francisco,us","lat":"0","lon":"0","lang":"en","cnt":"10","zip":"75035"}
@@ -79,7 +80,6 @@ def forecast5d3h(rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-    return response.text
+    return response
 
 
-Need stuff here

@@ -1,6 +1,6 @@
 import requests
-
-def OImage2Text(imageUrl, filename, rapidApiKey):
+from variable import rapidApiKey
+def OImage2Text(imageUrl, filename):
     url = "https://ocrly-image-to-text.p.rapidapi.com/"
 
     querystring = {"imageurl":imageUrl,"filename":filename}
@@ -11,4 +11,4 @@ def OImage2Text(imageUrl, filename, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-    return response.text
+    return response

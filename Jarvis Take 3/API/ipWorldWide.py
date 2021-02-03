@@ -1,7 +1,8 @@
 import requests
 import json
+from variable import rapidApiKey
 
-def ipWorldWide(apiKey, rapidApiKey):
+def ipWorldWide(apiKey):
     url = "https://find-any-ip-address-or-domain-location-world-wide.p.rapidapi.com/iplocation"
 
     querystring = {"apikey": apiKey}

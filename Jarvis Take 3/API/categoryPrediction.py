@@ -1,7 +1,7 @@
 """ COST MONEY"""
 import requests
-
-def categoryPrediction(text, rapidApiKey):
+from variables import rapidApiKey
+def categoryPrediction(text):
     url = "https://category-prediction-for-news-articles-amp-blogs.p.rapidapi.com/predict/v1"
 
     querystring = {"text": text }
@@ -12,4 +12,4 @@ def categoryPrediction(text, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-    return response.text
+    return response

@@ -12,4 +12,4 @@ def reverseImage(url):
         }
 
     response = requests.request("GET", baseUrl, headers=headers, params=querystring)
-    return response.text
+    return response

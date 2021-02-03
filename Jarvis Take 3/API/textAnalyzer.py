@@ -1,6 +1,7 @@
 import requests
+from variable import rapidApiKey
 
-def contentExtract(url, rapidApiKey):
+def contentExtract(url):
     baseUrl = "https://text-analyzer.p.rapidapi.com/analyze-text/text"
 
     querystring = {"url":url}
@@ -11,10 +12,10 @@ def contentExtract(url, rapidApiKey):
         }
 
     response = requests.request("GET", baseUrl, headers=headers, params=querystring)
-    return response.text
+    return response
 
 
-def namedExtract(url, rapidApiKey):
+def namedExtract(url):
     baseUrl = "https://text-analyzer.p.rapidapi.com/analyze-text/ner"
 
     querystring = {"url":url}
@@ -25,10 +26,10 @@ def namedExtract(url, rapidApiKey):
         }
 
     response = requests.request("GET", baseUrl, headers=headers, params=querystring)
-    return response.text
+    return response
 
 
-def partOfSpeech(url,rapidApiKey):
+def partOfSpeech(url):
     baseUrl = "https://text-analyzer.p.rapidapi.com/analyze-text/pos"
 
     querystring = {"url":url}
@@ -39,6 +40,6 @@ def partOfSpeech(url,rapidApiKey):
         }
 
     response = requests.request("GET", baseUrl, headers=headers, params=querystring)
-    return response.text
+    return response
 
     

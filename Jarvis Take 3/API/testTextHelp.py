@@ -1,6 +1,7 @@
 import requests
+from variable import rapidApiKey
 
-def fetchText(url,rapidApiKey):
+def fetchText(url):
     baseUrl = "https://test1972.p.rapidapi.com/analyze-text/text"
 
     querystring = {"url":url}
@@ -11,9 +12,9 @@ def fetchText(url,rapidApiKey):
         }
 
     response = requests.request("GET", baseUrl, headers=headers, params=querystring)
-    return response.text
+    return response
 
-def pos(url, rapidApiKey):
+def pos(url):
     baseUrl = "https://test1972.p.rapidapi.com/analyze-text/pos"
 
     querystring = {"url":url}
@@ -24,10 +25,10 @@ def pos(url, rapidApiKey):
         }
 
     response = requests.request("GET", baseUrl, headers=headers, params=querystring)
-    return response.text
+    return response
 
 
-def namedEntity(url, rapidApiKey):
+def namedEntity(url):
     baseUrl = "https://test1972.p.rapidapi.com/analyze-text/ner"
 
     querystring = {"url":url}
@@ -38,5 +39,5 @@ def namedEntity(url, rapidApiKey):
         }
 
     response = requests.request("GET", baseUrl, headers=headers, params=querystring)
-    return response.text
+    return response
 

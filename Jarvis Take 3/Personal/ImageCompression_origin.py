@@ -35,20 +35,19 @@ def main():
     print("Welcome to cleaning JPG Files episode 11")
     print("How much are we cleaning")
     print("1. One File")  # Tested. Works
-    print("3. One Directory")  # Not Tested
-    print("5. One Directory and subdirectories")  # Tested. Works
+    print("2. One Directory")  # Not Tested
+    print("3. One Directory and subdirectories")  # Tested. Works
     print("WARNING: Don't Try anything stupid. This will include the following")
-    print("- Try number 6 and expect results")
     print("- Enter full file paths put in a folder without files")
     print("- Lastly anything I wouldn't do")
 
     co = input()
     if(co == '1'):
-        justOne();
+        optionOne();
+    elif(co == '2'):
+        optionTwo();
     elif(co == '3'):
-        justThree();
-    elif(co == '5'):
-        justFive();
+        optionThree();
     else:
         print("That isn't an option. Goodbye")
     input("Press any button to end the program...")
@@ -104,7 +103,7 @@ def shallowPath(mypath):
 #===============================================================================
 # Implements cleaning up just one file and replacing it or making a copy
 #===============================================================================
-def justOne():
+def optionOne():
     print("Awesome Just one file")
     filename = input("Enter the file path: ")
     if not validPhoto(filename):
@@ -135,7 +134,7 @@ def justOne():
 #===============================================================================
 # Implements cleaning up on multiple files only in 1 directory (No SubDir)
 #===============================================================================
-def justThree():
+def optionTwo():
     print("One directory. Piece of cake after you answer some questions")
     valdir = False  # Valid directory input
     filename = "";
@@ -176,7 +175,7 @@ def justThree():
 #===============================================================================
 # Implements cleaning up on multiple files in 1 directory (and SubDirs)
 #===============================================================================
-def justFive():
+def optionThree():
     print("One directory and their children. That is just great")
     valdir = False  # Valid directory input
     filename = "";

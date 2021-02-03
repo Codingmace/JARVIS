@@ -214,14 +214,16 @@ if __name__ == '__main__':
         elif 'proxy' in query:
             proxies = proxyCheck()
             tempFile = open("1-31-2020.txt", "w")
-            tempFile.write(proxies)
+            tempFile.write(proxies) 
             tempFile.flush()
             tempFile.close()
             print(proxies[0]) # Check this works. Wasn't able to test today
             print("Printing out top 2 and saving all of them to a file")
 
         elif 'cat fact' in query:
-            print(randomCatFact()) # Add to this getting more than 1 back
+            query = query.replace("cat fact","")
+            print(randomCatFact(query))
+            print("would you like another")
 
         elif 'weather' in query:
             query = query.replace("weather")

@@ -1,13 +1,17 @@
 import requests
 
-def catFact(rapidApiKey):
-    url = "https://brianiswu-cat-facts-v1.p.rapidapi.com/facts"
-
-    headers = {
-        'x-rapidapi-key': rapidApiKey,
-        'x-rapidapi-host': "brianiswu-cat-facts-v1.p.rapidapi.com"
-        }
-
+def catFact(maxLength):
+    url = "https://catfact.ninja/facts"
+    if max_length > 0:
+        url += "?max_length=" + str(maxLength)    
+        
     response = requests.request("GET", url, headers=headers)
+    return response
 
+def catFacts(numberFacts, maxLength):
+    url = "https://catfact.ninja/facts?limit=" + str(numberFacts)
+    if max_length > 0:
+        url += "&max_length=" + str(maxLength)    
+        
+    response = requests.request("GET", url, headers=headers)
     return response

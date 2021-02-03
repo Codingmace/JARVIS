@@ -33,21 +33,40 @@ def wordDefinition(word):
 #    return defineWord(word,rapidApiKey)
     # Example of it
 
+
 # Encdoing for the google
-def encode(term):
+def googleEncode(term):
     return term.replace("+", "%2B").replace(" ", "+")
 
 # Google Search : Look up things on google
 def google(query):
     from API.googleSearch import search, images, crawl, news
     if "search" in query:
-        search("that term", "more" , rapidApiKey)
+        query = query.replace("search ","")
+        resultCount = 10
+        split = query.split(" ")
+        lastResult = split[:-1]
+        if(lastResult.isdigit()):
+            resultCount = int(lastResult)
+            query = query.replace(lastResult,"")
+        search(googleEncode(query), resultCount)
+        # So much can be done with this
     elif "image" in query:
-        image()
+        query = query.replace("image ","")
+        image(googleEncode(query))
+        # Show the images Maybe
     elif "crawl" in query:
-        crawl()
+        query = query.replace("crawl","")
+        resultCount = 10
+        split = query.split(" ")
+        lastResult = split[:-1]
+        if(lastResult.isdigit()):
+            resultCount = int(lastResult)
+            query = query.replace(lastResult,"")
+        crawl(googleEncode(query), resultCount)
     elif "news" in query:
-        news()
+        query = query.replace("news","")
+        news(googleEncode(query))
 
 
 # Revese Image : Google Reverse Image Search
@@ -61,16 +80,32 @@ def reverseImageSearch(query):
 
 # Open Proxy : Reports all open proxies at that moment
 def proxyCheck():
-    from API.openProxies import openProxy    
-    return openProxy(rapidApiKey)
+    from API.openProxies import openProxy
+    return openProxy()
 
 
 # Cat Facts : Returns random cat facts
-def randomCatFact():
+def randomCatFact(query):
     from API.catFacts import catFact
-    print("gets the random cat fact and will choose one")
-    facts = catFact(rapidApiKey).json()
-    return facts[0]['text'] # Have to do random because their are only 5 available
+    if "random" in query:
+        print("How many facts would you like")
+        numberFacts = 10
+        print("Would you like to add a length to that?")
+        split = query.split(" ")
+        maxLength = -1
+        if split[1].lower() == "yes":
+            print("Ask for the length")
+            maxLength = int(split[2])
+
+        if (numberFacts == 1):
+            print(catFact(maxLength))
+        else:
+            facts = catFacts(numberFacts, maxLength)
+    else:
+        return catFacts(1000, -1)
+    print("Print the number of results")
+    print("Choose from those results a random one because they always come in same order")
+    return facts # return a fact and maybe could make this offline
 #    return catFact(rapidApiKey)
     # catFact(rapidApiKey)
     

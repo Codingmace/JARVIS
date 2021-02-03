@@ -1,6 +1,7 @@
 import requests
+from variables import rapidApiKey
 
-def reverseImage(url, rapidApiKey):
+def reverseImage(url):
     baseUrl = "https://google-reverse-image-search.p.rapidapi.com/imgSearch"
 
     querystring = {"url":url}

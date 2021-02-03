@@ -1,6 +1,7 @@
 import requests
+from variables import rapidApiKey
 
-def search(term, number, rapidApiKey):
+def search(term, number):
     url = "https://google-search3.p.rapidapi.com/api/v1/search/q=" + term + "&num="+ number
     headers = {
         'x-rapidapi-key': rapidApiKey,
@@ -8,10 +9,10 @@ def search(term, number, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers)
-    return response.text
+    return response
 
 
-def images(term, rapidApiKey):
+def images(term):
     url = "https://google-search3.p.rapidapi.com/api/v1/images/q=" + term
     headers = {
         'x-rapidapi-key': rapidApiKey,
@@ -19,21 +20,21 @@ def images(term, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers)
-    return response.text
+    return response
     
 
-def crawl(term, number, rapidApiKey):
-    url = "https://google-search3.p.rapidapi.com/api/v1/crawl/q="+term+ "&num=" + number
+def crawl(term, number):
+    url = "https://google-search3.p.rapidapi.com/api/v1/crawl/q=" + term + "&num=" + number
     headers = {
         'x-rapidapi-key': rapidApiKey,
         'x-rapidapi-host': "google-search3.p.rapidapi.com"
         }
 
     response = requests.request("GET", url, headers=headers)
-    return response.text
+    return response
 
 
-def news(term, rapidApiKey):
+def news(term):
     url = "https://google-search3.p.rapidapi.com/api/v1/news/q=" + term
     headers = {
         'x-rapidapi-key': rapidApiKey,
@@ -41,7 +42,7 @@ def news(term, rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers)
-    return response.text
+    return response
     
 
 

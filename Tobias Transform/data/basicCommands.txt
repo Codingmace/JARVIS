@@ -1,6 +1,0 @@
-sleep - True
-shutdown - True
-screenshot - True
-time - True
-change voice - True
-search wikipedia - True

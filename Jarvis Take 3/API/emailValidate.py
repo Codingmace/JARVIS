@@ -1,6 +1,7 @@
 import requests
+from variables import rapidApiKey
 
-def validEmail(email, rapidApiKey):
+def validEmail(email):
     url = "https://email-validator8.p.rapidapi.com/api/v2.0/email"
 
     headers = {
@@ -10,7 +11,7 @@ def validEmail(email, rapidApiKey):
         }
 
     response = requests.request("POST", url, data=email, headers=headers)
-    return response.text
+    return response
 
 """
 {"email":"masnathan@mail.com",

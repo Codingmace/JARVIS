@@ -1,6 +1,7 @@
 import requests
+from variables import rapidApiKey
 
-def defineWord(word, rapidApiKey):
+def defineWord(word):
     url = "https://mashape-community-urban-dictionary.p.rapidapi.com/define"
 
     querystring = {"term" : word}

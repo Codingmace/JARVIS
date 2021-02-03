@@ -1,6 +1,7 @@
 import requests
+from variables import rapidApiKey
 
-def openProxy(rapidApiKey):
+def openProxy():
     url = "https://open-proxies.p.rapidapi.com/daily"
 
     headers = {
@@ -9,4 +10,4 @@ def openProxy(rapidApiKey):
         }
 
     response = requests.request("GET", url, headers=headers)
-    return response.text
+    return response

@@ -4,7 +4,7 @@
 EVERYTHING IS COMMAND BASED
 
 ## FRAMEWORK
-
+Phase 1
 - Facial Recognition
   - [x] Cat Face
   - [ ] Human Face
@@ -31,15 +31,12 @@ EVERYTHING IS COMMAND BASED
   
 - Queries
   - [ ] Can be taught new commands
-  - [x] Tell weather at location
-  - [x] Tell predicted weather for location
-  - [X] Time
-  - [X] Screenshot
+  - [x] Tell weather and predicted weather at a location
+  - [X] Time, Screenshot, Shutdown and Sleep Command
   - [ ] Play music - Needs to be tested
   - [ ] Launch softwares on machine
   - [ ] Activate PiHole (What I use as a DNS AdBlocker)
   - [ ] Current System Stats
-  - [X] Shutdown and Sleep Command
   - [x] Define a word
   - [ ] Basic Calculations
   
@@ -64,4 +61,8 @@ EVERYTHING IS COMMAND BASED
   - [ ] StaCoAn Software Launch
   - [ ] MobSF software launch
   - [ ] Output passive crawl of a website
-  - [x] Rename - TOBIAS
+
+###PHASE 2
+ - Aspects
+  - [ ] Access Traffic Web Cameras
+  - [ ] Get Animal Breed

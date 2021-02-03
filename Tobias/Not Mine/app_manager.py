@@ -11,11 +11,9 @@ class AppManager(object):
             'zoom': 'C:\\Users\\testing\AppData\Roaming\Zoom\\bin\Zoom.exe',
             'firefox': 'C:\\"Program Files"\\"Mozilla Firefox"\\firefox.exe',
             'chrome': 'C:\\"Program Files (x86)"\Google\Chrome\Application\chrome.exe --allow-outdated-plugins',
-            'pycharm': '"C:\\"Program Files"\\JetBrains\\"PyCharm Community Edition 2018.2"\\bin\pycharm64.exe"',
             'terminal': '%windir%\system32\cmd.exe',
             'notepad ++': 'C:\\"Program Files"\\"Notepad++"\\"notepad++.exe"',
             'notepad': '%windir%\system32\\notepad.exe',
-            'filmora': 'C:\\"Program Files (x86)"\Wondershare\\"Wondershare Filmora (CPC)"\\"Wondershare Filmora9.exe"',
             'file explorer': '%windir%\explorer.exe',
             'calculator': 'C:\\Windows\\System32\\calc.exe'
         }

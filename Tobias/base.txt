@@ -1,5 +1,0 @@
-import requests
-from variables import rapidApiKey
-
-class :
-	def __init__(self):

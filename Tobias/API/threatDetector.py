@@ -1,7 +1,7 @@
 import requests
 from variables import rapidApiKey
 
-class URLThreatDetect:
+class URLThreatDetect():
     def __init__(self):
         self.ipAddress = "45.16.197.205" # Test IP
         

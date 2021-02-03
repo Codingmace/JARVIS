@@ -148,15 +148,9 @@ if __name__ == '__main__':
     # import pyaudio # Throwing error on the Laptop
     cont = True
     from basicHelper import *
-#    from API import apiHandler
     from API.apiHandler import *
-#    from API import *
-   # from API.apiHandler import *
     while cont:
-       # query = takeCommand().lower()
-#        query = input("Enter a command").lower()
         query = "cat fact"
-#        query = 'google searc  lamborghini'
         cont = not cont
 
         """ BASIC HELPER SECTION """
@@ -205,16 +199,12 @@ if __name__ == '__main__':
             word = query.replace('define', '')
             print(wordDefinition(word))
             print("Hope that definition works for you") # Could add returning an example
-            
-#            speak("The definition of " + word)
-#            speak (wordDefinition(word))
 
         elif 'google' in query:
             newQuery = query.replace("google", "")
             if "search" in query or "image" in query or "crawl" in query or "news" in query:
                 result = google(newQuery)
-                
-                
+
 
         elif 'reverse image search' in query:
             newQuery = query.replace("reverse image search", "")

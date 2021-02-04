@@ -46,7 +46,7 @@ def news(term):
     
 
 
-def SERP(payload, rapidApiKey):
+def SERP(payload):
     # THIs is a post request and very tricky
 
     url = "https://google-search3.p.rapidapi.com/api/v1/serp/"

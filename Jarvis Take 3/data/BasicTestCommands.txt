@@ -1,0 +1,13 @@
+BASIC
+Sleep
+Shutdown
+Your name (stands for)
+Screenshot
+Are you there
+What time is it
+Change voice
+Wikipedia [term]
+Diagnostics
+get my ip v4
+get my ip v6
+get both my ip

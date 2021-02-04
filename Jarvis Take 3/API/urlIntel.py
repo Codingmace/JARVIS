@@ -4,7 +4,7 @@ from variable import rapidApiKey
 def urlIntel(targetUrl):
     url = "https://url-intelligence.p.rapidapi.com/rip"
 
-    querystring = {"target":targetUrl}
+    querystring = {"target": targetUrl}
 
     headers = {
         'x-rapidapi-key': rapidApiKey,

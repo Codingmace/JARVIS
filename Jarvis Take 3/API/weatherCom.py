@@ -10,14 +10,14 @@ def covid19(language):
         'x-rapidapi-key': rapidApiKey,
         'x-rapidapi-host': "weather-com.p.rapidapi.com"
         }
-
+    
     response = requests.request("GET", url, headers=headers, params=querystring)
     return response
 
-def forecastDaily(): 
+def forecastDaily(geocode, units, lang): 
     url = "https://weather-com.p.rapidapi.com/v3/wx/forecast/daily/3day"
 
-    querystring = {"geocode":"34.080911,-118.270406","units":"e","language":"en"}
+    querystring = {"geocode":geocode,"units":units,"language":lang}
 
     headers = {
         'x-rapidapi-key': rapidApiKey,
@@ -27,10 +27,10 @@ def forecastDaily():
     response = requests.request("GET", url, headers=headers, params=querystring)
     return response
 
-def forecastHourly():
+def forecastHourly(geocode, units, lang):
     url = "https://weather-com.p.rapidapi.com/v3/wx/forecast/hourly/1day"
 
-    querystring = {"geocode":"34.080911,-118.270406","units":"e","language":"en"}
+    querystring = {"geocode":geocode,"units":units,"language":lang}
 
     headers = {
         'x-rapidapi-key': rapidApiKey,
@@ -40,10 +40,10 @@ def forecastHourly():
     response = requests.request("GET", url, headers=headers, params=querystring)
     return response
 
-def historical30d():
+def historical30d(geocode, units, lang):
     url = "https://weather-com.p.rapidapi.com/v3/wx/conditions/historical/dailysummary/30day"
 
-    querystring = {"geocode":"34.080911,-118.270406","units":"e","language":"en"}
+    querystring = {"geocode":geocode,"units":units,"language":lang}
 
     headers = {
         'x-rapidapi-key': rapidApiKey,

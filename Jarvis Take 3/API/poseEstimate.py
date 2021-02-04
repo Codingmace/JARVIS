@@ -2,10 +2,10 @@ import requests
 from variable import rapidApiKey
 
 def image(base64ImageData):
-
+    
     url = "https://bform-pose-estimation.p.rapidapi.com/image"
 
-    payload = "{\r\n    \"imageBase64\": "+base64ImageData + "}"
+    payload = "{\r\n    \"imageBase64\": " + base64ImageData + "}"
     headers = {
         'content-type': "application/json",
         'x-rapidapi-key': rapidApiKey,

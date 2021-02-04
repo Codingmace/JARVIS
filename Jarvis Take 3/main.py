@@ -63,7 +63,8 @@ if __name__ == '__main__':
     ## LOAD IN THE API CONFIGURATIONS
     ApiFile = open("data/ApiCommands.txt", "r")
     ApiCommands = basicFile.readlines()
-
+    ipv4 = getMyIPv4Address()
+    ipv6 = getMyIPv6Address()
     print("Loaded config")
 #    greetings()
 
@@ -79,6 +80,7 @@ if __name__ == '__main__':
     cont = True
     from basicHelper import *
     from API.apiHandler import *
+    from IPAddress import getMyIPv4Address, getMyIPv6Address
     while cont:
         query = ""
         query = "weather"
@@ -124,6 +126,17 @@ if __name__ == '__main__':
             speak('Running Diagnostics')
             speak(diagnostics())
 
+        elif 'get my ip' in query:
+            if 'v4' in query:
+                print(getMyIPv4Address())
+            elif 'v6' in query:
+                try:
+                    print(getMyIPv6Address())
+                except:
+                    print("it seems you don't have an IPv6 Address")
+        elif 'get both my ip' in query:
+            print(getMyIPv4Address())
+            print(getMyIPv6Address())
 
 #        """ API HELPER SECTION """
         elif 'define' in query: # Done
@@ -136,11 +149,9 @@ if __name__ == '__main__':
             if "search" in query or "image" in query or "crawl" in query or "news" in query:
                 result = google(newQuery)
 
-
         elif 'reverse image search' in query:
             newQuery = query.replace("reverse image search", "")
             reverseImageSearch(newQuery)
-
 
         elif 'proxy' in query:
             proxies = proxyCheck()
@@ -154,24 +165,38 @@ if __name__ == '__main__':
         elif 'cat fact' in query:
             query = query.replace("cat fact","")
             print(randomCatFact(query))
-            print("would you like another")
 
         elif 'weather' in query:
             query = query.replace("weather")
-            print("Locate the device first or location of the weather")
+            print(weather(query))
 
-        elif 'verify' in query or "valid" in query:
-            newQuery = query.replace("verify","").replace("valid","")
-
-            print("Check if the phone number or email is valid")
-
+        elif 'verify' in query:
+            query = query.replace("verify", "").strip()
+            print(verifyPhoneNumber(query))
+            
+        elif "valid" in query: 
+            query = query.replace("valid","").strip()
+            print(validateEmailAddress(query))
+            
         elif 'analyze' in query:
             query = query.replace("analyze","")
             if 'text' in query:
-                print("analyze the text in some way.")
-                print("This can be by test, text anaylzer or if needed category prediction")
-            elif 'video' in query:
-                print("Doing the estimate pose")
+                if "url" in query:
+                    if "summarize" in query:
+                        query = query.replace("text url summarize" ,"")
+                        print(summarizeUrlText(query))
+                    elif "extract" in query:
+                        query = query.replace("text url extract","")
+                        print(analyzeUrlText(query))
+                    elif "grab" in query:
+                        query = query.replace("text url grab","")
+                        print(analyzeText(query))
+                else:
+                    print("I dont think that is an option")
+                    
+            elif 'video' in query or 'image' in query:
+                print("This one doesn't work at all yet")
+                print(estimatePose(query)) 
 
 
         elif 'transcribe' in query:
@@ -180,33 +205,40 @@ if __name__ == '__main__':
                 print("Do the scripting for Transcribe")
 
         elif 'scan' in query:
-            if 'url' in query:
+            if 'url threat' in query:
+                query = query.replace("scan url threat", "")
+                print(detectUrlThreats(query))
+            elif 'url link' in query:
+                query = query.replace("scan url link", "")
+                print(IntelligentUrl(query))
                 
-                print("scan urls or something")
-                print("Do the detect or URL intel")
-
-        elif 'image' in query and 'text' in query:
-            
-            print("Image to text OCRLY")
+        elif 'image to text' in query:
+            query = query.teplace("image to text", "")
+            print(urlImage2Text(query))
 
         elif 'youtube' in query:
             if 'search' in query:
-                
+                print("dont think I have this one yet")
                 print("Search and pull up the youtube video")
             elif 'download' in query:
-                
-                print("Download the youtube video. this may require searching for it")
-
-        elif 'locate' in query:
+                query = query.replace("youtube download","")
+                print(downloadYoutube(query))
             
-            print("go through ip address")
+        elif 'ip address' in query:
+            if "to location" in query:
+                print(ip2Location(ipv4))
+            if "geolocate" in query:
+                print(ipGeoLocate(ipv4))
+            elif "world wide" in query:
+                print(ipLocWW(ipv4))
 
+        elif 'plate scan' in query:
+            query = query.replace("plate scan","")
+            print(plateRecognition(query))
 
         elif 'more commands' in query:
-            
+            print("Print out the file with more commands")
             print("Made some more commands here")
-
-
 
 
         else: # check if it is a command to run on terminal

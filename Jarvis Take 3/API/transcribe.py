@@ -3,7 +3,7 @@ from variable import rapidApiKey
 
 def transcribeUrl(audioUrl):
     url = "https://transcribe.p.rapidapi.com/api/v1/transcribe_url/"
-
+    
     payload = "{\r\n    \"url\": " + audioUrl + "\r\n}"
     headers = {
         'content-type': "application/json",
@@ -16,7 +16,7 @@ def transcribeUrl(audioUrl):
 
 
 def getTask(taskID):
-    url = "https://transcribe.p.rapidapi.com/api/v1/tasks/" +taskID
+    url = "https://transcribe.p.rapidapi.com/api/v1/tasks/" + taskID
 
     headers = {
         'x-rapidapi-key': rapidApiKey,

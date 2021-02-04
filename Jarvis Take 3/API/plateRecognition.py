@@ -4,7 +4,7 @@ from variable import rapidApiKey
 def recognizeByUrl(imageUrl):
     url = "https://number-plate-recognition.p.rapidapi.com/recognition"
 
-    payload = "image_url="+ imageUrl
+    payload = "image_url=" + imageUrl
     headers = {
         'content-type': "application/x-www-form-urlencoded",
         'x-rapidapi-key': rapidApiKey,

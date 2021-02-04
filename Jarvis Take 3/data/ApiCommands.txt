@@ -8,12 +8,12 @@ Text Help - True
 Valid Email - True
 Summarize Text - True
 Verify Phone - True
-Pose Estimate - True
+Pose Estimate - False
 Trascribe - True
-Trulia - True
+Trulia - False
 Catagory Prediction - False
 Analyze Text - True
 Url Intel Inspect - True
 Plate Recognition - True
 Image to Text - True
-Youtube Download - True
+Youtube Download - False

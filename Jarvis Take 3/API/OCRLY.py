@@ -1,9 +1,10 @@
 import requests
 from variable import rapidApiKey
+
 def OImage2Text(imageUrl, filename):
     url = "https://ocrly-image-to-text.p.rapidapi.com/"
 
-    querystring = {"imageurl":imageUrl,"filename":filename}
+    querystring = {"imageurl": imageUrl,"filename": filename}
 
     headers = {
         'x-rapidapi-key': rapidApiKey,

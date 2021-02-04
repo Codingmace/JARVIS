@@ -1,10 +1,10 @@
 import requests
 from variables import rapidApiKey
 
-def currentWeather():
+def currentWeather(location, latitude, longitude, callback, lang, unit, mode): #D Dont know what to do with ID
     url = "https://community-open-weather-map.p.rapidapi.com/weather"
 
-    querystring = {"q":"London,uk","lat":"0","lon":"0","callback":"test","id":"2172797","lang":"en","units":"\"metric\" or \"imperial\"","mode":"JSON"}
+    querystring = {"q":location,"lat":latitude,"lon":longitude,"callback":callback,"id":"2172797","lang":lang,"units":units,"mode":mode}
 
     headers = {
         'x-rapidapi-key': rapidApiKey,
@@ -14,10 +14,10 @@ def currentWeather():
     response = requests.request("GET", url, headers=headers, params=querystring)
     return response
 
-def forecast():
+def forecast(location, latitude, longitude, count, units, mode, lang):
     url = "https://community-open-weather-map.p.rapidapi.com/forecast/daily"
 
-    querystring = {"q":"san francisco,us","lat":"35","lon":"139","cnt":"10","units":"metric or imperial","mode":"JSON","lang":"en"}
+    querystring = {"q":location,"lat":latitude,"lon":longitude,"cnt":count,"units":units,"mode":mode,"lang":lang}
 
     headers = {
         'x-rapidapi-key': rapidApiKey,
@@ -28,10 +28,10 @@ def forecast():
     return response
 
 
-def searchWeatherData():
+def searchWeatherData(location, latitude, longitude, count, mode, types, units):
     url = "https://community-open-weather-map.p.rapidapi.com/find"
 
-    querystring = {"q":"london","cnt":"1","mode":"JSON","lon":"0","type":"link, accurate","lat":"0","units":"imperial, metric"}
+    querystring = {"q":location,"cnt":count,"mode":mode,"lon":longitude,"type":types,"lat":latitude,"units":units}
 
     headers = {
         'x-rapidapi-key': rapidApiKey,
@@ -41,10 +41,10 @@ def searchWeatherData():
     response = requests.request("GET", url, headers=headers, params=querystring)
     return response
 
-def historicalWeather(rapidApiKey):
+def historicalWeather(latitude, longitude):
     url = "https://community-open-weather-map.p.rapidapi.com/onecall/timemachine"
 
-    querystring = {"lat":"37.774929","lon":"-122.419418","dt":"1590094153 "}
+    querystring = {"lat":latitude,"lon":longitude,"dt":"1590094153 "}
 
     headers = {
         'x-rapidapi-key': rapidApiKey,
@@ -69,10 +69,10 @@ def climateForecast30(city):
     return response
 
 
-def forecast5d3h():
+def forecast5d3h(location, latitude, longitude, lang, count, zipcode):
     url = "https://community-open-weather-map.p.rapidapi.com/forecast"
 
-    querystring = {"q":"san francisco,us","lat":"0","lon":"0","lang":"en","cnt":"10","zip":"75035"}
+    querystring = {"q":location,"lat":latitude,"lon":longitude,"lang":lang,"cnt":count,"zip":zipcode}
 
     headers = {
         'x-rapidapi-key': rapidApiKey,

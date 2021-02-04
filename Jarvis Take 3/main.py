@@ -5,7 +5,6 @@ import datetime
 import os
 import sys
 import smtplib
-#import pyaudio
 import platform
 import getpass
 
@@ -21,28 +20,6 @@ def speak(audio):
 
 # Do all diagnostics here
 
-"""
-def takeCommand():
-    r = sr.Recognizer()
-    with sr.Microphone() as source:
-        print('Listening...')
-        r.pause_threshold = 1
-        r.energy_threshold = 494
-        r.adjust_for_ambient_noise(source, duration=1.5)
-        audio = r.listen(source)
-
-    try:
-        print('Recognizing..')
-        query = r.recognize_google(audio, language='en-in')
-        print(f'User said: {query}\n')
-
-    except Exception as e:
-        # print(e)
-
-        print('Say that again please...')
-        return 'None'
-    return query
-"""
 
 def takeCommand(query):
     return query
@@ -65,29 +42,6 @@ def dirExist(folderPath):
     if not folderCheck: # Make folder if it doesn't exist
         os.makedirs(folderPath)
 
-### UPDATE THIS USING GLOBAL
-# Evaluting that the settings file has everything
-def setupEval(machineName): # MachineName will be when have more than 1 machine and changing the data foler to it
-    dirExist("data")
-    f1 = open("data/oldSettings.txt")
-    f = open("data/settings.txt", "w")
-    lines = f1.readlines()
-    if(len(lines) < 5): # Restart Setup
-        name = "Master" # User's name
-        musicPath = "./music" # Later verify how much we start with
-        dirExist(musicPath)
-        voiceId = 1 # Setting to female
-        voice = "female" if voiceId == 1 else "male"
-
-        f.write(("Name: " + name)+"\n")
-        f.write("Platform: " + sys.platform + "\n") # OS On
-        f.write("MusicPath: " + musicPath+"\n") # Path for music
-        f.write("Voice: " + voice + "\n")
-
-        # CONTINUE WITH A FRESH STARTUP
-    else:
-        print("Well seems you already have data. Good for you. Maybe later you could add some manipulation but we are keeping it simple right now")
-
 
 def getSoftwares(platform):
     softwareList = []
@@ -105,17 +59,10 @@ def getSoftwares(platform):
         basePath = input("Enter in the path")
 
 
-def startUpInitial():
-    print("Here is the process that is needed at start up")
-    # Load configurations
-    # Make sure the folders and files are their
-
 if __name__ == '__main__':
     print("Loading Config")
     machineName = "TOBIAS"
     machineMean = "Totally Obscure Intelligent Assistant System"
-# Will add this when have preset settings
-#    setupEval(machineName) # Determine all the general info is in settings.txt
     platform = sys.platform
     name = "Master"
     militaryTime = True
@@ -145,12 +92,11 @@ if __name__ == '__main__':
     for line in ApiCommands:
         print(line)
 
-    # import pyaudio # Throwing error on the Laptop
     cont = True
     from basicHelper import *
     from API.apiHandler import *
     while cont:
-#        query = "cat fact"
+        query = ""
         query = "weather"
         cont = not cont
 
@@ -256,22 +202,24 @@ if __name__ == '__main__':
                 print("Do the detect or URL intel")
 
         elif 'image' in query and 'text' in query:
+            
             print("Image to text OCRLY")
 
         elif 'youtube' in query:
             if 'search' in query:
+                
                 print("Search and pull up the youtube video")
             elif 'download' in query:
+                
                 print("Download the youtube video. this may require searching for it")
 
         elif 'locate' in query:
-            print("go through the ip address of mine or of someone else")
-
-        elif 'property search' in query:
-            print("Call Trulia on searching a property. Could be an issue.")
+            
+            print("go through ip address")
 
 
         elif 'more commands' in query:
+            
             print("Made some more commands here")
 
 

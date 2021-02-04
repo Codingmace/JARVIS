@@ -3,22 +3,11 @@
 import sys
 import json
 
-rapidApiKey = "8614ca8be7msh26e5b0d5c58e075p134f84jsn178e24818b36"
+# rapidApiKey = "8614ca8be7msh26e5b0d5c58e075p134f84jsn178e24818b36"
 # Add variable for location
 
 
 #sys.path.append("API/")
-
-def responses(response, neededData):
-    dataResponse = response.json()
-#    neededData = ['region_name','city_name','latitude','longitude','zip_code']
-    importantData = []
-    for data in neededData:
-        importantData.append(dataResponse[data])
-
-    print(neededData)
-    print(importantData)
-
 
 
 # Urban Dictionary : To define words
@@ -27,9 +16,7 @@ def wordDefinition(word):
 #    response = defineWord(word, rapidApiKey)
     dataResponse = defineWord(word,rapidApiKey).json()
     return dataResponse['list'][0]['definition'] # First word definition
-
-#    return defineWord(word,rapidApiKey)
-    # Example of it
+# Possible improvements : Go through the list and choose the best one. Display all of them
 
 
 # Encdoing for the google

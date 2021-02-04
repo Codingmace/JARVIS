@@ -4,9 +4,20 @@
 EVERYTHING IS COMMAND BASED
 
 ## FRAMEWORK
-Phase 1
+PHASE 1
+| Function Name  | First Feature | Second Feature | Third Feature | Fourth Feature | Fifth Feature |
+| ------------- | ------------- | ------------------------ | ------------- | ------------- | ------------- |
+| Facial Recognition | Cat Faces  | Human Faces |
+| Phone Calls  | Reverse IP lookup  | Name of caller | Origin of caller |  See if caller is blocked |
+| Networking   | Get Public IP | Ping Sweep | Port Scanner |
+| Web          | Search Google | Open Web URL | Crawl for info | Download Videos | Gmail Unsubscribe |
+| Removed      | ~~Remove from internet~~ |
+| Basic Queries | Taught New Commands | Weather | Time and Screenshot | Shutdown and Sleep | Play Music |
+| Quieres Cont. | Launch Software | Activate DNS Adblocker | Current System Stats | Define a word | Basic Calculations |
+| Photos  | Enhance | *Compress* | More to add |
+| Scrapping | Desktop Photo | Random Facts | Top Memes |
+
 - Facial Recognition
-  - [x] Cat Face
   - [ ] Human Face
 
 - Phone Calls
@@ -14,11 +25,6 @@ Phase 1
   - [ ] Find name of Caller
   - [ ] Find Origin of caller
   - [ ] Search to see if blocked (DNC DATABASE API) - Working on
-  
-- Networking
-  - [x] Locate Public IP Address
-  - [x] Ping Sweep
-  - [x] Port Scanner
   
 - Web
   - [ ] Search Google
@@ -31,13 +37,10 @@ Phase 1
   
 - Queries
   - [ ] Can be taught new commands
-  - [x] Tell weather and predicted weather at a location
-  - [X] Time, Screenshot, Shutdown and Sleep Command
   - [ ] Play music - Needs to be tested
   - [ ] Launch softwares on machine
   - [ ] Activate PiHole (What I use as a DNS AdBlocker)
   - [ ] Current System Stats
-  - [x] Define a word
   - [ ] Basic Calculations
   
 - Photo
@@ -49,7 +52,6 @@ Phase 1
   - [x] Image OCR
 
 - Personal Software
-  - [x] Compress Images
   - [ ] Use incremental Backup Software
   - [ ] Compress TimeLapse recording
   - [ ] Scan Videos for key components

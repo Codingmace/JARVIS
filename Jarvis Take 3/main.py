@@ -24,7 +24,7 @@ def speak(audio):
 def takeCommand(query):
     return query
 
-def greetings():
+def greetings(machineName, userName):
     hour = int(datetime.datetime.now().hour)
     response = "Good Evening "+ name
     if hour >= 0 and hour < 12:
@@ -34,29 +34,13 @@ def greetings():
         response = "Good Afternoon"+name
 
     speak(response)
-    speak('I am Tobias. Please tell me how can I help you Master?')
+    speak('I am ' + machineName + '. Please tell me how can I help you ' + userName + '?')
 
 
 def dirExist(folderPath):
     folderCheck = os.path.isdir(folderPath)
     if not folderCheck: # Make folder if it doesn't exist
         os.makedirs(folderPath)
-
-
-def getSoftwares(platform):
-    softwareList = []
-    basePath = ""
-    if platform == 'linux' or platform == 'linux2':
-        basePath = '/usr/bin/'
-    elif platform == "darwin":
-        basePath = '/Applications/'
-    elif platform == "win32":
-        basePath = "C:\\Program Files (x86)\\"
-        basePath2 = "C:\\Program Files\\"
-       # print(basePath)
-    else:
-        speak("Ummm. I don't know where it is. Could you specify where it is ")
-        basePath = input("Enter in the path")
 
 
 if __name__ == '__main__':

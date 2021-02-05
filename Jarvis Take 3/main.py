@@ -44,6 +44,7 @@ def dirExist(folderPath):
 
 
 if __name__ == '__main__':
+    from IPAddress import getMyIPv4Address, getMyIPv6Address
     print("Loading Config")
     machineName = "TOBIAS"
     machineMean = "Totally Obscure Intelligent Assistant System"
@@ -61,32 +62,45 @@ if __name__ == '__main__':
     webbrowser.register(browser, None, webbrowser.BackgroundBrowser(chrome_path))
     
     ## LOAD IN THE BASIC CONFIGURATIONS
-    basicFile = open("data/basicCommands.txt", "r")
+    basicFile = open("data/BasicTestCommands.txt", "r")
     basicCommands = basicFile.readlines()
     ## LOAD IN THE API CONFIGURATIONS
     ApiFile = open("data/ApiCommands.txt", "r")
     ApiCommands = basicFile.readlines()
     ipv4 = getMyIPv4Address()
-    ipv6 = getMyIPv6Address()
-    print("Loaded config")
+    ipv6 = ""
+    try:
+        ipv6 = getMyIPv6Address()
+    except:
+        print("You do not have an IPv6 Address")
+##    print("Loaded config")
 #    greetings()
 
+    
+##    print("This is a list of the Basic Commands")
+##    for line in basicCommands:
+##        print(line)
+##
+##    print("This is a list of the API Commands")
+##    for line in ApiCommands:
+##        print(line)
 
-    print("This is a list of the Basic Commands")
-    for line in basicCommands:
-        print(line)
-
-    print("This is a list of the API Commands")
-    for line in ApiCommands:
-        print(line)
+    queries = []
+    f = open('Data/ApiCmd.txt', 'r')
+    lines= f.readlines()
+    for line in lines:
+        queries.append(line)
 
     cont = True
     from basicHelper import *
     from API.apiHandler import *
     from IPAddress import getMyIPv4Address, getMyIPv6Address
-    while cont:
-        query = ""
-        query = "weather"
+    for q in queries:
+#    while cont:
+#        query = ""
+#        query = "weather"
+#        query = queries[3]
+        query = q
         cont = not cont
 
 #        """ BASIC HELPER SECTION """
@@ -181,7 +195,7 @@ if __name__ == '__main__':
             print(randomCatFact(query))
 
         elif 'weather' in query:
-            query = query.replace("weather")
+            query = query.replace("weather","")
             print(weather(query))
 
         elif 'verify' in query:

@@ -2,7 +2,7 @@ import requests
 from variables import rapidApiKey
 
 def search(term, number):
-    url = "https://google-search3.p.rapidapi.com/api/v1/search/q=" + term + "&num="+ number
+    url = "https://google-search3.p.rapidapi.com/api/v1/search/q=" + term + "&num="+ str(number)
     headers = {
         'x-rapidapi-key': rapidApiKey,
         'x-rapidapi-host': "google-search3.p.rapidapi.com"
@@ -24,7 +24,7 @@ def images(term):
     
 
 def crawl(term, number):
-    url = "https://google-search3.p.rapidapi.com/api/v1/crawl/q=" + term + "&num=" + number
+    url = "https://google-search3.p.rapidapi.com/api/v1/crawl/q=" + term + "&num=" + str(number)
     headers = {
         'x-rapidapi-key': rapidApiKey,
         'x-rapidapi-host': "google-search3.p.rapidapi.com"

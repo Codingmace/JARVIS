@@ -62,5 +62,6 @@ Hard coded
 save notes from user
 
 Implement different voices
+find best regex filter for a set of data
 Add port scanner to the basic program
 Add oxford dictionary

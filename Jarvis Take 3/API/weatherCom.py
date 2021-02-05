@@ -1,5 +1,5 @@
 import requests
-from variable import rapidApiKey
+from variables import rapidApiKey
 
 def covid19(language):
     url = "https://weather-com.p.rapidapi.com/v3/wx/disease/tracker/countryList/current"

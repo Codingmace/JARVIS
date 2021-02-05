@@ -1,7 +1,7 @@
 ## This is to help with importing the API only when needed
 import sys
 import json
-from variable import weatherInfo
+from variables import weatherInfo
 from IPAddress import getMyIPv4Address, getMyIPv6Address
 
 #sys.path.append("API/")
@@ -31,7 +31,7 @@ def google(query):
         query = query.replace("search ","")
         resultCount = 10
         split = query.split(" ")
-        lastResult = split[:-1]
+        lastResult = split[-1]
         if(lastResult.isdigit()):
             resultCount = int(lastResult)
             query = query.replace(lastResult,"")
@@ -39,13 +39,13 @@ def google(query):
         # So much can be done with this
     elif "image" in query:
         query = query.replace("image ","")
-        return image(googleEncode(query))
+        return images(googleEncode(query))
         # Show the images Maybe
     elif "crawl" in query:
         query = query.replace("crawl","")
         resultCount = 10
         split = query.split(" ")
-        lastResult = split[:-1]
+        lastResult = split[-1]
         if(lastResult.isdigit()):
             resultCount = int(lastResult)
             query = query.replace(lastResult,"")
@@ -59,7 +59,8 @@ def reverseImageSearch(query):
     from API.reverseImage import reverseImage
     imageUrl = query # Modify for the actual file URL
     results = reverseImage(imageUrl)
-    return results.json()['googleSearchResult']
+    return results
+#    return results.json()['googleSearchResult']
 
 
 # Open Proxy : Reports all open proxies at that moment
@@ -69,7 +70,7 @@ def proxyCheck():
 
 # Cat Facts : Returns random cat facts
 def randomCatFact(query):
-    from API.catFacts import catFact
+    from API.catFacts import catFact, catFacts
     if "random" in query:
         print("How many facts would you like")
         numberFacts = 10

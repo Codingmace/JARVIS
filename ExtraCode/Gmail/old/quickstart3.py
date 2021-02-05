@@ -6,114 +6,10 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 import json
 from tld import get_tld
-import dns.resolver
-
-
-
-
-def get_records(domain):
-    """
-    Get all the records associated to domain parameter.
-    :param domain: 
-    :return: 
-    """
-    ids = [
-        'A',
-        'NS',
-        'MD',
-        'MF',
-        'CNAME',
-        'SOA',
-        'MB',
-        'MG',
-        'MR',
-        'NULL',
-        'WKS',
-        'PTR',
-        'HINFO',
-        'MINFO',
-        'MX',
-        'TXT',
-        'RP',
-        'AFSDB',
-        'X25',
-        'ISDN',
-        'RT',
-        'NSAP',
-        'NSAP-PTR',
-        'SIG',
-        'KEY',
-        'PX',
-        'GPOS',
-        'AAAA',
-        'LOC',
-        'NXT',
-        'SRV',
-        'NAPTR',
-        'KX',
-        'CERT',
-        'A6',
-        'DNAME',
-        'OPT',
-        'APL',
-        'DS',
-        'SSHFP',
-        'IPSECKEY',
-        'RRSIG',
-        'NSEC',
-        'DNSKEY',
-        'DHCID',
-        'NSEC3',
-        'NSEC3PARAM',
-        'TLSA',
-        'HIP',
-        'CDS',
-        'CDNSKEY',
-        'CSYNC',
-        'SPF',
-        'UNSPEC',
-        'EUI48',
-        'EUI64',
-        'TKEY',
-        'TSIG',
-        'IXFR',
-        'AXFR',
-        'MAILB',
-        'MAILA',
-        'ANY',
-        'URI',
-        'CAA',
-        'TA',
-        'DLV',
-    ]
-    
-    for a in ids:
-        try:
-            answers = dns.resolver.query(domain, a)
-            for rdata in answers:
-                print(a, ':', rdata.to_text())
-                return a
-            
-        except Exception as e:
-            print(e)  # or pass
-    return "NA"
 
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
-
-
-def checkDNS(url):
-    b = open("valid.txt", "a") # For the shorter valid types
-    c = open("invalid.txt", "a") # For the shorter invalid types
-    ans = get_records(line)
-    if (ans == "NA"):
-        c.write(line)
-    else:
-        b.write(line)
-    b.close()
-    c.close()
-    
 
 
 def cleanUrl(url):
@@ -176,20 +72,19 @@ def main():
 
     # Call the Gmail API
     megaThreadList = []
-    ar = [] # Email From
-    arSmall = [] # Unique email from
+    ar = []
     unsub = []
-    x = open("file.txt","w") # Raw full info on URL
-    y = open("file2.txt","w") # Email Addresses from (Unique now)
+    y = open("file2.txt","w")
+    x = open("file.txt","w")
     z = open("file3.txt","w")
     moreThreads = True
-    threadsList = service.users().threads().list(userId='me',includeSpamTrash=True,prettyPrint=True).execute()
+    threadsList = service.users().threads().list(userId='me',includeSpamTrash=False,prettyPrint=True).execute()
     nextPageToken = threadsList['nextPageToken']
     for thread1 in threadsList['threads']:
         megaThreadList.append(thread1['id'])
         
     while moreThreads:
-        threadsList = service.users().threads().list(userId='me',includeSpamTrash=True,prettyPrint=True,pageToken=nextPageToken).execute()
+        threadsList = service.users().threads().list(userId='me',includeSpamTrash=False,prettyPrint=True,pageToken=nextPageToken).execute()
         for thread1 in threadsList['threads']:
             megaThreadList.append(thread1['id'])
         if 'nextPageToken' in threadsList:
@@ -220,9 +115,8 @@ def main():
                     curEmail = temp
                 else:
                     curEmail = temp[ind+1:-1]
-#                    y.write(curEmail + "\n")
                     ar.append(curEmail)
-
+                    y.write(curEmail + "\n")
 #                    print(temp[temp.index("<"):-1])
             if(pay['name'] == 'List-Unsubscribe'):
                 temp = pay['value']
@@ -233,11 +127,6 @@ def main():
               #  if("," in temp):
               #      print("True")
 
-    for c in ar: # Getting all unique from
-        if c not in arSmall:
-            arSmall.append(c)
-            y.write(c + "\n")
-            
     subscribeList = []
     for a in unsub:
         if "," in a:
@@ -256,12 +145,7 @@ def main():
     x.close()
     y.close()
     for b in subscribeList:
-        if ":" in b and ("http" not in b[0:10]):
-            print()
-        else:
-            print("check the DNS to see if valid")
-            checkDNS(b)
-#        print(b)
+        print(b)
         z.write(b + "\n")
     z.close()
 

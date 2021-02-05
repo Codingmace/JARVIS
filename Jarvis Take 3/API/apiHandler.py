@@ -1,12 +1,8 @@
 ## This is to help with importing the API only when needed
-## Will read in all the keys here though
 import sys
 import json
 from variable import weatherInfo
 from IPAddress import getMyIPv4Address, getMyIPv6Address
-# rapidApiKey = "8614ca8be7msh26e5b0d5c58e075p134f84jsn178e24818b36"
-# Add variable for location
-
 
 #sys.path.append("API/")
 def readData(filename):
@@ -20,12 +16,11 @@ def readData(filename):
 # Urban Dictionary : To define words
 def wordDefinition(word):
     from API.urbanDictionary import defineWord
-#    response = defineWord(word, rapidApiKey)
     dataResponse = defineWord(word).json()
     return dataResponse['list'][0]['definition'] # First word definition
 # Possible improvements : Go through the list and choose the best one. Display all of them
 
-# Encdoing for the google
+# Encoding for the google
 def googleEncode(term):
     return term.replace("+", "%2B").replace(" ", "+")
 
@@ -62,10 +57,10 @@ def google(query):
 # Revese Image : Google Reverse Image Search
 def reverseImageSearch(query):
     from API.reverseImage import reverseImage
-    print("Check that the file exists")
-    print("Remove and add in the file name")
     imageUrl = query # Modify for the actual file URL
-    return reverseImage(imageUrl)
+    results = reverseImage(imageUrl)
+    return results.json()['googleSearchResult']
+
 
 # Open Proxy : Reports all open proxies at that moment
 def proxyCheck():
@@ -94,15 +89,13 @@ def randomCatFact(query):
     print("Print the number of results")
     print("Choose from those results a random one because they always come in same order")
     return facts # return a fact and maybe could make this offline
-#    return catFact(rapidApiKey)
-    # catFact(rapidApiKey)
     
 
 # Open Weather : Reports back the weather
 """ NEEDS: have to sort out how I am going to do location """
 def openWeather(query):
     from openWeather import currentWeather, forecast, searchWeatherData, historicalWeather, climateForcast30, forecast5d3h
-    from API.ip2Location import ip2location
+    from ipGeoLocation import ipLocation
     ipv4 = getMyIPv4Address()
     callback = weatherInfo['callback']
     mode = weatherInfo['mode']
@@ -111,12 +104,11 @@ def openWeather(query):
     units = weatherInfo['units']
     lang = weatherInfo['lang']
     count = weatherInfo['count']
-    geoInfo = ip2location(ipv4, "demo")
+    geoInfo = ipLocation(ipv4)
     latitude = geoInfo['latitude']
     longitude = geoInfo['longitude']
-    city = geoInfo['city_name']
-    country = geoInfo['country_code']
-    zipcode = geoInfo['zipcode']
+    city = geoInfo['city']
+    country = geoInfo['country']['code']
     location = city + "," + country
     # Location example San francisco,us
     if "current weather" in query:
@@ -130,15 +122,22 @@ def openWeather(query):
     elif "climate forecast" in query:
         return climateForecast30(city)
     elif "5 day forecast" in query:
+        # Have to redo because maybe another spot and don't want mixed data.
+        from API.ip2Location import ip2location
+        geoInfo = ip2location(ipv4, "demo")
+        latitude = geoInfo['latitude']
+        longitude = geoInfo['longitude']
+        city = geoInfo['city_name']
+        country = geoInfo['country_code']
+        zipcode = geoInfo['zipcode']
+        location = city + "," + country
         return forecast5d3h(location, latitude, longitude, lang, count, zipcode)
     else:
         print("That is not a valid one")
         return ""
-# from openWeather import *
 
 # Weather.com : Reports back weather
 def weather(query):
-    # Cannot do * Have to add all of them
     from API.weatherCom import covid19, forecastDaily, forecastHourly, historical30d
     currentWeather = weatherInfo
     language = weatherInfo['language']

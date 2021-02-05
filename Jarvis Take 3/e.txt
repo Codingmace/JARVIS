@@ -13,22 +13,11 @@ OCRLY
 Try and make the URL into a local file (Does it need to be binary?)
 - Use in unison with google search
 
-ReverseImage by Local instead of URL?
-
-
-
-
 
             """ EXTRA SECTION AS OF NOW NEEDS REVISIONS """
-        elif 'open google' in query:
-            webbrowser.get(browser).open_new_tab("https://google.com")
-
+        
 ##        elif 'open stackoverflow' in query:
 ##            webbrowser.get(browser).open_new_tab("https://stackoverflow.com")
-
-        elif 'music' in query:
-            # Play spotify?
-            print("Make a music function")
             
         elif 'open' in query:
             query.replace("open ", "")
@@ -36,14 +25,6 @@ ReverseImage by Local instead of URL?
             print("Check to see if it is a file")
             print("Check if the query is a website")
             print("Throw an error if not above")
-
-        elif 'play' in query:
-            if 'music' in query:
-                os.startfile(musicPath)
-            else:
-                query.replace("play ", "")
-                print("Find the song")
-                print("Play the song or throw an error")
             
         elif 'remember' in query: ## Add to take in the entry name
             print("Many things that can go here but going to start simple")

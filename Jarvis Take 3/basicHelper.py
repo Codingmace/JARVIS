@@ -1,6 +1,7 @@
 import os
 import sys
 import datetime
+import math
 
 def sleep():
     print("Going to sleep")
@@ -59,6 +60,81 @@ def diagnostics():
     battery = psutil.sensors_battery()
     
     return str("CPU is at " + usage + " and batter is at " + str(battery.percent))
+
+def playMyMusic(path):
+    os.startfile(path)
+
+def calculate(query):
+    # Basic one words responses
+    split= query.split(" ", "")
+    if "pi" in query:
+        return float(math.pi)
+    elif "tan" in query:
+        return float(math.tan(float(split[1])))
+    elif "sin" in query:
+        return float(math.sin(float(split[1])))
+    elif "cos" in query:
+        return float(math.cos(float(split[1])))
+    elif "factorial" in query:
+        query = query.replace("factorial of ","")
+        query = query.replace("factorial","")
+        return float(math.factorial(float(query)))
+    elif "value of e" in query:
+        return float(math.e)
+    elif "add" in query:
+        return float(split[1]) + float(split[3])
+    elif "subtract" in query:
+        return float(split[1]) - float(split[3])
+    elif "multiply" in query:
+        return float(split[1]) * float(split[3])
+    elif "divide" in query:
+        return float(split[1]) / float(split[3])
+    elif "plus" in query:
+        return float(split[0]) + float(split[2])
+    elif "minus" in query:
+        return float(split[0]) - float(split[2])
+    elif "times" in query:
+        return float(split[0]) * float(split[2])
+    elif "divided by" in query:
+        return float(split[0]) / float(split[3])
+    elif "to the" in query:
+        return float(split[0]) ** float(split[5])
+    elif "log" in query:
+        if "base" in query:
+            return float(math.log(float(split[1]), float(split[3])))
+        else:
+            return float(math.log(float(split[1]), 10))
+    else :
+        return -1
+
+    # No where near done
+def advanceCalculations(query):
+    # Advance Equations
+    words = ["plus"]
+    symbols = ["+"]
+    split = query.split(" ")
+    equasion = ""
+    for s in split:
+        if s in words:
+            equation += symbols[words[s]]
+        else:
+            equation += s
+    print(equasion)
+    # Alternative way
+    i = 0
+    for w in words:
+        query = query.replace(w, symbol[i])
+        i += 1
+    print(query)
+    
+    return "Done"
+
+
+
+
+def computeLogs(self):
+    return 
+
 
 
 

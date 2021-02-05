@@ -49,9 +49,12 @@ if __name__ == '__main__':
     machineMean = "Totally Obscure Intelligent Assistant System"
     platform = sys.platform
     name = "Master"
+    dirExist("User")
+    userPath = "User/" + name + "/"
+    dirExist(userPath)
     militaryTime = True
     voiceId = 1 # Female
-    musicPath = "./music" # Later verify how much we start with
+    musicPath = userPath + "music/" # Later verify how much we start with
 #    softwareList = getSoftwares(platform) ## Will implement later
     browser= 'chrome'
     chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
@@ -86,7 +89,7 @@ if __name__ == '__main__':
         query = "weather"
         cont = not cont
 
-        """ BASIC HELPER SECTION """
+#        """ BASIC HELPER SECTION """
         if 'sleep' in query:
             speak("Going to sleep " +name)
             sleep()
@@ -101,7 +104,7 @@ if __name__ == '__main__':
                 speak("which stands for " + machineMean)
 
         elif 'screenshot' in query:
-            status = screenshot("screenshot")
+            status = screenshot(userPath + "screenshot")
             speak(status)
 
         elif 'are you there' in query:
@@ -138,6 +141,16 @@ if __name__ == '__main__':
             print(getMyIPv4Address())
             print(getMyIPv6Address())
 
+        elif 'play my music' in query:
+            playMyMusic(musicPath)
+
+        elif 'basic calculation' in query:
+            query=query.replace("basic calculation", "")
+            print("calculating: " + calculate(query))
+
+        elif 'open google' in query:
+            webbrowser.get(browser).open_new_tab("https://google.com")
+
 #        """ API HELPER SECTION """
         elif 'define' in query: # Done
             word = query.replace('define', '')
@@ -155,7 +168,8 @@ if __name__ == '__main__':
 
         elif 'proxy' in query:
             proxies = proxyCheck()
-            tempFile = open("1-31-2020.txt", "w")
+            dateTime = (datetime.datetime.now().replace(microsecond=0).strftime('%H-%M-%S'))
+            tempFile = open(userPath + "op_" + dateTime + ".txt", "w")
             tempFile.write(proxies)
             tempFile.flush()
             tempFile.close()

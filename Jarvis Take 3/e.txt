@@ -62,3 +62,5 @@ Hard coded
 save notes from user
 
 Implement different voices
+Add port scanner to the basic program
+Add oxford dictionary

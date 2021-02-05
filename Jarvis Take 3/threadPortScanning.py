@@ -20,7 +20,7 @@ def threader():
       portscan(worker)
       q.task_done()
 
-def main(target):
+def portScanner(target):
    socket.setdefaulttimeout(0.25)
    print_lock = threading.Lock()
    target = "192.168.2.10"

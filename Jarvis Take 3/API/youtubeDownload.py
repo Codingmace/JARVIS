@@ -1,5 +1,6 @@
 import requests
-from variable import rapidApiKey
+from variables import rapidApiKey
+import json
 
 def downloadVideo(videoId):
     url = "https://youtube-to-mp32.p.rapidapi.com/yt_to_mp3"
@@ -11,9 +12,11 @@ def downloadVideo(videoId):
         'x-rapidapi-host': "youtube-to-mp32.p.rapidapi.com"
         }
 
-    response = requests.request("GET", url, headers=headers, params=querystring)
-
-    if response['Status_Code'] == "200":
+    response1 = requests.request("GET", url, headers=headers, params=querystring)
+#    print(response.text)
+    response = response1.json()
+    if response['Status'] == "Success":
         return response['Download_url']
     else:
-        return response['Warining']
+        return response1.text
+#        return response['Warning']

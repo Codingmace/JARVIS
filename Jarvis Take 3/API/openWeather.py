@@ -44,7 +44,7 @@ def searchWeatherData(location, latitude, longitude, count, mode, types, units):
 def historicalWeather(latitude, longitude):
     url = "https://community-open-weather-map.p.rapidapi.com/onecall/timemachine"
 
-    querystring = {"lat":latitude,"lon":longitude,"dt":"1590094153 "}
+    querystring = {"lat":latitude,"lon":longitude,"dt":"1590094153"}
 
     headers = {
         'x-rapidapi-key': rapidApiKey,

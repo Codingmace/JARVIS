@@ -1,5 +1,5 @@
 import requests
-from variable import rapidApiKey
+from variables import rapidApiKey
 
 def urlIntel(targetUrl):
     url = "https://url-intelligence.p.rapidapi.com/rip"

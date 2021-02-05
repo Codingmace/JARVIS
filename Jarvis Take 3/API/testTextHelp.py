@@ -1,5 +1,5 @@
 import requests
-from variable import rapidApiKey
+from variables import rapidApiKey
 
 def fetchText(url):
     baseUrl = "https://test1972.p.rapidapi.com/analyze-text/text"

@@ -95,8 +95,8 @@ def randomCatFact(query):
 # Open Weather : Reports back the weather
 """ NEEDS: have to sort out how I am going to do location """
 def openWeather(query):
-    from openWeather import currentWeather, forecast, searchWeatherData, historicalWeather, climateForcast30, forecast5d3h
-    from ipGeoLocation import ipLocation
+    from API.openWeather import currentWeather, forecast, searchWeatherData, historicalWeather, climateForecast30, forecast5d3h
+    from API.ipGeoLocation import ipLocation
     ipv4 = getMyIPv4Address()
     callback = weatherInfo['callback']
     mode = weatherInfo['mode']
@@ -105,7 +105,9 @@ def openWeather(query):
     units = weatherInfo['units']
     lang = weatherInfo['lang']
     count = weatherInfo['count']
-    geoInfo = ipLocation(ipv4)
+    geoInfo1 = ipLocation(ipv4)
+    geoInfo = geoInfo1.json()
+#    print(geoInfo)
     latitude = geoInfo['latitude']
     longitude = geoInfo['longitude']
     city = geoInfo['city']
@@ -125,7 +127,8 @@ def openWeather(query):
     elif "5 day forecast" in query:
         # Have to redo because maybe another spot and don't want mixed data.
         from API.ip2Location import ip2location
-        geoInfo = ip2location(ipv4, "demo")
+        geoInfo1 = ip2location(ipv4, "demo")
+        geoInfo = geoInfo.json()
         latitude = geoInfo['latitude']
         longitude = geoInfo['longitude']
         city = geoInfo['city_name']
@@ -154,7 +157,9 @@ def weather(query):
     elif "historical records" in query:
         return historical30d(geocode, units, lang)
     else:
-        return openWeather(query)
+        x = openWeather(query)
+        return x
+#        return openWeather(query)
 
 # Email Validate : Check if email is valid or not
 def validateEmailAddress(query):
@@ -229,7 +234,7 @@ def analyzeUrlText(query):
         return namedExtract(query)
     elif "part of speech" in query:
         query = query.replace("part of speech", "")
-        return portOfSpeech(query)
+        return partOfSpeech(query)
     else:
         return ""
 

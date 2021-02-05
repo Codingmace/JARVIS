@@ -241,7 +241,7 @@ if __name__ == '__main__':
                 print(IntelligentUrl(query))
                 
         elif 'image to text' in query:
-            query = query.teplace("image to text", "")
+            query = query.replace("image to text", "")
             print(urlImage2Text(query))
 
         elif 'youtube' in query:

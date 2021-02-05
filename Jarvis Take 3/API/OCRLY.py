@@ -1,5 +1,5 @@
 import requests
-from variable import rapidApiKey
+from variables import rapidApiKey
 
 def OImage2Text(imageUrl, filename):
     url = "https://ocrly-image-to-text.p.rapidapi.com/"

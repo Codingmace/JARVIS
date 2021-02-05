@@ -1,5 +1,5 @@
 import requests
-from variable import rapidApiKey
+from variables import rapidApiKey
 
 def summarize(url):
     baseUrl = "https://summarization3.p.rapidapi.com/summary/v1/"

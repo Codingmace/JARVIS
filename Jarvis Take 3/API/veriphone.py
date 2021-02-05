@@ -1,5 +1,5 @@
 import requests
-from variable import rapidApiKey
+from variables import rapidApiKey
 
 def verifyPhone(number):
     url = "https://veriphone.p.rapidapi.com/verify"

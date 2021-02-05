@@ -1,5 +1,5 @@
 import requests
-from variable import rapidApiKey
+from variables import rapidApiKey
 
 def detectThreat(ipAddress):
 #    ipAddress = "45.16.197.205"

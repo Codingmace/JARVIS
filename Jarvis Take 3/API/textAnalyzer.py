@@ -1,5 +1,5 @@
 import requests
-from variable import rapidApiKey
+from variables import rapidApiKey
 
 def contentExtract(url):
     baseUrl = "https://text-analyzer.p.rapidapi.com/analyze-text/text"

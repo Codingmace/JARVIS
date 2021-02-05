@@ -1,5 +1,5 @@
 import requests
-from variable import rapidApiKey
+from variables import rapidApiKey
 
 def ip2location(ipAddress,apiKey):
     url = "https://ip2location-ip2location-v1.p.rapidapi.com/"

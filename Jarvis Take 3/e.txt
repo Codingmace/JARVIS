@@ -60,3 +60,5 @@ Chat bot capabilitiy
 
 Hard coded
 save notes from user
+
+Implement different voices

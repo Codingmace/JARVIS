@@ -13,7 +13,7 @@
               "required": false
             }
           ],
-          "return": [ "something" ]
+          "return": ["facts", "length" ]
         },
         {
           "name": "catFacts",
@@ -28,7 +28,7 @@
               "required": true
             }
           ],
-          "return": [ "something" ]
+          "return": [ "facts", "length" ]
         }
       ]
     },
@@ -168,6 +168,7 @@
         {
           "name": "",
           "url": "",
+          "available": false,
           "variables": [
             {
               "name": "",

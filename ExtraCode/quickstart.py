@@ -106,24 +106,7 @@ def cleanUrl(url):
         return newUrl
 
 
-def cleanDomain(url):
-    newUrl = url.strip().replace("<","").replace(">","")
-    startInd = 0
-    if ("mailto" in newUrl):
-        startInd = newUrl.index(":") # MAYBE +1
-        if ("?" in newUrl): # Has a subject line too
-            endInd = newUrl.index("?") 
-            return newUrl[startInd:endInd]
-        return newUrl[startInd:] # Maybe
-    elif ("https" in newUrl):
-        newUrl = newUrl.replace("https://","")
-        startInd = newUrl.index("/")
-        return "https://" + (newUrl[0:startInd])
-    elif ("http" in newUrl):
-        newUrl = newUrl.replace("http://","")
-        startInd = newUrl.index("/")
-        return "http://" + (newUrl[0:startInd])
-        
+
 
 def main():
     """Shows basic usage of the Gmail API.

@@ -164,7 +164,7 @@ if __name__ == '__main__':
 
         elif 'reverse image search' in query:
             newQuery = query.replace("reverse image search", "")
-            reverseImageSearch(newQuery)
+            print(reverseImageSearch(newQuery))
 
         elif 'proxy' in query:
             proxies = proxyCheck()

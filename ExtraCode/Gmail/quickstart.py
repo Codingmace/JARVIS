@@ -44,10 +44,15 @@ class Site:
     def getString(self):
         fin = ""
         fin += self.sender + " " + self.domainName + " " + str(len(self.messages))
-        for a in self.messages:
-            fin += "\n" + a.link
+#        for a in self.messages:
+#            fin += "\n" + a.link
         return fin
 
+    def getMessageSize(self):
+        return len(self.messages)
+
+    def getLink(self):
+        return self.messages[0].link
 
 
 # com , org , us , edu , gov , net , 
@@ -218,10 +223,11 @@ def main():
         if "," in unsub:
             split = unsub.split(",")
             cleanDom = cleanDomain(split[1])
+            curMess.link = cleanDom
         else:
             cleanDom = cleanDomain(unsub)
 
-        curMess.link = cleanDom
+
         if cleanDom is None or "mailto" in cleanDom:
             print("That is none. Onto the next")
         else:
@@ -242,17 +248,17 @@ def main():
                 print("That is an invalid link that I am going to ignore")
 
     fsd = open("SitesFile.txt","w")
-
+    fs = open("webSiteFile.txt", "w")
     # IF thier is one do a get and post request real quick
     for s in sitesList:
-        fsd.write(s.getString() + "\n")
-
+        if s.getMessageSize() == 1:
+            print("Would you like to delete them messages?")
+            print("Ignoring " + s.getSender())
+        else:
+            fsd.write(s.getString() + "\n")
+            fs.write(s.getLink() + "\n")
     fsd.close()
-    
-    for c in ar: # Getting all unique from
-        if c not in arSmall:
-            arSmall.append(c)
-            y.write(c + "\n")
+    fs.close()
 
 
    

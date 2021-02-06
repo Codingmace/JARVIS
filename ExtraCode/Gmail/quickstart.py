@@ -6,21 +6,9 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 import json
 from tld import get_tld
+import requests
 import dns.resolver
 
-class Site:
-    sender = ""
-    domainName = ""
-    messages = []
-
-    def getSender(self):
-        return self.sender
-
-    def getDomain(self):
-        return self.domain
-
-    def addMessage(self, mail):
-        self.messages.append(mail)
 
 class Message:
     thread = ""
@@ -35,6 +23,32 @@ class Message:
 
         return false
     
+
+class Site:
+    def __init__(self):
+        self.messages = []
+
+    sender = ""
+    domainName = ""
+    messages = [Message()]
+
+    def getSender(self):
+        return self.sender
+
+    def getDomain(self):
+        return self.domain
+
+    def addMessage(self, mail):
+        self.messages.append(mail)
+    
+    def getString(self):
+        fin = ""
+        fin += self.sender + " " + self.domainName + " " + str(len(self.messages))
+        for a in self.messages:
+            fin += "\n" + a.link
+        return fin
+
+
 
 # com , org , us , edu , gov , net , 
 
@@ -76,44 +90,40 @@ def checkDNS(url):
 
 def validURL(url):
     try:
-        response = requests.get("http://www.avalidurl.com/")
+        response = requests.get(url,timeout=.5)
         return True
 #        print("URL is valid and exists on the internet")
     except requests.ConnectionError as exception:
         return False
+    except :
+        return False
 #        print("URL does not exist on Internet")
 
+
 def cleanUrl(url):
-#    from tld import get_tld
     newUrl = url.strip()
     if not("mailto" in url): # It is email back
-#        res = get_tld(url, as_object=True) #Get the root as an object
-#        return (res.tld)
-        #print("Send them back an email about unsubscribing. Could do this one later")
         return newUrl
     else: # It is an actual URL that needs to be cleaned up
         url = newUrl
-        newUrl = url.replace("<","").replace(">","")
+        newUrl = url.replace("<","").replace(">","").trim()
         return newUrl
 
 def cleanDomain(url):
-    newUrl = url.strip().replace("<","").replace("<","")
+    newUrl = url.replace("<","").replace(">","").replace(",","").strip()
     startInd = 0
     if ("mailto" in newUrl):
-        startInd = newUrl.index(":") # MAYBE +1
-        if ("?" in newUrl): # Has a subject line too
-            endInd = newUrl.index("?") 
-            return newUrl[startInd:endInd]
-        return newUrl[startInd:] # Maybe
+        return url
     elif ("https" in newUrl):
         newUrl = newUrl.replace("https://","")
         startInd = newUrl.index("/")
-        return "https://" + (newUrl[0:startInd])
+        return "https://" + (newUrl[0:startInd]).strip()
     elif ("http" in newUrl):
         newUrl = newUrl.replace("http://","")
         startInd = newUrl.index("/")
-        return "http://" + (newUrl[0:startInd])
+        return "http://" + (newUrl[0:startInd]).strip()
         
+
 
 def main():
     """Shows basic usage of the Gmail API.
@@ -147,7 +157,6 @@ def main():
     siteNames = [] # Names of sites for easy search
     ar = [] # Email From
     arSmall = [] # Unique email from
-#    unsub = []
     x = open("file.txt","w") # Raw full info on URL
     y = open("file2.txt","w") # Email Addresses from (Unique now)
     z = open("file3.txt","w")
@@ -172,7 +181,6 @@ def main():
         metaMessage = service.users().threads().get(userId='me',id=ids,format="metadata").execute()
         fullMessage = service.users().threads().get(userId='me',id=ids,format="full").execute()
 #        print(metaMessage)
-#        s = input()
         payloads = (metaMessage['messages'][0]['payload'])
         head = payloads['headers']
         # Name = List-Unsubscribe
@@ -202,39 +210,43 @@ def main():
                 ind = temp.index("<")
                 curLink = temp[ind+1:-1]
                 unsub = curLink
-                print(unsub)
+#                print(unsub)
                 curMess.link = curLink
-              #  if("," in temp):
-              #      print("True")
-        print("Take from here we have message ")
+
+#        print("Take from here we have message ")
         cleanDom = unsub
         if "," in unsub:
             split = unsub.split(",")
             cleanDom = cleanDomain(split[1])
         else:
             cleanDom = cleanDomain(unsub)
-        print(cleanDom)
-        if cleanDom is None:
+
+        curMess.link = cleanDom
+        if cleanDom is None or "mailto" in cleanDom:
             print("That is none. Onto the next")
-        elif "mailto" in cleanDom:
-            print(cleanDom + " Not dealing with that yet")
         else:
-            if cleanDom in siteNames: # Already exist
-                curIndex = siteNames.index(cleanDom)
-                sitesList[curIndex].addMessage(curMess)
-#                print("something already exists")
-            else: # Create new Site
-                curSite = Site()
-                siteNames.append(cleanDom)
-                curSite.domainName = cleanDom
-                curSite.addMessage(curMess)
-                curSite.sender = curMess.sender
-                sitesList.append(curSite)
+            if(validURL(cleanDom)):
+                if cleanDom in siteNames: # Already exist
+                    curIndex = siteNames.index(cleanDom)
+                    sitesList[curIndex].addMessage(curMess)
+                    print("something already exists")
+                else: # Create new Site
+                    curSite = Site()
+                    siteNames.append(cleanDom)
+                    curSite.domainName = cleanDom
+                    curSite.addMessage(curMess)
+                    curSite.sender = curMess.sender
+                    sitesList.append(curSite)
+                    print("That is a new site")
+            else:
+                print("That is an invalid link that I am going to ignore")
 
     fsd = open("SitesFile.txt","w")
-    fsd.write(str(len(sitesList)) + "\n")
+
+    # IF thier is one do a get and post request real quick
     for s in sitesList:
-        fsd.write(s.sender + " " + s.domainName + " " + str(s.messages) + "\n")
+        fsd.write(s.getString() + "\n")
+
     fsd.close()
     
     for c in ar: # Getting all unique from
@@ -242,39 +254,10 @@ def main():
             arSmall.append(c)
             y.write(c + "\n")
 
-##    for c in unsub: # Getting all unique from
-##        if c not in arSmall:
-##            arSmall.append(c)
-##            y.write(c + "\n")
-    
-    subscribeList = []
-    for a in unsub:
-        if "," in a:
-            split = a.split(",")
-            #print(cleanUrl(split[0]))
-            #print(cleanUrl(split[1]))
-            cleanDom = split[1]
-#            cleanDom = cleanDomain(split[1]) # Cleaning that will be done later
-            if not (cleanDom in subscribeList):
-                subscribeList.append(cleanDom)
-        else:
-            #print(cleanUrl(a))
-            cleanDom = a
-#            cleanDom = cleanDomain(a) # cleaning that will be done later
-            if not (cleanDom in subscribeList):
-                subscribeList.append(cleanDom)
-    
+
+   
     x.close()
     y.close()
-    for b in subscribeList:
-        if ":" in b and ("http" not in b[0:10]):
-            print()
-        else:
-            print("check the DNS to see if valid\check for spam")
-            z.write(b + "\n")
-#            checkDNS(b)
-        print(b)
-
     z.close()
 
     

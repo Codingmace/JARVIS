@@ -162,9 +162,6 @@ def main():
     siteNames = [] # Names of sites for easy search
     ar = [] # Email From
     arSmall = [] # Unique email from
-    x = open("file.txt","w") # Raw full info on URL
-    y = open("file2.txt","w") # Email Addresses from (Unique now)
-    z = open("file3.txt","w")
     moreThreads = True
     threadsList = service.users().threads().list(userId='me',includeSpamTrash=True,prettyPrint=True).execute()
     nextPageToken = threadsList['nextPageToken']
@@ -199,26 +196,22 @@ def main():
                 ind = -1
                 if "<" in temp:
                     ind = temp.index("<")
-#                ind = temp.index("<")
                 if (ind < 0):
-                    #print(temp)
                     curEmail = temp
                 else:
                     curEmail = temp[ind+1:-1]
-#                    y.write(curEmail + "\n")
                     curMess.sender = curEmail
                     ar.append(curEmail)
 
-#                    print(temp[temp.index("<"):-1])
             if(pay['name'] == 'List-Unsubscribe'):
                 temp = pay['value']
-                ind = temp.index("<")
+                ind = 0
+                if "<" in temp:
+                    ind = temp.index("<")
                 curLink = temp[ind+1:-1]
                 unsub = curLink
-#                print(unsub)
                 curMess.link = curLink
 
-#        print("Take from here we have message ")
         cleanDom = unsub
         if "," in unsub:
             split = unsub.split(",")
@@ -249,7 +242,7 @@ def main():
 
     fsd = open("SitesFile.txt","w")
     fs = open("webSiteFile.txt", "w")
-    # IF thier is one do a get and post request real quick
+    # If their is one do a get and post request real quick
     for s in sitesList:
         if s.getMessageSize() == 1:
             print("Would you like to delete them messages?")
@@ -259,12 +252,6 @@ def main():
             fs.write(s.getLink() + "\n")
     fsd.close()
     fs.close()
-
-
-   
-    x.close()
-    y.close()
-    z.close()
 
     
 if __name__ == '__main__':

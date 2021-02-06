@@ -2,9 +2,14 @@ import os, sys
 import requests
 import re
 
-def USPhonebook():
+def phone_format(number):                                                                                                                                  
+     return format(int(number[:-1]), ",").replace(",", "-") + number[-1]       
+
+def USPhonebook(phoneNumber):
     baseUrl = "https://www.usphonebook.com/"
-    extendUrl = "214-843-6427"
+    extendUrl = phone_format(phoneNumber)
+    print(extendUrl)
+#    extendUrl = "214-843-6427"
 
 
     headers = {
@@ -35,6 +40,6 @@ def USPhonebook():
     else:
         print("That number is good")
 
-USPhonebook()
+USPhonebook("2148436427")
 
 

@@ -3,7 +3,7 @@ Alaska - https://511.alaska.gov/cctv?
 Arizona - https://www.az511.com/cctv
 Arkansas - https://idrivearkansas.com/
 California - https://cwwp2.dot.ca.gov/vm/streamlist.htm
-Cal SD - https://traffic.511sd.com/
+Cal San Deigo - https://traffic.511sd.com/
 Cal IE - https://ie511.org/traffic
 Cal GO - https://go511.com/Cameras/Index
 Colorado - https://www.coloradowebcam.net/camera, https://www.cotrip.org/map.htm

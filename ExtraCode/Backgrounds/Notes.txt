@@ -1,0 +1,10 @@
+iFunny
+<div data-type="video" # For videos
+
+wtffunfacts
+https://wtffunfact.com/2012/03/page/2/ # The format
+
+Images
+<div class="post-image>
+	<a href
+		<img width  src='The image to download'

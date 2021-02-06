@@ -4,8 +4,7 @@ import re
 
 def whitePages():
     baseUrl = "https://www.whitepages.com/phone/1-"
-    extendUrl = "200-200-2000
-
+    extendUrl = "214-843-6427"
     r = requests.get((baseUrl + extendUrl), allow_redirects=True)
     print(len(r.content))
     open(extendUrl + '.html', 'wb').write(r.content)

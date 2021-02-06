@@ -4,9 +4,8 @@ import re
 
 def USPhonebook():
     baseUrl = "https://www.usphonebook.com/"
-    extendUrl = "100-200-2000"
+    extendUrl = "214-843-6427"
 
-    r = requests.get((baseUrl + extendUrl), allow_redirects=True, headers=headers)
 
     headers = {
     'authority': 'www.usphonebook.com',
@@ -27,6 +26,8 @@ def USPhonebook():
     'upgrade-insecure-requests': '1',
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4324.104 Safari/537.36',
     }
+    r = requests.get((baseUrl + extendUrl), allow_redirects=True, headers=headers)
+
     print(len(r.content))
     open(extendUrl + '.html', 'wb').write(r.content)
     if(len(r.content)< 65000):

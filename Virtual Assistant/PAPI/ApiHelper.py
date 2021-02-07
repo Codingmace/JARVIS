@@ -22,3 +22,8 @@ def unique(query):
         return lineSort(query)
     else:
         return line(query)
+
+
+def phoneLookup(query):
+    print("This is for the one that looks up phones")
+    

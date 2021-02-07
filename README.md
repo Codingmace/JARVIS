@@ -22,18 +22,11 @@ PHASE 1
 
 - Phone Calls
   - [ ] Reverse IP Lookup - Needs to be Implemented
-  - [ ] Find name of Caller
-  - [ ] Find Origin of caller
   - [ ] Search to see if blocked (DNC DATABASE API) - Working on
   
 - Web
-  - [ ] Search Google
-  - [ ] Open a url website
   - [ ] Crawl for more information on unknown topics
-  - [ ] Download Youtube Videos
-  - [ ] Remove yourself from the internet
-  - [ ] Gmail Auto Unsubscriber
-  
+  - [ ] Remove yourself from the internet  
   
 - Queries
   - [ ] Can be taught new commands
@@ -41,15 +34,12 @@ PHASE 1
   - [ ] Launch softwares on machine
   - [ ] Activate PiHole (What I use as a DNS AdBlocker)
   - [ ] Current System Stats
-  - [ ] Basic Calculations
   
 - Photo
   - [ ] Enhance Photo
   - [ ] Grab recent top iFunny memes
-  - [ ] Download Desktop photos
   - [ ] Download Random Facts
   - [ ] Object Classification
-  - [x] Image OCR
 
 - Personal Software
   - [ ] Use incremental Backup Software
@@ -66,5 +56,4 @@ PHASE 1
 
 ###PHASE 2
  - Aspects
-  - [ ] Access Traffic Web Cameras
   - [ ] Get Animal Breed

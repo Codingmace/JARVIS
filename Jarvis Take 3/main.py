@@ -264,6 +264,10 @@ if __name__ == '__main__':
             query = query.replace("plate scan","")
             print(plateRecognition(query))
 
+
+#       """ Personal API Helper """
+        
+
         elif 'more commands' in query:
             print("Print out the file with more commands")
             print("Made some more commands here")

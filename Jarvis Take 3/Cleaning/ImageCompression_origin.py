@@ -8,38 +8,32 @@ import piexif
 
 # Try a Different File Formats
 # Prints cleaned and not number validly cleaned
-#===============================================================================
-# Test for positive words
-#===============================================================================
+
+#============================
+# Test for positive words   =
+#============================
 def yesNo(cases):
-    valid = {'yes', 'YES', 'true'}
-    for v in valid:
-        if v == cases:
-            return True;
-    return False;
+    cases = cases.lower()
+    return "yes" in cases or "true" in cases
 
 
-#===============================================================================
-# Tests for valid file extensions
-# Can't Do PNG
-#===============================================================================
+#====================================
+# Tests for valid file extensions   =
+# Can't Do PNG                      =
+#====================================
 def validPhoto(filename):
-    valid = {'jpg', 'JPG', 'jpeg', 'JPEG'}
-    for v in valid:
-        if v in filename:
-            return True;
-    return False;
+    filename = filename.lower()
+    return "jpeg" in filename or "jpg" in filename
 
 
 def main():
     print("Welcome to cleaning JPG Files episode 11")
     print("How much are we cleaning")
-    print("1. One File")  # Tested. Works
+    print("1. One File")
     print("2. One Directory")  # Not Tested
-    print("3. One Directory and subdirectories")  # Tested. Works
-    print("WARNING: Don't Try anything stupid. This will include the following")
-    print("- Enter full file paths put in a folder without files")
-    print("- Lastly anything I wouldn't do")
+    print("3. One Directory and subdirectories")
+    print("WARNING: Don't Try anything stupid.")
+    print("- So don't do Anything I wouldn't do")
 
     co = input()
     if(co == '1'):
@@ -53,9 +47,9 @@ def main():
     input("Press any button to end the program...")
 
 
-#===============================================================================
-# Transfer/Clean the EXif of a file
-#===============================================================================
+#====================================
+# Transfer/Clean the EXif of a file =
+#====================================
 def getOn(filename, new_file):
     im = Image.open(filename)
     try:
@@ -66,18 +60,19 @@ def getOn(filename, new_file):
         print('shit')
 
 
-#===============================================================================
-# Strips string to file name
-#===============================================================================
+#=============================
+# Strips string to file name =
+#=============================
 def stripFileName(path):
     head, tail = ntpath.split(path)
     return tail or ntpath.basename(head)
 
 
-#===============================================================================
-# Returns an array with all the files that are valid in the directory
-# and its sub directories
-#===============================================================================
+#====================================
+# Returns an array with all the     =
+# files that are valid in the       =
+# directory and its sub directories =
+#====================================
 def allThePaths(mypath):
     f = []
     for (dirName, subdirlist, fileList) in os.walk(mypath):
@@ -87,9 +82,11 @@ def allThePaths(mypath):
     return f
 
 
-#===============================================================================
-# Like allThePaths. Only returns files from the directory (no sub directories)
-#===============================================================================
+#========================================
+# Like allThePaths.                     =
+# Only returns files from the directory =
+# No sub directories                    =
+#========================================
 def shallowPath(mypath):
     f = []
     for (dirName, subdirlist, fileList) in os.walk(mypath):
@@ -100,16 +97,15 @@ def shallowPath(mypath):
     return f
 
 
-#===============================================================================
-# Implements cleaning up just one file and replacing it or making a copy
-#===============================================================================
+#========================================
+# Implements cleaning up just one file  =
+# and replacing it or making a copy     =
+#========================================
 def optionOne():
     print("Awesome Just one file")
     filename = input("Enter the file path: ")
     if not validPhoto(filename):
-        print("Screwed up you have")
-        print("Can't do anything to help you.")
-        print("Goodbye")
+        print("That is not a valid photo type")
         exit()
     replace = input("Are you going to be replacing the file? ")
     replacing = yesNo(replace);
@@ -131,9 +127,10 @@ def optionOne():
 
 
 
-#===============================================================================
-# Implements cleaning up on multiple files only in 1 directory (No SubDir)
-#===============================================================================
+#============================================
+# Implements cleaning up on multiple files  =
+# only in 1 directory (No SubDir)           =
+#============================================
 def optionTwo():
     print("One directory. Piece of cake after you answer some questions")
     valdir = False  # Valid directory input
@@ -172,9 +169,10 @@ def optionTwo():
 
 
 
-#===============================================================================
-# Implements cleaning up on multiple files in 1 directory (and SubDirs)
-#===============================================================================
+#================================================
+# Implements cleaning up on                     =
+# multiple files in 1 directory (and SubDirs)   =
+#================================================
 def optionThree():
     print("One directory and their children. That is just great")
     valdir = False  # Valid directory input

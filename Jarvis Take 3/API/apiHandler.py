@@ -200,12 +200,24 @@ def weather(query):
         return x
 #        return openWeather(query)
 
-
-# Email Validate : Check if email is valid or not
+#####################
+# Email Validate    #
+# Check if email    #
+# is valid or not   #
+#####################
 def validateEmailAddress(query):
     from API.emailValidate import validEmail
-    # Could need to extract the text for email when trying this voice to text
-    return validEmail(query)
+    result = validEmail(query).json()
+    dispose = result['disposable'] == 'true'
+    valid = result['valid'] == 'true'
+    fin = ""
+    if not valid:
+        fin += "non"
+    fin += "valid "
+    if not dispose:
+        fin += "non"
+    fin += "disposable email"
+    return fin
 
 
 ##############################
@@ -358,10 +370,17 @@ def IntelligentUrl(query):
     from API.urlIntel import urlIntel
     return urlIntel(query)
 
-# IP2Location : Well Turns an IP Address into a Location
+
+#########################
+# IP2Location           #
+# Turn Ip into location #
+#########################
 def ip2Location(query):
     from API.ip2Location import ip2location
-    return ip2location(query)
+    response = ip2location(query, "demo")
+    result = response.json()
+    print("Longitude : " + result['longitude'] + "\nLatitude : " + result['latitude']
+    return result['city_name'] + " " + result['region_name'] + " zipcode " + result['zip_code']
 
 # Find any Ip address world wide : IPv6 and IPv4
 def ipLocWW(query):

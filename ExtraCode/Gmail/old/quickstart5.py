@@ -7,7 +7,6 @@ from google.auth.transport.requests import Request
 import json
 from tld import get_tld
 import requests
-import webbrowser
 import dns.resolver
 
 
@@ -64,7 +63,7 @@ def get_records(domain):
     :param domain: 
     :return: 
     """
-    ids = [ 'A','NS','MD','MF','CNAME','SOA','MB','MG', 'MR','MX','AAAA']
+    ids = [ 'A','NS','MD','MF','CNAME','SOA','MB','MG', 'MR','MX','AAAA',    ]
     
     for a in ids:
         try:
@@ -79,7 +78,7 @@ def get_records(domain):
 
 
 # If modifying these scopes, delete the file token.pickle.
-SCOPES = ['https://www.googleapis.com/auth/gmail.readonly', 'https://www.googleapis.com/auth/gmail.modify']
+SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
 
 def checkDNS(url):
@@ -156,7 +155,7 @@ def main():
 
     service = build('gmail', 'v1', credentials=creds)
 
-    f = open("Everything.txt", "w")
+
     # Call the Gmail API
     megaThreadList = [] # All threads/ Emails
     sitesList = [] # List of all sites
@@ -169,24 +168,21 @@ def main():
     nextPageToken = threadsList['nextPageToken']
     for thread1 in threadsList['threads']:
         megaThreadList.append(thread1['id'])
-
-    ix = 0
+        
     while moreThreads:
         threadsList = service.users().threads().list(userId='me',includeSpamTrash=True,prettyPrint=True,pageToken=nextPageToken).execute()
         for thread1 in threadsList['threads']:
             megaThreadList.append(thread1['id'])
         if 'nextPageToken' in threadsList:
             nextPageToken = threadsList['nextPageToken']
-            if ix >= 10000: # Cut off after second page
-                moreThreads = False
-            ix += 1
             print(nextPageToken)
         else:
             moreThreads = False
-    print(ix)
+#        moreThreads = False
+    
     for ids in megaThreadList:
         metaMessage = service.users().threads().get(userId='me',id=ids,format="metadata").execute()
-#        fullMessage = service.users().threads().get(userId='me',id=ids,format="full").execute()
+        fullMessage = service.users().threads().get(userId='me',id=ids,format="full").execute()
 #        print(metaMessage)
         payloads = (metaMessage['messages'][0]['payload'])
         head = payloads['headers']
@@ -207,8 +203,8 @@ def main():
                 curEmail = temp[ind+1:-1]
                 curMess.sender = curEmail
                 ar.append(curEmail)
-                if "noreply" in curEmail or "no-reply" in curEmail:
-                    noReply.append(ids)
+                if "noreply" in curEmail:
+                    noReply.append(curEmail)
 
             if(pay['name'] == 'List-Unsubscribe'):
                 temp = pay['value']
@@ -219,8 +215,6 @@ def main():
                 unsub = curLink
                 curMess.link = curLink
 
-        f.write(curMess.sender + "  "+ curMess.link + "\n")
-
         cleanDom = unsub
         if "," in unsub:
             split = unsub.split(",")
@@ -230,11 +224,14 @@ def main():
             cleanDom = cleanDomain(unsub)
 
 
-        if not(cleanDom is None or "mailto" in cleanDom):
+        if cleanDom is None or "mailto" in cleanDom:
+            print("That is none. Onto the next")
+        else:
             if(validURL(cleanDom)):
                 if cleanDom in siteNames: # Already exist
                     curIndex = siteNames.index(cleanDom)
                     sitesList[curIndex].addMessage(curMess)
+                    print("something already exists")
                 else: # Create new Site
                     curSite = Site()
                     siteNames.append(cleanDom)
@@ -242,83 +239,23 @@ def main():
                     curSite.addMessage(curMess)
                     curSite.sender = curMess.sender
                     sitesList.append(curSite)
-    f.flush()
-    f.close()
+                    print("That is a new site")
+            else:
+                print("That is an invalid link that I am going to ignore")
+
     fsd = open("SitesFile.txt","w")
     fs = open("webSiteFile.txt", "w")
-    fsa = open("ignored.txt","w")
     # If their is one do a get and post request real quick
     for s in sitesList:
         if s.getMessageSize() == 1:
             print("Would you like to delete them messages?")
-            fsa.write(s.getSender() + "/n")
             print("Ignoring " + s.getSender())
         else:
             fsd.write(s.getString() + "\n")
             fs.write(s.getLink() + "\n")
     fsd.close()
-    fsa.close()
     fs.close()
-#    print(noReply)
-    fq = open("issues.txt","w")
-    keeping = [] # The ones we are keeping
-    oneTimeResponse = "yes"
-    noReplyResponse = "yes"
-#    oneTimeResponse = input("Would you like to delete one time messages (yes/no)? ")
-#    noReplyResponse = input("Would you like to delete noreply messages (yes/no)? ")
-    oneTime = oneTimeResponse.lower().strip() == "yes"
-    noReplies = noReplyResponse.lower().strip() == "yes"
-    counter = 0
-    newSet = []
-    if (noReplies):
-        for nrthread in noReply:
-            try:
-                service.users().messages().trash(userId='me',id=nrthread).execute() #trashing thread
-            except:
-                print("That was an issue with " + nrthread)
 
-    for s in sitesList:
-        try:
-            if s.getMessageSize() == 1 and oneTime:
-                service.users().messages().trash(userId='me', id = s.messages.thread).execute()
-            if s.getMessageSize() > 1:
-                print(str(counter) + ". " + s.getString())
-                newSet.append(s)
-                counter += 1
-        except:
-            fq.write(s.getString())
-            print("that message does not exist")
-        
-    fsb = open("deleting.txt", "w")
-#    keeping = input("enter in the number seperated by a , of the ones you want to keep: ")
-    fq.write("\nhere is the split\n\n")
-#    spliting = keeping.split(",")
-    spliting = []
-    counter = 0
-    for splits in spliting:
-        if not (counter == splits):
-            fsb.write(newSet[counter].sender + "\n")
-            for mes in newSet[counter].messages:
-                try:
-                    service.users().messages().trash(userId='me',id=mes.thread).execute()
-                except:
-                    fq.write(mes.getString())
-#                    print("That thread does not exist")
-        counter += 1
-    # Deleting the messages here
-    fsb.flush()
-    fsb.close()
-    fq.close()
-
-    # Opening up all the unsubscribes
-    fr = open("webSiteFile.txt","r")
-    lx = fr.readlines()
-    ci = 0
-    for lx1 in lx:
-        if ci >=5: # only opening 5 browsers at a time
-            webbrowser.open(lx1)
-        ci += 1
-    fr.close()
     
 if __name__ == '__main__':
     main()

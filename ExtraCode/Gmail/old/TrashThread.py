@@ -7,7 +7,7 @@ from google.auth.transport.requests import Request
 import json
 
 # If modifying these scopes, delete the file token.pickle.
-SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
+SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
 
 def main():
     """Shows basic usage of the Gmail API.
@@ -34,26 +34,13 @@ def main():
 
     service = build('gmail', 'v1', credentials=creds)
 
+        
     # Call the Gmail API
     threadsList = service.users().threads().list(userId='me',includeSpamTrash=False,prettyPrint=True).execute()
-#    minMessage = service.users().threads().get(userId='me',id="1766fb36b3d82723",format="metadata").execute()
-#    print(minMessage)
-    print(threadsList)
-    # id= 1766fb36b3d82723
+#    print(threadsList)
+    oneThread = threadsList['threads'][0]['id']
+    service.users().messages().trash(userId='me',id=oneThread).execute()
 
-    f = open("i.json","w")
-#    json.dump(minMessage, f)
-    
-    results = service.users().labels().list(userId='me').execute()
-    labels = results.get('labels', [])
-#    print(results)
-
-    if not labels:
-        print('No labels found.')
-    else:
-        print('Labels:')
-        for label in labels:
-            print(label['name'])
 
 if __name__ == '__main__':
     main()

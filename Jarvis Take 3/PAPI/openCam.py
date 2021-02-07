@@ -17,14 +17,12 @@ def openCamera(state):
 
 
 
-def main(state):
+def findWebCamera(state):
     state = state.lower()
-    if state == "none":
-        state = input("Input the state you would like to access")
     cameraLink = openCamera(state)
     if "NONE" in cameraLink:
-        print(state + " is not a valid state")
+        return state + " is not a valid state")
     else:
         webbrowser.open(cameraLink)
+        return "I have opened up " + state + " cameras"
 
-main("Texas2")

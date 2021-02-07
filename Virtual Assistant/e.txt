@@ -1,0 +1,66 @@
+The time needs to be in regular time and not military
+Setting the commands to be linked to a file
+
+
+DNC
+- I can use phone map but would like to use local database but would require merging the files
+
+Vehicle recognition API Issue
+Don't know how to upload the image
+
+
+OCRLY
+Try and make the URL into a local file (Does it need to be binary?)
+- Use in unison with google search
+
+
+            """ EXTRA SECTION AS OF NOW NEEDS REVISIONS """
+            
+        elif 'open' in query:
+            query.replace("open ", "")
+            print("Check if the query is a software")
+            print("Check to see if it is a file")
+            print("Check if the query is a website")
+            print("Throw an error if not above")
+            
+        elif 'remember' in query: ## Add to take in the entry name
+            print("Many things that can go here but going to start simple")
+            query.replace("remember", "")
+            print("Split up the command. The key word and action")
+            print("For now is will split them")
+            rememberMessage = query.replace("remember", "").split(" is ")
+            rememberCmd = open('extraCommands.txt', 'a')
+            rememberCmd.write(rememberMessage[0])
+            rememberCmd.close()
+            rememberAction = open('extraActions.txt', 'a')
+            rememberAction.write(rememberMessage[1])
+            rememberAction.close()
+
+        elif 'list extra' in query:# print out the recently added comamnds
+            if 'command' in query:
+                remember = open("extraCommands.txt", "r")
+                lines = remember.readlines()
+                speak(str("I have " + str(len(lines)) + " learned commands"))
+            if 'action' in query:
+                remember = open("extraActions.txt", "r")
+                lines = remember.readlines()
+                speak(str("I have " + str(len(lines)) + " learned commands"))
+
+
+
+ping sweep did not work
+
+
+Expression recognition
+Hand gesture recognition
+Chat bot capabilitiy
+
+Hard coded
+save notes from user
+
+Implement different voices
+find best regex filter for a set of data
+Add port scanner to the basic program
+Add oxford dictionary
+
+The PAPI need to be better programmed

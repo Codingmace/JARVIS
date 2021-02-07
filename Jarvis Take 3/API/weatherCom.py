@@ -53,3 +53,4 @@ def historical30d(geocode, units, lang):
     response = requests.request("GET", url, headers=headers, params=querystring)
     return response
 
+

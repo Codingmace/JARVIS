@@ -1,5 +1,5 @@
 import requests
-from variable import rapidApiKey
+from variables import rapidApiKey
 
 def searching(city, state, pageNum):
     url = "https://trulia1.p.rapidapi.com/search"

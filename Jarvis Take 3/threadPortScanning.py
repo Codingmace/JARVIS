@@ -20,10 +20,11 @@ def threader():
       portscan(worker)
       q.task_done()
 
-def portScanner(target):
+#def portScanner(target):
+def portScanner():
    socket.setdefaulttimeout(0.25)
    print_lock = threading.Lock()
-   target = "192.168.2.10"
+   target = "192.168.4.40"
    t_IP = socket.gethostbyname(target)
    print ('Starting scan on host: ', t_IP)
    q = Queue()
@@ -39,3 +40,6 @@ def portScanner(target):
       
    q.join()
    print('Time taken:', time.time() - startTime)
+
+
+portScanner()

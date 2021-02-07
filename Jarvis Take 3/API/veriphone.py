@@ -13,3 +13,4 @@ def verifyPhone(number):
 
     response = requests.request("GET", url, headers=headers, params=querystring)
     return response
+

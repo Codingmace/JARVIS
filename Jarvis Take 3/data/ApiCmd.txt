@@ -1,3 +1,6 @@
+define pornhub
+define mars
+define netflix and chill
 google search maximum
 google search elon musk
 google search bing 4
@@ -8,9 +11,9 @@ google crawl mp3 10
 google news president
 google news current events
 reverse image search https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/media/speech-devices-sdk/eclipse-launcher.png
-cat fact
-cat fact 12 40
-weather covid
+cat fact random
+cat fact 12
+weather covid United States of America
 weather daily forecast
 weather hourly forecast
 weather historical records

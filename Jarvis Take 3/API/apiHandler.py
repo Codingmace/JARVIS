@@ -13,16 +13,33 @@ def readData(filename):
         fin += line
     return fin
 
-# Urban Dictionary : To define words
+def removingJson(jsonData, removingList):
+    for l in removingList:
+        del jsonData.get(l)
+    return jsonData
+
+def refineJson(jsonData, addList):
+    newJson = json.dump("")
+    for l in addList:
+        newJson.update(jsonData.get(l))
+    return newJson
+
+
+####################
+# Urban Dictionary #
+# To define words  #
+####################
 def wordDefinition(word):
     from API.urbanDictionary import defineWord
     dataResponse = defineWord(word).json()
     return dataResponse['list'][0]['definition'] # First word definition
 # Possible improvements : Go through the list and choose the best one. Display all of them
 
+
 # Encoding for the google
 def googleEncode(term):
     return term.replace("+", "%2B").replace(" ", "+")
+
 
 # Google Search : Look up things on google
 def google(query):
@@ -63,33 +80,32 @@ def reverseImageSearch(query):
 #    return results.json()['googleSearchResult']
 
 
-# Open Proxy : Reports all open proxies at that moment
+
+##########################
+# Open Proxy             #
+# Reports all open       #
+# proxies at that moment #
+##########################
 def proxyCheck():
     from API.openProxies import openProxy
     return openProxy().text
 
-# Cat Facts : Returns random cat facts
-def randomCatFact(query):
-    from API.catFacts import catFact, catFacts
-    if "random" in query:
-        print("How many facts would you like")
-        numberFacts = 10
-        print("Would you like to add a length to that?")
-        split = query.split(" ")
-        maxLength = -1
-        if split[1].lower() == "yes":
-            print("Ask for the length")
-            maxLength = int(split[2])
 
-        if (numberFacts == 1):
-            print(catFact(maxLength))
-        else:
-            facts = catFacts(numberFacts, maxLength)
-    else:
-        return catFacts(1000, -1)
-    print("Print the number of results")
-    print("Choose from those results a random one because they always come in same order")
-    return facts # return a fact and maybe could make this offline
+##################################
+# Cat Facts                      #
+# Returns random cat fact        #
+# with optional Length parameter #
+##################################
+def randomCatFact(query):
+    from API.catFacts import catFact
+    length = -1
+    if "random" not in query:
+        try:
+            temp = int(query.strip())
+            length = temp
+        except:
+            length = -1
+    return catFact(length).json()['data'][0]['fact']
     
 
 # Open Weather : Reports back the weather
@@ -146,7 +162,30 @@ def weather(query):
     currentWeather = weatherInfo
     language = weatherInfo['language']
     if "covid" in query:
-        return covid19(language)
+        query = query.replace("covid","")
+        response = covid19(language)
+        result = response.json()['covid19']
+        needed = ['recordLocation', 'totalPopulation','confirmed','deaths','dateReport','dateReportUtc']
+        result = refineJson(result,needed)
+        if (query in result['recordedLocation']) and not(query == ""):
+            ind = result['recordedLocation'][query]
+            tot = ""
+            for i in needed:
+                tot += result[i][ind] + " "
+            return tot
+        else:
+            population= 0 # Population
+            conf = 0 # Confirmed
+            dea = 0 # deaths
+            tot = "World population: "
+            for a in result['totalPopulation']:
+                population += int(a)
+            for b in result['confirmed']:
+                conf += int(b)
+            for c in result['deaths']:
+                dea += int(c)
+            return tot + " " + str(population) + " " + str(conf) + " " + str(dea)
+        
     lang = weatherInfo['lang']
     geocode = "100, 20" # Get this from somewhere else
     units = weatherInfo['units']
@@ -161,17 +200,28 @@ def weather(query):
         return x
 #        return openWeather(query)
 
+
 # Email Validate : Check if email is valid or not
 def validateEmailAddress(query):
     from API.emailValidate import validEmail
     # Could need to extract the text for email when trying this voice to text
     return validEmail(query)
 
-# Verifone : Verifies a phone is valid (Default Country is US)
+
+##############################
+# Verifone                   #
+# Verifies if a phone is     #
+# valid (Default Country US) #
+##############################
 def verifyPhoneNumber(query):
     from API.veriphone import verifyPhone
-    # Must be entered the 10 nubmer digits. My require conversion when doing voice to text
-    return verifyPhone(query)
+    response = verifyPhone(query)
+    result = response.json()
+    if result['phone_valid'] == True:
+        return "valid phone with type : " + result['phone_type']  +" and carrier : " + result['carrier']
+    else:
+        return "That phone is not valid"
+
 
 # Pose Estimate : Takes a photo or video and estimates the posture
 def estimatePose(query):
@@ -279,12 +329,23 @@ def urlImage2Text(query): # Uses true url encoding
         return OImage2Text(split[0], split[1])
     else:
         return OImage2Text(split[0], "testFilename.txt")
-    
-# Youtube Download : Download Youtube Video by VideoID
+
+
+####################
+# Youtube Download #
+# Download Youtube #
+# Video by VideoID #
+####################
 def downloadYoutube(query):
     from API.youtubeDownload import downloadVideo
-    return downloadVideo(query)
-    
+    response = downloadVideo(query)
+    result = response.json()
+    if result['Status'] == "Success":
+        return result['Download_url']
+    else:
+        return "I have failed to get a URL"
+
+
 # Threat Detect :
 def detectUrlThreats(query):
     from API.threatDetector import detectThreat

@@ -15,7 +15,7 @@ PHASE 1
 | Basic Queries | Taught New Commands | Weather | Time and Screenshot | Shutdown and Sleep | Play Music |
 | Quieres Cont. | Launch Software | Activate DNS Adblocker | Current System Stats | Define a word | Basic Calculations |
 | Photos  | Enhance | *Compress* | More to add |
-| Scrapping | Desktop Photo | Random Facts | Top Memes |
+| Scrapping | Desktop Photo | Random Cat Facts | Top Memes |
 
 - Facial Recognition
   - [ ] Human Face

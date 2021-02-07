@@ -19,4 +19,3 @@ http://click.mlsend.com
 http://click.mlsend2.com
 http://track.customer.io
 http://track.mlsend.com
-http://track.mlsend2.com

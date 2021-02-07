@@ -43,7 +43,8 @@ Rhode Island - http://www.dot.ri.gov/travel/cameras_metro.php
 South Carolina - https://www.511sc.org/
 South Dakota - https://sd511.org/
 Tennessee - https://smartway.tn.gov/traffic?f
-Texas - https://www.txdot.gov/inside-txdot/division/traffic/cameras.html
+Texas - https://its.txdot.gov/ITS_WEB
+Texas2 - https://www.txdot.gov/inside-txdot/division/traffic/cameras.html
 Utah - https://www.udottraffic.utah.gov/
 Vermont - http://newengland511.org/
 Virginia - https://www.511virginia.org/

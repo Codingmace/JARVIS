@@ -131,10 +131,3 @@ def advanceCalculations(query):
 
 
 
-
-def computeLogs(self):
-    return 
-
-
-
-

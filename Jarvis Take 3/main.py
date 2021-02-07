@@ -44,7 +44,7 @@ def dirExist(folderPath):
 
 
 if __name__ == '__main__':
-    from IPAddress import getMyIPv4Address, getMyIPv6Address
+    from API.IPAddress import getMyIPv4Address, getMyIPv6Address
     print("Loading Config")
     machineName = "TOBIAS"
     machineMean = "Totally Obscure Intelligent Assistant System"
@@ -94,7 +94,7 @@ if __name__ == '__main__':
     cont = True
     from basicHelper import *
     from API.apiHandler import *
-    from IPAddress import getMyIPv4Address, getMyIPv6Address
+    from API.IPAddress import getMyIPv4Address, getMyIPv6Address
     for q in queries:
 #    while cont:
 #        query = ""

@@ -1,0 +1,19 @@
+{
+  "current_page": 1,
+  "data": [
+    {
+      "fact": "A cat almost never meows at another cat, mostly just humans. Cats typically will spit, purr, and hiss at other cats.",
+      "length": 116
+    }
+  ],
+  "first_page_url": "https:\/\/catfact.ninja\/facts?page=1",
+  "from": 1,
+  "last_page": 332,
+  "last_page_url": "https:\/\/catfact.ninja\/facts?page=332",
+  "next_page_url": "https:\/\/catfact.ninja\/facts?page=2",
+  "path": "https:\/\/catfact.ninja\/facts",
+  "per_page": 1,
+  "prev_page_url": null,
+  "to": 1,
+  "total": 332
+}

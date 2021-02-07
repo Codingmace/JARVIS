@@ -1,6 +1,7 @@
 """ COST MONEY"""
 import requests
 from variables import rapidApiKey
+
 def categoryPrediction(text):
     url = "https://category-prediction-for-news-articles-amp-blogs.p.rapidapi.com/predict/v1"
 

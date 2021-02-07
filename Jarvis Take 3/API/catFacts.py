@@ -15,3 +15,5 @@ def catFacts(numberFacts, maxLength):
         
     response = requests.request("GET", url)
     return response
+
+print(catFact(-1).json()['data'][0]['fact'])

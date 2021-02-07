@@ -1,61 +1,52 @@
 import os, sys
 import requests
 import re
-import time
 
-""" NPNR"""
+def phone_format(number, replacing):
+     return format(int(number[:-1]), ",").replace(",", replacing) + number[-1]
 
+############
+#   NPNR   #
+############
 def npnr(phoneNumber):
     baseUrl = "https://npnr.org/"
     con = 0
-	extendUrl = phoneNumber in format
-            headers = {
-'authority': 'npnr.org',
-'method': 'GET',
-'path': extendUrl,
-'scheme': 'https',
-'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-'accept-encoding': 'gzip, deflate',
-'accept-language': 'en-US,en;q=0.9',
-'cache-control': 'no-cache',
-'cookie': '__cfduid=d32854e1edac80db0fbc24174584bacb51611896395; __RequestVerificationToken=a2X5YPcosSAUPvLu5RY25dCKPpKmYQLxlFkbHgRbsOrtbUMVWn90_kH3WmeYH7EwZYmoq_izPar_5TVzoL7QFyPTIOyDaY1RmgNrs3jWRzU1',
-'pragma': 'no-cache',
-'sec-fetch-dest': 'document',
-'sec-fetch-mode': 'navigate',
-'sec-fetch-site': 'none',
-'sec-fetch-user': '?1',
-'upgrade-insecure-requests': '1',
-'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36',
-    	}
-            try:
-                r = requests.get((baseUrl + extendUrl), allow_redirects=True, headers=headers)
-                if ("does not have a location" in str(r.content)):
-                    print("That is a bad number")
-                else:
-		        print("That is a good number")
-            except:
-		print("Going to fast. Slowing Down")
-                nonWork.write(str(i)+""+str(mid)+""+"\n")
-                print(str(i)+""+str(mid)+"")
-                time.sleep(60)
+    extendUrl = phone_format(phoneNumber, "/") + str(phoneNumber) + ".html"
+    headers = {
+        'authority': 'npnr.org',
+        'method': 'GET',
+        'path': extendUrl,
+        'scheme': 'https',
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'accept-encoding': 'gzip, deflate',
+        'accept-language': 'en-US,en;q=0.9',
+        'cache-control': 'no-cache',
+        'cookie': '__cfduid=d32854e1edac80db0fbc24174584bacb51611896395; __RequestVerificationToken=a2X5YPcosSAUPvLu5RY25dCKPpKmYQLxlFkbHgRbsOrtbUMVWn90_kH3WmeYH7EwZYmoq_izPar_5TVzoL7QFyPTIOyDaY1RmgNrs3jWRzU1',
+        'pragma': 'no-cache',
+        'sec-fetch-dest': 'document',
+        'sec-fetch-mode': 'navigate',
+        'sec-fetch-site': 'none',
+        'sec-fetch-user': '?1',
+        'upgrade-insecure-requests': '1',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36',
+               }
+    try:
+        r = requests.get((baseUrl + extendUrl), allow_redirects=True, headers=headers)
+        if ("does not have a location" in str(r.content)):
+            print("That is a bad number")
+        else:
+            print("That is a good number")
+            
+    except:
+        print("Going to fast. Slowing Down")
 
 
-createUrl()
-
-
-
-
-""" USPHONEBOOK """
-
-def phone_format(number):                                                            
-     return format(int(number[:-1]), ",").replace(",", "-") + number[-1]       
-
+###############
+# USPHONEBOOK #
+###############
 def USPhonebook(phoneNumber):
     baseUrl = "https://www.usphonebook.com/"
-    extendUrl = phone_format(phoneNumber)
-    print(extendUrl)
-#    extendUrl = "214-843-6427"
-
+    extendUrl = phone_format(phoneNumber, "-")
 
     headers = {
     'authority': 'www.usphonebook.com',
@@ -83,24 +74,6 @@ def USPhonebook(phoneNumber):
     if(len(r.content)< 65000):
         print("That number is bad")
     else:
-        print("That number is good")
-
-USPhonebook("2148436427")
-
-
-
-""" WHITE PAGES DOESNT WORK YET """
-
-def whitePages():
-    baseUrl = "https://www.whitepages.com/phone/1-"
-    extendUrl = "214-843-6427"
-    r = requests.get((baseUrl + extendUrl), allow_redirects=True)
-    print(len(r.content))
-    open(extendUrl + '.html', 'wb').write(r.content)
-    if(len(r.content)< 65000):
-        print("that is a bad number")
-    else:
-        print("That is a good number")
-
-
+        print("That number is good.")
+    print("I have downloaded the report if you would like to know who owns that phone nubmer")
 

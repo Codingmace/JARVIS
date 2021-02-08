@@ -49,11 +49,20 @@ PHASE 1
   - [ ] Remove empty folders on computer
   
 - Extra
+  - [ ] Reverse Image Search
+  - [ ] Image to text
+  - [ ] Scan url for threats
+  - [ ] Validate email
+  - [ ] validate phone number
+  - [ ] Find currently open proxies
+  - [ ] Analyze Text
+  - [ ] Summarize Text
+  - [ ] License plate recognition
+
+### PHASE 2
+ - Aspects
+  - [ ] Get Animal Breed
   - [ ] Vulnerability Scan Report on Android App
   - [ ] StaCoAn Software Launch
   - [ ] MobSF software launch
   - [ ] Output passive crawl of a website
-
-###PHASE 2
- - Aspects
-  - [ ] Get Animal Breed

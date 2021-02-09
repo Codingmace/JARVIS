@@ -4,29 +4,24 @@
  Phase 2 will include speech to text. Current issue is pronunciation and specific word triggers that I would like to fix.
 
 ## FRAMEWORK
-**PHASE 1***
+**PHASE 1**
 | Function Name  | First Feature | Second Feature | Third Feature | Fourth Feature | Fifth Feature |
 | ------------- | ------------- | ------------------------ | ------------- | ------------- | ------------- |
 | Facial Recognition | Cat Faces  | Human Faces |
 | Phone Calls  | Reverse IP lookup  | Name of caller | Origin of caller |  See if caller is blocked | Validate Phone Number |
 | Networking   | Get Public IP | Ping Sweep | Port Scanner | Find Open Proxies |
-| Web          | Search Google | Open Web URL | Crawl for info | Download Videos | Gmail Unsubscribe |
+| Web          | Search Google | Open Web URL | Crawl website | Download Videos | Gmail Unsubscribe |
 | Removed      | ~~Remove from internet~~ | ~~Android vulernability parts~~ |
 | Basic Queries | Taught New Commands | Weather | Time and Screenshot | Shutdown and Sleep | Play Music |
 | Quieres Cont. | Launch Software | Activate DNS Adblocker | Current System Stats | Define a word | Basic Calculations |
-| Photos  | Enhance | *Compress* | Find Face |
+| Photos  | *Enhance* | *Compress* | Find Face | 
 | Scrapping | Desktop Photo | Random Cat Facts | Top Memes |
 
 - Facial Recognition
   - [ ] Human Face
 
 - Phone Calls
-  - [ ] Reverse IP Lookup - Needs to be Implemented
   - [ ] Search to see if blocked (DNC DATABASE API) - Working on
-  
-- Web
-  - [ ] Crawl for more information on unknown topics
-  - [ ] Remove yourself from the internet
   
 - Queries
   - [ ] Can be taught new commands
@@ -36,7 +31,6 @@
   - [ ] Current System Stats
   
 - Photo
-  - [ ] Enhance Photo
   - [ ] Grab recent top iFunny memes
   - [ ] Download Random Facts
   - [ ] Object Classification
@@ -65,3 +59,25 @@
   - Chat bot
   - Speech input option
   - Gmail Improvements
+  - D2Nit Camera enhancement (Requires a lot more computing power. Could be moved to phase 3)
+  - Vehicle history API
+  - VIN Decoder
+  - Enhance Photo
+  - Write Journal
+  - Track what have eaten
+  - Expression Recognition
+  - Hand gesture recognition
+  - Save notes from user
+  - Add multiple voices
+  - Revise Port scanner
+  - Add oxford dictionary
+  - Improve PAPI
+  - Gmail Access Other Labels
+  - Gmail Access the message and unsubscribe
+  - Recipies on what to cook
+  - Random recipe to cook
+  - Find most fitting RegEx Filter for data
+  - Fix images upload
+  - Open Query word: Software -> File -> Website -> Error
+  - Reverse IP Lookup improved
+  - Crawl for more information

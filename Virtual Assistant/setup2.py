@@ -93,16 +93,10 @@ while not requireMade:
 print("Ok so we are done with that. Awesome. You are ready to go. Have a nice day")
 
 
-f = open("part1.txt", "r")
+f = open("AsciiLogo.txt", "r")
 lines = f.readlines()
 for line in lines:
     print(line.strip())
 f.close()
-
-f1 = open("part2.txt", "r")
-lines = f1.readlines()
-for line in lines:
-    print(line.strip())
-f1.close()
 
 input()

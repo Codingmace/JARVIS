@@ -118,8 +118,7 @@ def main(url, path):
 if __name__ == "__main__":
     """ BRUTE FORCE WALLPaper CAVE"""
     baseUrl = 'https://wallpapercave.com/w/uwp'
-    for i in range(98835, 490000, 1):
-#    for i in range(66800, 490000, 1):
+    for i in range(160161, 354283, 1):
         if i % 100 == 99:
             # Cleanup
             print("Cleaning Up Folder " + str((int) (i/100)))

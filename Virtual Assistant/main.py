@@ -1,5 +1,3 @@
-import pyttsx3
-import speech_recognition as sr  #Implement later Automatic-speech recognition
 import webbrowser
 import datetime
 import os
@@ -8,15 +6,26 @@ import smtplib
 import platform
 import getpass
 
-engine = pyttsx3.init()
-voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[1].id)
+speechEnabled = False # Speech recognition/ Sating information enabed?
+faceEnabled = False # Facial Recognition Feature Enabled?
+def enableSpeechRecognition():
+    import pyttsx3
+    import speech_recognition as sr  #Implement later Automatic-speech recognition
+
+    engine = pyttsx3.init()
+    voices = engine.getProperty('voices')
+    engine.setProperty('voice', voices[1].id)
 
 
-def speak(audio):
-    engine.say(audio)
-    engine.runAndWait()
+def speak(text):
+    if (speechEnabled):
+        engine.say(text)
+        engine.runAndWait()
+    else:
+        print(text)
 
+
+# HERE DO ALL THE FACIAL RECOGNITION STUFF
 
 # Do all diagnostics here
 
@@ -41,23 +50,29 @@ def dirExist(folderPath):
     folderCheck = os.path.isdir(folderPath)
     if not folderCheck: # Make folder if it doesn't exist
         os.makedirs(folderPath)
+        return False
+    return True
 
 
 if __name__ == '__main__':
+    if(speechEnabled):
+        enableSpeechRecognition()
     from API.IPAddress import getMyIPv4Address, getMyIPv6Address
     print("Loading Config")
     machineName = "TOBIAS"
     machineMean = "Totally Obscure Intelligent Assistant System"
     platform = sys.platform
     name = "Master"
-    dirExist("User")
+    noUsers = dirExist("User")
     userPath = "User/" + name + "/"
-    dirExist(userPath)
+    userExists = dirExist(userPath)
+    if not userExists:
+        print("Have to create a user now")
     militaryTime = True
     voiceId = 1 # Female
     musicPath = userPath + "music/" # Later verify how much we start with
 #    softwareList = getSoftwares(platform) ## Will implement later
-    browser= 'chrome'
+    browser= 'chrome' # Have this in all of them so can remove it
     chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
     webbrowser.register(browser, None, webbrowser.BackgroundBrowser(chrome_path))
     
@@ -146,30 +161,43 @@ if __name__ == '__main__':
         elif 'get my ip' in query:
             if 'v4' in query:
                 print(getMyIPv4Address())
+                speak("I have gotten your IPv4 Address")
             elif 'v6' in query:
                 try:
                     print(getMyIPv6Address())
+                    speak("I have gotten your IPv6 Address")
                 except:
-                    print("it seems you don't have an IPv6 Address")
+                    speak("It seems you do not have an IPv6 Address")
+                    speak("Now getting your IPv4 address")
+                    print(getMyIPv4Address())
+                    speak("I have gotten your IPv4 Address")
         elif 'get both my ip' in query:
             print(getMyIPv4Address())
-            print(getMyIPv6Address())
+            speak("I have gotten your IPv4 Address")
+            try:
+                print(getMyIPv6Address())
+                speak("I have gotten your IPv6 Address")
+            except:
+                speak("It seems you do not have an IPv6 Address")
 
         elif 'play my music' in query:
             playMyMusic(musicPath)
+            speak("Playing music")
 
         elif 'basic calculation' in query:
             query=query.replace("basic calculation", "")
-            print("calculating: " + calculate(query))
+            calculation = calculate(query)
+            speak(query + " is equal to " + calculation)
 
         elif 'open google' in query:
+            speak("opening google")
             webbrowser.get(browser).open_new_tab("https://google.com")
 
 #        """ API HELPER SECTION """
         elif 'define' in query: # Done
             word = query.replace('define', '')
-            print(wordDefinition(word))
-            print("Hope that definition works for you") # Could add returning an example
+            speak("The word " + word + "means " + wordDefinition(word))
+            speak("Hope that definition works for you") # Could add returning an example
 
         elif 'google' in query:
             newQuery = query.replace("google", "")
@@ -188,23 +216,24 @@ if __name__ == '__main__':
             tempFile.flush()
             tempFile.close()
             print(proxies[0]) # Check this works. Wasn't able to test today
-            print("Printing out top 2 and saving all of them to a file")
+            speak("I have returned the first openProxy and written the rest to a file")
+
 
         elif 'cat fact' in query:
             query = query.replace("cat fact","")
-            print(randomCatFact(query))
+            speak(randomCatFact(query))
 
         elif 'weather' in query:
             query = query.replace("weather","")
-            print(weather(query))
+            speak(weather(query))
 
         elif 'verify' in query:
             query = query.replace("verify", "").strip()
-            print(verifyPhoneNumber(query))
+            speak(verifyPhoneNumber(query))
             
         elif "valid" in query: 
             query = query.replace("valid","").strip()
-            print(validateEmailAddress(query))
+            speak(validateEmailAddress(query))
             
         elif 'analyze' in query:
             query = query.replace("analyze","")
@@ -213,59 +242,74 @@ if __name__ == '__main__':
                     if "summarize" in query:
                         query = query.replace("text url summarize" ,"")
                         print(summarizeUrlText(query))
+                        speak("I have printed out the text summary")
                     elif "extract" in query:
                         query = query.replace("text url extract","")
                         print(analyzeUrlText(query))
+                        speak("I have printed out the text at the URL")
                     elif "grab" in query:
                         query = query.replace("text url grab","")
                         print(analyzeText(query))
+                        speak("I have gotten the text at the URL")
                 else:
-                    print("I dont think that is an option")
+                    speak("I do not think that is an option")
                     
             elif 'video' in query or 'image' in query:
-                print("This one doesn't work at all yet")
-                print(estimatePose(query)) 
+                speak("This one doesn't work at all yet")
+#                print(estimatePose(query)) 
 
 
         elif 'transcribe' in query:
             if 'audio to text' in query:
                 query = query.replace("trascribe audio to text", "")
-                print("Do the scripting for Transcribe")
+                speak ("I have not done the scripting for Transcribe.")
+                speak("Please check back later")
+#                print("Do the scripting for Transcribe")
 
         elif 'scan' in query:
             if 'url threat' in query:
                 query = query.replace("scan url threat", "")
                 print(detectUrlThreats(query))
+                speak("Scanning the URL complete.") # Print result. If to file or console
             elif 'url link' in query:
                 query = query.replace("scan url link", "")
                 print(IntelligentUrl(query))
+                speak("Scanning the URL complete.") # Print result. If to file or console
                 
         elif 'image to text' in query:
             query = query.replace("image to text", "")
-            print(urlImage2Text(query))
+            imageText = urlImage2Text(query)
+            speak("The image says:\n" + imageText) # Make adjustments to reason if it is a valid statement or not
 
         elif 'youtube' in query:
             if 'search' in query:
-                print("dont think I have this one yet")
-                print("Search and pull up the youtube video")
+                speak("I don't think I have this one yet")
+                speak("Alternatively I could open youtube.com and you look it up yourself")
+                
             elif 'download' in query:
                 query = query.replace("youtube download","")
-                print(downloadYoutube(query))
+                speak("Downloading Youtube File")
+                status = downloadYoutube(query)
+                speak("The download " + status)
             
         elif 'ip address' in query:
             if "to location" in query:
-                print(ip2Location(ipv4))
+                speak(ip2Location(ipv4))
             if "geolocate" in query:
-                print(ipGeoLocate(ipv4))
+                speak(ipGeoLocate(ipv4))
             elif "world wide" in query:
-                print(ipLocWW(ipv4))
+                speak(ipLocWW(ipv4))
 
         elif 'plate scan' in query:
             query = query.replace("plate scan","")
+            speak("Printing out plate information")
             print(plateRecognition(query))
 
 
 #       """ Personal API Helper """
+
+
+
         
 
         elif 'more commands' in query:

@@ -15,7 +15,7 @@ def readData(filename):
 
 def removingJson(jsonData, removingList):
     for l in removingList:
-        del jsonData.get(l)
+        del jsonData[jsonData.get(l)]
     return jsonData
 
 def refineJson(jsonData, addList):
@@ -379,7 +379,7 @@ def ip2Location(query):
     from API.ip2Location import ip2location
     response = ip2location(query, "demo")
     result = response.json()
-    print("Longitude : " + result['longitude'] + "\nLatitude : " + result['latitude']
+    print("Longitude : " + result['longitude'] + "\nLatitude : " + result['latitude'])
     return result['city_name'] + " " + result['region_name'] + " zipcode " + result['zip_code']
 
 # Find any Ip address world wide : IPv6 and IPv4

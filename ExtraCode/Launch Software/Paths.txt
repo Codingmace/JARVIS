@@ -34,5 +34,5 @@
 "C:\Windows\notepad.exe"
 "C:\Windows\regedit.exe"
 "C:\Windows\explorer.exe"
-"C:\Users\JMW180004\AppData\Local\Microsoft\Teams\current\Teams.exe"
-"C:\Users\JMW180004\AppData\Local\GitHubDesktop\GitHubDesktop.exe"
+"C:\Users\%USER%\AppData\Local\Microsoft\Teams\current\Teams.exe"
+"C:\Users\%USER%\AppData\Local\GitHubDesktop\GitHubDesktop.exe"

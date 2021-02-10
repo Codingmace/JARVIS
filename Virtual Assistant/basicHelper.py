@@ -62,7 +62,7 @@ def diagnostics():
     return str("CPU is at " + usage + " and batter is at " + str(battery.percent))
 
 def playMyMusic(path):
-    os.startfile(path)
+    os.startfile(path) # If file doesn't exist throw an error or something
 
 def calculate(query):
     # Basic one words responses

@@ -2,7 +2,7 @@ import requests
 import json
 import time
 from datetime import datetime, timedelta
-from variables import dncApiKey
+# from variables import dncApiKey
 
 # https://www.ftc.gov/developer
 def clean(phoneNumber):
@@ -21,7 +21,9 @@ def doNotCallList(phoneNumber):
     if (number == "too short" or number == "too long"):
         print("That doesn't work")
         exit()
-    apiKey = dncApiKey
+
+    apiKey = "yMQK54tjjKehjvhp3s7GRKP9ajoLjxgmpPv5d0E2"
+    dncApiKey = apiKey
     areaCode = number[0:3]
     print(areaCode)
     areaCode = "243"
@@ -47,14 +49,12 @@ def doNotCallList(phoneNumber):
     # Read in from the API
 #        response = requests.get(baseUrl+ dncApiKey + "&" + extendUrl + str(offset) +"&" + extendUrl2 + "&" + creates)
     
-    for offset in range(400, 600, 1):
+    for offset in range(100, 300, 1):
         d = datetime.today() - timedelta(days=offset)
         form = d.strftime("%Y-%m-%d")
         print(offset)
         response = requests.get(baseUrl+dncApiKey + "&created_date=\"" + form + "\"")
 #        response = requests.get(baseUrl+dncApiKey)
-
-
 
         if (response.status_code == 429):
             print("Rate has been exceeded")

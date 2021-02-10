@@ -1,6 +1,6 @@
 import requests
 import os
-from tqdm import tqdm
+from tqdm import tqdm # Want to replace this
 from bs4 import BeautifulSoup as bs
 from urllib.parse import urljoin, urlparse
 import time
@@ -30,10 +30,6 @@ def get_all_images(url):
 
     ind = response.index(b'<h2><span>Recent Wallpapers by Our Community</span></h2>')
     response = response[0:ind]
-#    print(response)
-#    print(ind)
-#    input()
-#    soup = bs(requests.get(url).content, "html.parser")
     soup = bs(response, "html.parser")
     urls = []
     for img in tqdm(soup.find_all("img"), "Extracting images"):
@@ -101,8 +97,8 @@ if __name__ == "__main__":
     for i in range (0, numberOfCategories):
         print(str(i + 1) + ". " + categoriesList[i])
 
-#    categorySelection = input("Select a category : ")
-    categorySelection = 1
+    categorySelection = input("Select a category : ")
+#    categorySelection = 1
     selection = categoriesSubDir[categorySelection]
     filename = selection + ".html"
     download(categoriesUrl + selection, filename)
@@ -113,10 +109,10 @@ if __name__ == "__main__":
     line = f.readline()
     while not (startLine in line):
         line = f.readline()
-#           print(line)
 
     while not (startLine in line):
         line = f.readline()
+        
     while not (endLine in line):
         if ("<a href=\"/" in line):
             line = line.replace(" class=\"albumthumbnail\" ","!")
@@ -124,7 +120,6 @@ if __name__ == "__main__":
             entries.append(line)
         try:
             line = f.readline()
-            #print(line)
         except:
             print("That line doesn't work.")
 
@@ -132,14 +127,12 @@ if __name__ == "__main__":
     for i in range(0, entriesSize):
         print(str(i) + ". " + getTitle(entries[i]))
 
-#    personSelection = int(input("Input the category you would like to download "))
-    personSelection = 110
+    personSelection = int(input("Input the category you would like to download "))
     if personSelection > entriesSize or personSelection < 0:
         print("That is not valid thus I will not continue")
     else:
         link = entries[personSelection].split("!")[0].replace("\"","")
         disInclude = ['comment.png','download.png','fav.png','instagram.png','logo.png','twitter.png']
-#        print(link)
         imagesUrl = get_all_images(url + link)
         for iU in imagesUrl:
             validDownload = True

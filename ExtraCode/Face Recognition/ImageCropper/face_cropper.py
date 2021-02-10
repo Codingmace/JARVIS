@@ -15,8 +15,10 @@ class FaceCropper(object):
             print("Can't open image file")
             return 0
 
-        #img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        faces = self.face_cascade.detectMultiScale(img, 1.5, 3, minSize=(100, 100))
+        
+        faces = self.face_cascade.detectMultiScale(img, 1.25, 3, minSize=(100, 100))
+        if len(faces) > 1:
+            faces = self.face_cascade.detectMultiScale(img, 1.5, 3, minSize=(100, 100))
         if (faces is None):
             print('Failed to detect face')
             return 0
@@ -42,21 +44,33 @@ class FaceCropper(object):
             nr = int(r * 2)
 
             faceimg = img[ny:ny+nr, nx:nx+nr]
-            lastimg = cv2.resize(faceimg, (32, 32))
+            lastimg = cv2.resize(faceimg, (64, 64))
+            # Getting the new file name
+            filePathSplit = os.path.splitext(image_path)
+            extension = filePathSplit[1]
+            filename = filePathSplit[0]
             i += 1
-            cv2.imwrite("image%d.jpg" % i, lastimg)
+            while("/" in filename): # Cleaning up the filename (Since extended folders doesn't help)
+                index = filename.index("/") + 1
+                filename = filename[index::]
+            while("\\" in filename):
+                index = filename.index("\\") + 1
+                filename = filename[index::]
+            newLocation = 'face'
+            if facecnt > 1:
+                newLocation += 's'
+            newLocation += '/'
+            newName = newLocation + filename + str(i) + extension
+            cv2.imwrite(newName, lastimg)
 
 
 if __name__ == '__main__':
-    image_path = "two_people.jpg"
-#    args = sys.argv
-#    argc = len(args)
-
-#    if (argc != 2):
-#        print('Usage: %s [image file]' % args[0])
-#        quit()
-
+    baseDir = "Example/"
+    paths = os.listdir(baseDir)
+    print(paths)
+#    image_path = "two_people.jpg"
     detecter = FaceCropper()
-#    detecter.generate(args[1], True)
-    detecter.generate(image_path, False)
+    for file in paths:
+        if os.path.isfile(baseDir + file):
+            detecter.generate(baseDir + file, False)
     

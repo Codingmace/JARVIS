@@ -133,3 +133,5 @@ ExtraCode/Phone Number/allNumbers.txt
 # *.json
 *.html
 Virtual Assistant/Notes.txt
+ExtraCode/DoNotCall/Base/
+ExtraCode/DoNotCall/Data/

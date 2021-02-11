@@ -26,4 +26,6 @@ def unique(query):
 
 def phoneLookup(query):
     print("This is for the one that looks up phones")
-    
+
+def grabCategoryPhotos():
+    print("This one needs to be mofidified as I don't like the download image function")

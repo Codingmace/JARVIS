@@ -98,7 +98,6 @@ if __name__ == "__main__":
         print(str(i + 1) + ". " + categoriesList[i])
 
     categorySelection = input("Select a category : ")
-#    categorySelection = 1
     selection = categoriesSubDir[categorySelection]
     filename = selection + ".html"
     download(categoriesUrl + selection, filename)
@@ -112,7 +111,7 @@ if __name__ == "__main__":
 
     while not (startLine in line):
         line = f.readline()
-        
+
     while not (endLine in line):
         if ("<a href=\"/" in line):
             line = line.replace(" class=\"albumthumbnail\" ","!")
@@ -139,9 +138,7 @@ if __name__ == "__main__":
             for d in disInclude:
                 if d in iU:
                     validDownload = False
-#                    print(iU)                    
                     break
-#            print(iU)
             if validDownload:
                 newTitle = getTitle(entries[personSelection]).replace("Wallpapers","")
                 newTitle = re.sub("[^a-zA-Z0-9 ]","",newTitle).strip()
@@ -157,4 +154,3 @@ if __name__ == "__main__":
                     print("Something went wrong")
         print(imagesUrl)
 
-#    main("https://wallpapercave.com/", "background-images")

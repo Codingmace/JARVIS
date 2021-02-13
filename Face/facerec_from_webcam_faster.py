@@ -11,7 +11,7 @@ def humanFace():
     video_capture = cv2.VideoCapture(0)
 
     # Load a sample photo
-    person1_image = face_recognition.load_image_file("Capture.PNG")
+    person1_image = face_recognition.load_image_file("abby.PNG")
     person1_encoding = face_recognition.face_encodings(person1_image)[0]
 
     # Create arrays of known face encodings and their names

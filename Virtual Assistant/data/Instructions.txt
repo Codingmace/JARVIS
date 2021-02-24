@@ -1,0 +1,44 @@
+The program is designed to grab from a file a random cat fact. In addition sometimes you don't want to have a long one so they will enter the length of the fact
+
+# Instructions
+# Read in all the lines of a file
+# Read in the input
+# Validate it is a valid input (lower() and verify the value given is a string if it is going the second way)
+# Determine if it will be processed the first way or second way
+# If it is the first way
+# Grab a random line and print it out that phrase
+# If it is the second way
+# Narrow down the lines to only phrases shorter then the length given ( I think the shortest is 21. Not sure though)
+# Print out that random line
+# WARNING: Watch out for putting in an input shorter than any phrase (prints nothing)
+# Extra: Make sure the phrase has - First Character is capitalized , Get rid of all double spaces in phrase
+
+Tests:
+Input 1
+random cat fact
+
+Output 1
+cats always land on their feet
+
+Input 2
+random cat fact 10
+
+Output 2
+
+Input 3
+RanDom Cat fact
+
+Output 3
+Normal body temperature for a cat is 102 degrees F.
+
+Input 4
+randOm CAt facT 45
+
+Output 4
+A cat cannot see directly under its nose.
+
+Input 5
+random Cat Fact a
+
+Ouput 5
+Invalid input
